@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Mitarbeiter;
 
 import fahrstuhlsimulator.*;
+import fahrstuhlsimulator.animaton.MitarbeiterAnimator;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,8 +33,9 @@ public class MitarbeiterGraphic
         
         ArrayList<String> images_keySet = new ArrayList(gliederImgs.keySet());
         for(String image_key:images_keySet)
-            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
         {
+            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
+        
             if(image_key.contains("Koerper"))
             {
                 koerper = (BufferedImage) gliederImgs.get(image_key);
@@ -54,15 +56,22 @@ public class MitarbeiterGraphic
             {
                 bein_rechts =  (BufferedImage) gliederImgs.get(image_key);
             }
-        }
-//</editor-fold>
         
+//</editor-fold>
+        }
         //<editor-fold defaultstate="collapsed" desc="Speicherung der Koordinaten">
         x_pos = x_position;
         this.etage = etage;
 //</editor-fold>
         
+        animator = new MitarbeiterAnimator();
+        
     }
+    public MitarbeiterAnimator getAnimator()
+    {
+        return animator;
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer KoerperGlieder">
     
     public BufferedImage getKoerper()
@@ -98,7 +107,16 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
 
-
+    //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
+    public void setX_Pos(int x)
+    {
+        x_pos = x;
+    }
+    public void setEtage(int etage)
+    {
+        this.etage = etage;
+    }
+//</editor-fold>
     
     
     

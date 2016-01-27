@@ -22,5 +22,8 @@ public class Animator {
     {
         
     }
-    
+    protected void setPositionImg(AffineTransform img_transformer, int x,int y)
+    {
+        img_transformer.translate(x, y);
+    }
 }
