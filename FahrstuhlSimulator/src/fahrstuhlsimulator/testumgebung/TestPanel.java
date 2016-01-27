@@ -30,12 +30,16 @@ public class TestPanel extends JPanel {
         this.setSize(800, 600);
         this.setLayout(null);
         this.setVisible(true);
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        
+        erstelleTestPerson();
         repaint();
         
     }
     
+    private void erstelleTestPerson()
+    {
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+        mitarbeiterGraphics.get(0).setPosition(300, WIDTH);
+    }
     
     @Override
     public void paintComponent(Graphics g) {

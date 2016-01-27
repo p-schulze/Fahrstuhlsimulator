@@ -107,12 +107,18 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
 
+    public void setPosition(int x, int etage) // TODO: Klasse etagen mit einbeziehen
+    {
+        setX_Pos(x);
+        setEtage(etage);
+        animator.setPosition(x, 100); // Hier muss das etagen System implementiert werden
+    }
     //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
-    public void setX_Pos(int x)
+    private void setX_Pos(int x)
     {
         x_pos = x;
     }
-    public void setEtage(int etage)
+    private void setEtage(int etage)
     {
         this.etage = etage;
     }

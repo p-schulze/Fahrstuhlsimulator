@@ -31,13 +31,13 @@ public class MitarbeiterAnimator extends Animator {
     {
         
     }
-    private void setPosition(int x, int y)
+    public void setPosition(int x, int y)
     {
         this.setPositionImg(img_trans_arm_rechts, x, y);
         this.setPositionImg(img_trans_arm_links, x, y);
         this.setPositionImg(img_trans_koerper, x, y);
-        this.setPositionImg(img_trans_bein_links, x, y);
-        this.setPositionImg(img_trans_bein_rechts, x, y);
+        this.setPositionImg(img_trans_bein_links, x, y+32);
+        this.setPositionImg(img_trans_bein_rechts, x, y+32);
 
     }
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
