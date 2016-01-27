@@ -9,6 +9,7 @@ public class FahrstuhlSimulator {
         
         ImageLoader.loadImages();
         new fahrstuhlsimulator.testumgebung.TestFenster();
+        new fahrstuhlsimulator.Konsole.Konsole().kStart();
         
         
     }

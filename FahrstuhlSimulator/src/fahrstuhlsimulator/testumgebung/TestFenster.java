@@ -24,7 +24,7 @@ public class TestFenster extends JFrame
         panel = new TestPanel();
         add(panel);
         this.setVisible(true);
-        
+                
     }
     
 }
