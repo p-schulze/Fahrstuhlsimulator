@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Mitarbeiter;
 
+import fahrstuhlsimulator.Misc.ImageLoader;
 import fahrstuhlsimulator.*;
 import fahrstuhlsimulator.animaton.MitarbeiterAnimator;
 import java.awt.image.BufferedImage;
@@ -13,7 +14,7 @@ import java.util.HashMap;
 
 public class MitarbeiterGraphic
 {
-    private fahrstuhlsimulator.animaton.MitarbeiterAnimator animator;
+    private MitarbeiterAnimator animator;
     //<editor-fold defaultstate="collapsed" desc="BufferedImages fuer KoerperGlieder">
     private BufferedImage koerper;
     private BufferedImage bein_links;

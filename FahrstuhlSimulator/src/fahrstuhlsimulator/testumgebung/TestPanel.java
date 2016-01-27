@@ -58,24 +58,12 @@ public class TestPanel extends JPanel {
     
     private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)
     {
-        
-//        AffineTransform at = new AffineTransform();
-//        at.translate(200, 100);
-//        at.rotate(Math.toRadians(180));
-//        at.translate(-mitarbeiterGraphic.getArm_rechts().getWidth()/2, -mitarbeiterGraphic.getArm_rechts().getHeight()/2);
-//        g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), at, null);
-        
         g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts(), null);
         g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
         g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getAnimator().getImg_trans_koerper(), null);
         g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_links(), null);
         g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
         
-//        g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), null, mitarbeiterGraphic.getX_Pos(), 100);
-//        g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), null, mitarbeiterGraphic.getX_Pos(), 100+32);
-//        g2d.drawImage(mitarbeiterGraphic.getKoerper(), null, mitarbeiterGraphic.getX_Pos(), 100);
-//        g2d.drawImage(mitarbeiterGraphic.getArm_links(), null, mitarbeiterGraphic.getX_Pos(), 100);
-//        g2d.drawImage(mitarbeiterGraphic.getBein_links(), null, mitarbeiterGraphic.getX_Pos(), 100+32);
     }
     
 }

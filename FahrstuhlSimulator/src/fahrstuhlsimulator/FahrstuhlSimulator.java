@@ -1,5 +1,6 @@
 package fahrstuhlsimulator;
 
+import fahrstuhlsimulator.Misc.ImageLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 

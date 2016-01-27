@@ -1,4 +1,4 @@
-package fahrstuhlsimulator;
+package fahrstuhlsimulator.Misc;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
