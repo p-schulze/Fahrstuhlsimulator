@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.testumgebung;
 
+import fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -23,7 +24,7 @@ import javax.swing.JPanel;
 public class TestPanel extends JPanel {
     
     private BufferedImage skin;
-    private ArrayList<fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    private ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     public TestPanel()
     {
         
@@ -38,21 +39,24 @@ public class TestPanel extends JPanel {
     private void erstelleTestPerson()
     {
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).setPosition(300, WIDTH);
+        mitarbeiterGraphics.get(0).setPosition(300, 0);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+        mitarbeiterGraphics.get(1).setPosition(400, 0);
+        mitarbeiterGraphics.get(0).setStreckArme();
     }
     
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
         Graphics2D g2d = (Graphics2D) g;
-        for(fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
+        for(MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
         {
             drawMitarbeiterGraphic(g2d,mitarbeiterGraphic);
         }
         
     }
     
-    private void drawMitarbeiterGraphic(Graphics2D g2d, fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic mitarbeiterGraphic)
+    private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)
     {
         
 //        AffineTransform at = new AffineTransform();

@@ -18,9 +18,11 @@ public class Animator {
         
     }
     
-    private void rotateImg(AffineTransform img_transformer, int winkel)
+    protected void rotateImg(AffineTransform img_transformer, int winkel, int widthFromImg, int heightFromImg)
     {
-        
+        img_transformer.translate(widthFromImg/2, heightFromImg/2);
+        img_transformer.rotate(Math.toRadians(winkel));
+        img_transformer.translate(-widthFromImg/2, -heightFromImg/2);
     }
     protected void setPositionImg(AffineTransform img_transformer, int x,int y)
     {

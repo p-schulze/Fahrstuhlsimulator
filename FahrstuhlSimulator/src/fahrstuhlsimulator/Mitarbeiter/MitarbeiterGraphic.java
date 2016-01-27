@@ -125,5 +125,12 @@ public class MitarbeiterGraphic
 //</editor-fold>
     
     
+    // Test Funktionen
+    public void setStreckArme()
+    {
+        animator.setArmRotation(90);
+    }
+    
+    
     
 }

@@ -31,6 +31,11 @@ public class MitarbeiterAnimator extends Animator {
     {
         
     }
+    public void setArmRotation(int winkel)
+    {
+        this.rotateImg(img_trans_arm_rechts, winkel, 32, 64);
+        this.rotateImg(img_trans_arm_links, winkel, 32, 64);
+    }
     public void setPosition(int x, int y)
     {
         this.setPositionImg(img_trans_arm_rechts, x, y);
