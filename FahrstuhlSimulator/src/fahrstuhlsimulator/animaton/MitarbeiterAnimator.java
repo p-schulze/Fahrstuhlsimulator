@@ -27,6 +27,6 @@ public class MitarbeiterAnimator extends Animator {
         img_trans_bein_rechts = new AffineTransform();
     }
     
-    private 
+    
     
 }
