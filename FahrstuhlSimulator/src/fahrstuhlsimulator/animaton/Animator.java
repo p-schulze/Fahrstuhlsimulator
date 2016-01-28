@@ -18,7 +18,7 @@ public class Animator {
         
     }
     
-    protected void rotateImg(AffineTransform img_transformer, int winkel, int widthFromImg, int heightFromImg)
+    protected void rotateImg(AffineTransform img_transformer, double winkel, int widthFromImg, int heightFromImg)
     {
         img_transformer.translate(widthFromImg/2, heightFromImg/2);
         img_transformer.rotate(Math.toRadians(winkel));

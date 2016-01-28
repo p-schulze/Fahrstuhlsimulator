@@ -21,7 +21,11 @@ public class Arm extends AffineTransform{
     
     public boolean checkWinkelGleichZielWinkel()
     {
-        return(winkel == ziel_winkel);
+        return(winkel >= ziel_winkel);
+    }
+    public boolean checkRevertWinkelGleichZielWinkel()
+    {
+        return(winkel <= ziel_winkel);
     }
     
     public void setZielWinkel(double winkel)
@@ -36,7 +40,8 @@ public class Arm extends AffineTransform{
     @Override
     public void rotate(double theta) {
         super.rotate(theta); //To change body of generated methods, choose Tools | Templates.
-        winkel = theta;
+        winkel = winkel + theta;
+        //System.out.println(winkel);
     }
 
     

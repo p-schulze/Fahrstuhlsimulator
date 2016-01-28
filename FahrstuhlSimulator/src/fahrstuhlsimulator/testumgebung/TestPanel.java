@@ -50,7 +50,7 @@ public class TestPanel extends JPanel {
     
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+        super.paintComponent(g);
         Graphics2D g2d = (Graphics2D) g;
         for(MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
         {

@@ -127,15 +127,49 @@ public class MitarbeiterGraphic
     
     
     // Test Funktionen
+    //<editor-fold defaultstate="collapsed" desc="Senke Arme Methoden">
+    public void senkeArme()
+    {
+        senkeArmRechts();
+        senkeArmLinks();
+    }
+    public void senkeArmRechts()
+    {
+        System.out.println("1");
+        animator.getImg_trans_arm_rechts().setZielWinkel(Math.toRadians(0));
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.rechts.speed:25", this);
+    }
+    public void senkeArmLinks()
+    {
+        System.out.println("1");
+        animator.getImg_trans_arm_links().setZielWinkel(Math.toRadians(0));
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.links.speed:25", this);
+    }
+//</editor-fold>
+    
+    //<editor-fold defaultstate="collapsed" desc="Strecke Arme Methoden">
     public void streckArme()
     {
-        animator.getImg_trans_arm_rechts().setZielWinkel(90);
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArme", this);
+        streckeArmRechts();
+        streckeArmLinks();
     }
-    public void setGestreckteArme()
+    public void streckeArmRechts()
     {
-        animator.setArmRotation(90);
+        animator.getImg_trans_arm_rechts().setZielWinkel(Math.toRadians(90));
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArm.rechts.speed:25", this);
     }
+    public void streckeArmLinks()
+    {
+        animator.getImg_trans_arm_links().setZielWinkel(Math.toRadians(90));
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArm.links.speed:25", this);
+    }
+//</editor-fold>
+    
+    
+//    public void setGestreckteArme()
+//    {
+//        animator.setArmRotation(90);
+//    }
     
     
     

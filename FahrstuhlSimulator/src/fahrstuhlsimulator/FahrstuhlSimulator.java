@@ -14,8 +14,9 @@ public class FahrstuhlSimulator {
         Thread th = new Thread(graphicDrawer);
         th.start();
         ImageLoader.loadImages();
-        new fahrstuhlsimulator.testumgebung.TestFenster();
         new fahrstuhlsimulator.Konsole.Konsole().kStart();
+        new fahrstuhlsimulator.testumgebung.TestFenster();
+        
         
         
     }

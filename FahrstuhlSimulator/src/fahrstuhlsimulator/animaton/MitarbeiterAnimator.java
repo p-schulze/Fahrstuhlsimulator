@@ -14,7 +14,7 @@ import java.awt.geom.AffineTransform;
  */
 public class MitarbeiterAnimator extends Animator {
     private Arm img_trans_arm_rechts;
-    private AffineTransform img_trans_arm_links;
+    private Arm img_trans_arm_links;
     private AffineTransform img_trans_koerper;
     private AffineTransform img_trans_bein_links;
     private AffineTransform img_trans_bein_rechts;
@@ -22,7 +22,7 @@ public class MitarbeiterAnimator extends Animator {
     public MitarbeiterAnimator()
     {
         img_trans_arm_rechts = new Arm();
-        img_trans_arm_links = new AffineTransform();
+        img_trans_arm_links = new Arm();
         img_trans_koerper = new AffineTransform();
         img_trans_bein_links = new AffineTransform();
         img_trans_bein_rechts = new AffineTransform();
@@ -32,10 +32,13 @@ public class MitarbeiterAnimator extends Animator {
     {
         
     }
-    public void setArmRotation(int winkel)
+    public void setArmLinksRotation(double winkel)
+    {
+        this.rotateImg(img_trans_arm_links, winkel, 32, 64);
+    }
+    public void setArmRechtsRotation(double winkel)
     {
         this.rotateImg(img_trans_arm_rechts, winkel, 32, 64);
-        this.rotateImg(img_trans_arm_links, winkel, 32, 64);
     }
     public void setPosition(int x, int y)
     {
@@ -52,7 +55,7 @@ public class MitarbeiterAnimator extends Animator {
     {
         return img_trans_arm_rechts;
     }
-    public AffineTransform getImg_trans_arm_links()
+    public Arm getImg_trans_arm_links()
     {
         return img_trans_arm_links;
     }
