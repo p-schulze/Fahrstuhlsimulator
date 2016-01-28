@@ -18,10 +18,10 @@ public abstract class ImageLoader {
         BufferedReader br = new BufferedReader(fr);
 
         String zeile;
-            System.out.println("Grafik wird Gelanden...");
+            //System.out.println("Grafik wird Gelanden...");
         while( (zeile = br.readLine() ) != null )
         {
-            System.out.println(zeile);
+            //System.out.println(zeile);
             if(!zeile.equals("") && !zeile.startsWith("//"))
             {
                 BufferedImage img = ImageIO.read(new File(zeile));
@@ -30,7 +30,7 @@ public abstract class ImageLoader {
             
             
         }
-        System.out.println("Fertig...");
+        //System.out.println("Fertig...");
         }catch(Exception ex){System.out.println(ex.toString());}
     }
     public static HashMap getImagesVomPfad(String pfad)
@@ -42,7 +42,7 @@ public abstract class ImageLoader {
             if(image_key.contains(pfad))
             {
                 String[] image_keySplit = image_key.split("/");
-                System.out.println(image_keySplit[image_keySplit.length-1].split("\\.")[0]);
+                //System.out.println(image_keySplit[image_keySplit.length-1].split("\\.")[0]);
                 returnHashMap.put(image_keySplit[image_keySplit.length-1].split("\\.")[0], images.get(image_key));
             }
         }

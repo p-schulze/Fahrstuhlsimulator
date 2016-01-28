@@ -64,8 +64,14 @@ public class MitarbeiterGraphic
         x_pos = x_position;
         this.etage = etage;
 //</editor-fold>
-        
         animator = new MitarbeiterAnimator();
+        /**
+        animator.getImg_trans_koerper().translate((32/2)+ getX_Pos(), (32/2)+getY_Pos());
+        System.out.println(animator.getImg_trans_koerper().getScaleX());
+        animator.getImg_trans_koerper().scale(-1, 1);
+        System.out.println(animator.getImg_trans_koerper().getScaleX());
+        animator.getImg_trans_koerper().translate((32/2)- getX_Pos(), (32/2)-getY_Pos());
+        **/
         
     }
     public MitarbeiterAnimator getAnimator()
@@ -104,7 +110,7 @@ public class MitarbeiterGraphic
     }
     public int getY_Pos()
     {
-        return 100; //TODO: An Klasse Etage anpassen
+        return 472-(64*etage); //TODO: An Klasse Etage anpassen
     }
     public int getEtage()
     {
@@ -120,7 +126,20 @@ public class MitarbeiterGraphic
     //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
     private void setX_Pos(int x)
     {
+        // Verbesserungswuedig!:D
+        double tempDegrees_bein_rechts = Math.toDegrees(animator.getImg_trans_bein_rechts().getWinkel());
+        double tempDegrees_bein_links = Math.toDegrees(animator.getImg_trans_bein_links().getWinkel());
+        double tempDegrees_arm_links = Math.toDegrees(animator.getImg_trans_arm_links().getWinkel());
+        double tempDegrees_arm_rechts = Math.toDegrees(animator.getImg_trans_arm_rechts().getWinkel());
+        animator.setBeinRechtsRotation(-tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
+        animator.setBeinLinksRotation(-tempDegrees_bein_links, getX_Pos(), getY_Pos());
+        animator.setArmLinksRotation(-tempDegrees_arm_links, getX_Pos(), getY_Pos());
+        animator.setArmRechtsRotation(-tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
         x_pos = x;
+        animator.setBeinRechtsRotation(tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
+        animator.setBeinLinksRotation(tempDegrees_bein_links, getX_Pos(), getY_Pos());
+        animator.setArmLinksRotation(tempDegrees_arm_links, getX_Pos(), getY_Pos());
+        animator.setArmRechtsRotation(tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
     }
     private void setEtage(int etage)
     {
@@ -128,54 +147,27 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
     
-    /**
-    // Test Funktionen
-    //<editor-fold defaultstate="collapsed" desc="Senke Arme Methoden">
-    public void senkeArme()
-    {
-        senkeArmRechts();
-        senkeArmLinks();
-    }
-    public void senkeArmRechts()
-    {
-        animator.getImg_trans_arm_rechts().setZielWinkel(Math.toRadians(0));
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.rechts.speed:25", this);
-    }
-    public void senkeArmLinks()
-    {
-        animator.getImg_trans_arm_links().setZielWinkel(Math.toRadians(0));
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.links.speed:25", this);
-    }
-//</editor-fold>
     
-    //<editor-fold defaultstate="collapsed" desc="Strecke Arme Methoden">
-    public void streckArme()
-    {
-        streckeArmRechts();
-        streckeArmLinks();
-    }
-    public void streckeArmRechts()
-    {
-        animator.getImg_trans_arm_rechts().setZielWinkel(Math.toRadians(90));
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArm.rechts.speed:25", this);
-    }
-    public void streckeArmLinks()
-    {
-        animator.getImg_trans_arm_links().setZielWinkel(Math.toRadians(90));
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArm.links.speed:25", this);
-    }
-//</editor-fold>
-    **/
     
     public void moveToPosition(int x)
     {
         ArrayList<String> tasks1 = new ArrayList();
         ArrayList<Object> objects1 = new ArrayList();
         
-        tasks1.add("Mitarbeiter.move:speed(20)ziel(100)");
+        tasks1.add("Mitarbeiter.move:speed(20)ziel("+x+")");
         objects1.add(this);
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+    }
+    
+    public boolean checkPositionGleichZielPosition(int x_ziel)
+    {
+        //System.out.println(x_pos + " "+ x_ziel);
+        return(x_pos <= x_ziel);
+    }
+    public void addToX(int add)
+    {
+        setX_Pos(x_pos + add);
     }
     
     public void schrittVor()

@@ -5,12 +5,11 @@
         <group>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/testumgebung/TestPanel.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/FahrstuhlSimulator.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/ImageLoader.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/animaton/MitarbeiterAnimator.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/animaton/Animator.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Mitarbeiter/Mitarbeiter.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Mitarbeiter/Glieder/RotatableGlied.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Mitarbeiter/Graphic/MitarbeiterGraphic.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/GraphicDrawer.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Mitarbeiter/MitarbeiterGraphic.java</file>
         </group>
     </open-files>
 </project-private>

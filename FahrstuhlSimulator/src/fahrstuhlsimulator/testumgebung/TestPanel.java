@@ -39,13 +39,15 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
+        
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        //mitarbeiterGraphics.get(0).setPosition(100, 0);
-//        mitarbeiterGraphics.get(0).setPosition(100, 0);
-//        mitarbeiterGraphics.get(0).setPosition(200, 0);
-        //mitarbeiterGraphics.get(0).setPosition(100, 0);
-        mitarbeiterGraphics.get(0).setPosition(200, 0);
         mitarbeiterGraphics.get(0).schrittVor();
+        mitarbeiterGraphics.get(0).moveToPosition(100);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
+        mitarbeiterGraphics.get(1).schrittVor();
+        mitarbeiterGraphics.get(1).moveToPosition(150);
+        
+        
         
         
         
@@ -67,6 +69,7 @@ public class TestPanel extends JPanel {
     
     private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)
     {
+        
         
         g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
         g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);

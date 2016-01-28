@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class GraphicDrawer implements Runnable {
     
-    private final int timeForFrame = 20;
+    private final int timeForFrame = 40;
     private static ArrayList<ArrayList<String>> taskList_task = new ArrayList();
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
     
@@ -57,7 +57,7 @@ public class GraphicDrawer implements Runnable {
                                 double ziel_winkel = 0;
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    System.out.println(parameter[i_parameter]);
+                                    //System.out.println("HebArm: X: "+ mitarbeiterG.getY_Pos());
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -80,7 +80,7 @@ public class GraphicDrawer implements Runnable {
                             else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
                                 //<editor-fold defaultstate="collapsed" desc="Heb Arm Links">
                             {
-                                System.out.println("Links");
+                                
                                 MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
                                 //split("[(),]");
                                 String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
@@ -88,7 +88,7 @@ public class GraphicDrawer implements Runnable {
                                 double ziel_winkel = 0;
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    System.out.println(parameter[i_parameter]);
+                                    
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -122,7 +122,7 @@ public class GraphicDrawer implements Runnable {
                                 double ziel_winkel = 0;
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    System.out.println(parameter[i_parameter]);
+                                    
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -145,7 +145,7 @@ public class GraphicDrawer implements Runnable {
                             else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
                                 //<editor-fold defaultstate="collapsed" desc="Heb Fuss Links">
                             {
-                                System.out.println("Links");
+                                
                                 MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
                                 //split("[(),]");
                                 String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
@@ -153,7 +153,7 @@ public class GraphicDrawer implements Runnable {
                                 double ziel_winkel = 0;
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    System.out.println(parameter[i_parameter]);
+                                    
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -174,15 +174,17 @@ public class GraphicDrawer implements Runnable {
                             }
 //</editor-fold>
                         }
-                        else if(taskList_taskSplit[1].equalsIgnoreCase("move"))
+                        else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("move"))
                         {
+                            
                             MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                            String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                            
+                            String[] parameter = taskList_taskSplit[1].split(":")[1].split("[(),]");
                                 int speed = 0;
                                 int ziel = mitarbeiterG.getX_Pos();
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    System.out.println(parameter[i_parameter]);
+                                    //System.out.println(parameter[i_parameter]);
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -193,10 +195,10 @@ public class GraphicDrawer implements Runnable {
                                     }
                                     
                                 }
-                                if(!(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkPositionGleichZielPosition(ziel)))
+                                
+                                if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
                                 {
-                                    
-                                    mitarbeiterG.getAnimator().getImg_trans_bein_links().translate(i, i);
+                                    mitarbeiterG.addToX(-5);
                                 }
                                 else{
                                     
@@ -217,7 +219,7 @@ public class GraphicDrawer implements Runnable {
     }
     private void deleteTask(int i)
     {
-        if(!(taskList_task.get(i).size() >0)) // TODO: Koennte zum ERROR fuehren
+        if((taskList_task.get(i).size()==1)) // TODO: Koennte zum ERROR fuehren
         {
             taskList_task.remove(i);
             taskList_object.remove(i);
