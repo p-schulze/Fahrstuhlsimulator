@@ -13,7 +13,11 @@ import javax.swing.JFrame;
  */
 public class TestFenster extends JFrame
 {
+<<<<<<< Updated upstream
     public static TestPanel panel;
+=======
+    public TestPanel panel;
+>>>>>>> Stashed changes
     public TestFenster()
     {
         super("TestUmgebung");
