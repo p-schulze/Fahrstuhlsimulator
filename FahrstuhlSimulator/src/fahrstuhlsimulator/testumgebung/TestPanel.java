@@ -40,9 +40,9 @@ public class TestPanel extends JPanel {
     private void erstelleTestPerson()
     {
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).setPosition(300, 0);
+        mitarbeiterGraphics.get(0).setPosition(100, 0);
         mitarbeiterGraphics.get(0).schrittVor();
-        mitarbeiterGraphics.get(0).streckeArmLinks();
+        
         
         
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));

@@ -125,7 +125,7 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
     
-    
+    /**
     // Test Funktionen
     //<editor-fold defaultstate="collapsed" desc="Senke Arme Methoden">
     public void senkeArme()
@@ -162,11 +162,40 @@ public class MitarbeiterGraphic
         FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArm.links.speed:25", this);
     }
 //</editor-fold>
-    
+    **/
     public void schrittVor()
     {
-        animator.getImg_trans_bein_rechts().setZielWinkel(Math.toRadians(45));
-        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.hebFuss.rechts.speed:25", this); // Winkel  Speed
+        
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
+        
+        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
+        objects1.add(this);
+        
+        ArrayList<String> tasks2 = new ArrayList();
+        ArrayList<Object> objects2 = new ArrayList();
+        
+        tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
+        objects2.add(this);
+        
+        ArrayList<String> tasks3 = new ArrayList();
+        ArrayList<Object> objects3 = new ArrayList();
+        
+        tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
+        objects3.add(this);
+        
+        ArrayList<String> tasks4 = new ArrayList();
+        ArrayList<Object> objects4 = new ArrayList();
+        
+        tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
+        objects4.add(this);
+        
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks3, objects3);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks4, objects4);
+        
+        
     }
     
     
