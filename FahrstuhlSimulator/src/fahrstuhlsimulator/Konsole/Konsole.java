@@ -68,7 +68,7 @@ public class Konsole {
             String[] array = command.split("[(),]");
             for(int i =0; i<array.length ; i++){
                 
-              
+                //Auslesen dein Eingabe als Array
             
             }
             
