@@ -32,31 +32,23 @@ public class MitarbeiterAnimator extends Animator {
     {
         
     }
-    public void setArmLinksRotation(double winkel)
+    public void setArmLinksRotation(double winkel, int x, int y)
     {
-        this.rotateImg(img_trans_arm_links, winkel, 32, 64);
+        this.rotateImg(img_trans_arm_links, winkel, 32, 64, x, y);
     }
-    public void setArmRechtsRotation(double winkel)
+    public void setArmRechtsRotation(double winkel, int x, int y)
     {
-        this.rotateImg(img_trans_arm_rechts, winkel, 32, 64);
+        this.rotateImg(img_trans_arm_rechts, winkel, 32, 64, x, y);
     }
-    public void setBeinLinksRotation(double winkel)
+    public void setBeinLinksRotation(double winkel, int x, int y)
     {
-        this.rotateImg(img_trans_bein_links, winkel, 32, 32);
+        this.rotateImg(img_trans_bein_links, winkel, 32, 96, x, y);
     }
-    public void setBeinRechtsRotation(double winkel)
+    public void setBeinRechtsRotation(double winkel, int x, int y)
     {
-        this.rotateImg(img_trans_bein_rechts, winkel, 32, 32);
+        this.rotateImg(img_trans_bein_rechts, winkel, 32, 96, x, y);
     }
-    public void setPosition(int x, int y)
-    {
-        this.setPositionImg(img_trans_arm_rechts, x, y);
-        this.setPositionImg(img_trans_arm_links, x, y);
-        this.setPositionImg(img_trans_koerper, x, y);
-        this.setPositionImg(img_trans_bein_links, x, y+32);
-        this.setPositionImg(img_trans_bein_rechts, x, y+32);
-
-    }
+    
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
     
     public RotatableGlied getImg_trans_arm_rechts()

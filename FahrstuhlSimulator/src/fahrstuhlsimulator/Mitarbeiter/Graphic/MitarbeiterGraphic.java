@@ -102,6 +102,10 @@ public class MitarbeiterGraphic
     {
         return x_pos;
     }
+    public int getY_Pos()
+    {
+        return 100; //TODO: An Klasse Etage anpassen
+    }
     public int getEtage()
     {
         return etage;
@@ -112,7 +116,6 @@ public class MitarbeiterGraphic
     {
         setX_Pos(x);
         setEtage(etage);
-        animator.setPosition(x, 100); // Hier muss das etagen System implementiert werden
     }
     //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
     private void setX_Pos(int x)
@@ -163,6 +166,18 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
     **/
+    
+    public void moveToPosition(int x)
+    {
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
+        
+        tasks1.add("Mitarbeiter.move:speed(20)ziel(100)");
+        objects1.add(this);
+        
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+    }
+    
     public void schrittVor()
     {
         
@@ -171,11 +186,19 @@ public class MitarbeiterGraphic
         
         tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
         objects1.add(this);
+        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(20)winkel(50)");
+        objects1.add(this);
+        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-1)");
+        objects1.add(this);
         
         ArrayList<String> tasks2 = new ArrayList();
         ArrayList<Object> objects2 = new ArrayList();
         
         tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
+        objects2.add(this);
+        tasks2.add("Mitarbeiter.hebFuss.links:speed(-20)winkel(-50)");
+        objects2.add(this);
+        tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(1)");
         objects2.add(this);
         
         ArrayList<String> tasks3 = new ArrayList();
@@ -183,11 +206,19 @@ public class MitarbeiterGraphic
         
         tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
         objects3.add(this);
+        tasks3.add("Mitarbeiter.hebArm.links:speed(20)winkel(50)");
+        objects3.add(this);
+        tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-1)");
+        objects3.add(this);
         
         ArrayList<String> tasks4 = new ArrayList();
         ArrayList<Object> objects4 = new ArrayList();
         
         tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
+        objects4.add(this);
+        tasks4.add("Mitarbeiter.hebArm.rechts:speed(-20)winkel(-50)");
+        objects4.add(this);
+        tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(1)");
         objects4.add(this);
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);

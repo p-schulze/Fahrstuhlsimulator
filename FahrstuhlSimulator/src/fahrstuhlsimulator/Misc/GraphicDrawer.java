@@ -69,7 +69,7 @@ public class GraphicDrawer implements Runnable {
                                 if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
                                 {
                                     
-                                    mitarbeiterG.getAnimator().setArmRechtsRotation(100/speed);
+                                    mitarbeiterG.getAnimator().setArmRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
                                 }
                                 else{
                                     
@@ -100,7 +100,7 @@ public class GraphicDrawer implements Runnable {
                                 if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
                                 {
                                     
-                                    mitarbeiterG.getAnimator().setArmLinksRotation(100/speed);
+                                    mitarbeiterG.getAnimator().setArmLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
                                 }
                                 else{
                                     
@@ -134,7 +134,7 @@ public class GraphicDrawer implements Runnable {
                                 if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
                                 {
                                     
-                                    mitarbeiterG.getAnimator().setBeinRechtsRotation(100/speed);
+                                    mitarbeiterG.getAnimator().setBeinRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
                                 }
                                 else{
                                     
@@ -165,7 +165,7 @@ public class GraphicDrawer implements Runnable {
                                 if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
                                 {
                                     
-                                    mitarbeiterG.getAnimator().setBeinLinksRotation(100/speed);
+                                    mitarbeiterG.getAnimator().setBeinLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
                                 }
                                 else{
                                     
@@ -174,9 +174,41 @@ public class GraphicDrawer implements Runnable {
                             }
 //</editor-fold>
                         }
+                        else if(taskList_taskSplit[1].equalsIgnoreCase("move"))
+                        {
+                            MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                            String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                int speed = 0;
+                                int ziel = mitarbeiterG.getX_Pos();
+                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                {
+                                    System.out.println(parameter[i_parameter]);
+                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    {
+                                        speed = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                    {
+                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                    
+                                }
+                                if(!(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkPositionGleichZielPosition(ziel)))
+                                {
+                                    
+                                    mitarbeiterG.getAnimator().getImg_trans_bein_links().translate(i, i);
+                                }
+                                else{
+                                    
+                                    deleteTask(i);
+                                }
+                                
+                        }
                     }
             }
-        }catch(IndexOutOfBoundsException ex) {System.out.println("Keine Aufgaben vorhanden");}
+        }catch(IndexOutOfBoundsException ex) {
+            //System.out.println("Keine Aufgaben vorhanden");
+        }
         //System.out.println("GraphicDrawer: Gestartet");
         try {TestFenster.panel.repaint();} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
         try {Thread.sleep(timeForFrame);} catch (InterruptedException ex) {Logger.getLogger(GraphicDrawer.class.getName()).log(Level.SEVERE, null, ex);}
@@ -185,7 +217,7 @@ public class GraphicDrawer implements Runnable {
     }
     private void deleteTask(int i)
     {
-        if(!(taskList_task.get(i).size() >0))
+        if(!(taskList_task.get(i).size() >0)) // TODO: Koennte zum ERROR fuehren
         {
             taskList_task.remove(i);
             taskList_object.remove(i);
