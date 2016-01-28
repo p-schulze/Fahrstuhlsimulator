@@ -41,7 +41,9 @@ public class TestPanel extends JPanel {
     {
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).setPosition(300, 0);
-        mitarbeiterGraphics.get(0).streckArme();
+        mitarbeiterGraphics.get(0).schrittVor();
+        mitarbeiterGraphics.get(0).streckeArmLinks();
+        
         
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
 //        mitarbeiterGraphics.get(1).setPosition(400, 0);
@@ -65,7 +67,7 @@ public class TestPanel extends JPanel {
         g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
         g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getAnimator().getImg_trans_koerper(), null);
         g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_links(), null);
-        g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
+        g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_links(), null);
         
     }
     

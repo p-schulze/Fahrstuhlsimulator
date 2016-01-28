@@ -111,6 +111,38 @@ public class GraphicDrawer implements Runnable {
                     
 //</editor-fold>
                 }
+                else if(taskList_taskSplit[1].equalsIgnoreCase("hebFuss"))
+                {
+                    if(taskList_taskSplit[2].equalsIgnoreCase("rechts"))
+                    {
+                        System.out.println("1");
+                        MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object.get(i);
+                        int speed = Integer.parseInt(taskList_taskSplit[3].split(":")[1]);
+                        if(!(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkWinkelGleichZielWinkel()))
+                        {
+                            
+                            mitarbeiterG.getAnimator().setBeinRechtsRotation(100/speed);
+                        }
+                        else{
+                            System.out.println("2");
+                            temp_taskList_task.remove(i);
+                            temp_taskList_object.remove(i);
+                        }
+                    }else if(taskList_taskSplit[2].equalsIgnoreCase("links"))
+                    {
+                        System.out.println("Links");
+                        MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object.get(i);
+                        int speed = Integer.parseInt(taskList_taskSplit[3].split(":")[1]);
+                        if(!(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkWinkelGleichZielWinkel()))
+                        {
+                            mitarbeiterG.getAnimator().setBeinLinksRotation(100/speed);
+                        }
+                        else{
+                            temp_taskList_task.remove(i);
+                            temp_taskList_object.remove(i);
+                        }
+                    }
+                }
             }
         }
         //System.out.println("GraphicDrawer: Gestartet");

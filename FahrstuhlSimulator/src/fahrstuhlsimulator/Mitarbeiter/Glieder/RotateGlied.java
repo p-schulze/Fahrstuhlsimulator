@@ -11,16 +11,17 @@ import java.awt.geom.AffineTransform;
  *
  * @author Sebastian
  */
-public class Arm extends AffineTransform{
+public class RotateGlied extends AffineTransform{
     private double winkel = 0;
     private double ziel_winkel = 0;
-    public Arm()
+    public RotateGlied()
     {
         super();
     }
     
     public boolean checkWinkelGleichZielWinkel()
     {
+        System.out.println(winkel +" " + ziel_winkel);
         return(winkel >= ziel_winkel);
     }
     public boolean checkRevertWinkelGleichZielWinkel()

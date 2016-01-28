@@ -135,13 +135,11 @@ public class MitarbeiterGraphic
     }
     public void senkeArmRechts()
     {
-        System.out.println("1");
         animator.getImg_trans_arm_rechts().setZielWinkel(Math.toRadians(0));
         FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.rechts.speed:25", this);
     }
     public void senkeArmLinks()
     {
-        System.out.println("1");
         animator.getImg_trans_arm_links().setZielWinkel(Math.toRadians(0));
         FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.senkArm.links.speed:25", this);
     }
@@ -165,11 +163,11 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
     
-    
-//    public void setGestreckteArme()
-//    {
-//        animator.setArmRotation(90);
-//    }
+    public void schrittVor()
+    {
+        animator.getImg_trans_bein_rechts().setZielWinkel(Math.toRadians(45));
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.hebFuss.rechts.speed:25", this); // Winkel  Speed
+    }
     
     
     

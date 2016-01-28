@@ -5,7 +5,7 @@
  */
 package fahrstuhlsimulator.animaton;
 
-import fahrstuhlsimulator.Mitarbeiter.Glieder.Arm;
+import fahrstuhlsimulator.Mitarbeiter.Glieder.RotateGlied;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -13,19 +13,19 @@ import java.awt.geom.AffineTransform;
  * @author Sebastian
  */
 public class MitarbeiterAnimator extends Animator {
-    private Arm img_trans_arm_rechts;
-    private Arm img_trans_arm_links;
-    private AffineTransform img_trans_koerper;
-    private AffineTransform img_trans_bein_links;
-    private AffineTransform img_trans_bein_rechts;
+    private RotateGlied img_trans_arm_rechts;
+    private RotateGlied img_trans_arm_links;
+    private RotateGlied img_trans_koerper;
+    private RotateGlied img_trans_bein_links;
+    private RotateGlied img_trans_bein_rechts;
     
     public MitarbeiterAnimator()
     {
-        img_trans_arm_rechts = new Arm();
-        img_trans_arm_links = new Arm();
-        img_trans_koerper = new AffineTransform();
-        img_trans_bein_links = new AffineTransform();
-        img_trans_bein_rechts = new AffineTransform();
+        img_trans_arm_rechts = new RotateGlied();
+        img_trans_arm_links = new RotateGlied();
+        img_trans_koerper = new RotateGlied();
+        img_trans_bein_links = new RotateGlied();
+        img_trans_bein_rechts = new RotateGlied();
     }
     
     private void spielLaufanimation()
@@ -40,6 +40,14 @@ public class MitarbeiterAnimator extends Animator {
     {
         this.rotateImg(img_trans_arm_rechts, winkel, 32, 64);
     }
+    public void setBeinLinksRotation(double winkel)
+    {
+        this.rotateImg(img_trans_bein_links, winkel, 32, 32);
+    }
+    public void setBeinRechtsRotation(double winkel)
+    {
+        this.rotateImg(img_trans_bein_rechts, winkel, 32, 32);
+    }
     public void setPosition(int x, int y)
     {
         this.setPositionImg(img_trans_arm_rechts, x, y);
@@ -51,23 +59,23 @@ public class MitarbeiterAnimator extends Animator {
     }
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
     
-    public Arm getImg_trans_arm_rechts()
+    public RotateGlied getImg_trans_arm_rechts()
     {
         return img_trans_arm_rechts;
     }
-    public Arm getImg_trans_arm_links()
+    public RotateGlied getImg_trans_arm_links()
     {
         return img_trans_arm_links;
     }
-    public AffineTransform getImg_trans_koerper()
+    public RotateGlied getImg_trans_koerper()
     {
         return img_trans_koerper;
     }
-    public AffineTransform getImg_trans_bein_links()
+    public RotateGlied getImg_trans_bein_links()
     {
         return img_trans_bein_links;
     }
-    public AffineTransform getImg_trans_bein_rechts()
+    public RotateGlied getImg_trans_bein_rechts()
     {
         return img_trans_bein_rechts;
     }
