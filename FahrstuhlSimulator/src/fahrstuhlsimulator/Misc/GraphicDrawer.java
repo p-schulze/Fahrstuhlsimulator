@@ -5,6 +5,8 @@
  */
 package fahrstuhlsimulator.Misc;
 
+import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
+import fahrstuhlsimulator.testumgebung.TestFenster;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,12 +43,14 @@ public class GraphicDrawer implements Runnable {
                 if(taskList_taskSplit[1].equalsIgnoreCase("streckArme"))
                 {
                     System.out.println("GraphicDrawer:Mitarbeiter: Arme werden gestreckt");
+                    ((MitarbeiterGraphic) taskList_object.get(i)).getAnimator().setArmRotation(10);
                 }
             }
         }
         System.out.println("GraphicDrawer: Gestartet");
         try {Thread.sleep(timeForFrame);} catch (InterruptedException ex) {Logger.getLogger(GraphicDrawer.class.getName()).log(Level.SEVERE, null, ex);}
         System.out.println("GraphicDrawer: Fertig");
+        TestFenster.panel.repaint();
         this.run();
     }
     

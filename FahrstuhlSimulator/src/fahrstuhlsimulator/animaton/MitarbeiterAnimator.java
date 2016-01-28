@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.animaton;
 
+import fahrstuhlsimulator.Mitarbeiter.Glieder.Arm;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -12,7 +13,7 @@ import java.awt.geom.AffineTransform;
  * @author Sebastian
  */
 public class MitarbeiterAnimator extends Animator {
-    private AffineTransform img_trans_arm_rechts;
+    private Arm img_trans_arm_rechts;
     private AffineTransform img_trans_arm_links;
     private AffineTransform img_trans_koerper;
     private AffineTransform img_trans_bein_links;
@@ -20,7 +21,7 @@ public class MitarbeiterAnimator extends Animator {
     
     public MitarbeiterAnimator()
     {
-        img_trans_arm_rechts = new AffineTransform();
+        img_trans_arm_rechts = new Arm();
         img_trans_arm_links = new AffineTransform();
         img_trans_koerper = new AffineTransform();
         img_trans_bein_links = new AffineTransform();
@@ -47,7 +48,7 @@ public class MitarbeiterAnimator extends Animator {
     }
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
     
-    public AffineTransform getImg_trans_arm_rechts()
+    public Arm getImg_trans_arm_rechts()
     {
         return img_trans_arm_rechts;
     }

@@ -13,7 +13,7 @@ import javax.swing.JFrame;
  */
 public class TestFenster extends JFrame
 {
-    private TestPanel panel;
+    public static TestPanel panel;
     public TestFenster()
     {
         super("TestUmgebung");

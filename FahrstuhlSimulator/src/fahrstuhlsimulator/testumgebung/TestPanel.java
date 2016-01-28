@@ -5,7 +5,7 @@
  */
 package fahrstuhlsimulator.testumgebung;
 
-import fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic;
+import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -25,6 +25,7 @@ public class TestPanel extends JPanel {
     
     private BufferedImage skin;
     private ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    
     public TestPanel()
     {
         
@@ -38,7 +39,7 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).setPosition(300, 0);
         mitarbeiterGraphics.get(0).streckArme();
         

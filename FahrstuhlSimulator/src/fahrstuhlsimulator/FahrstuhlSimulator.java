@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 public class FahrstuhlSimulator {
     public static GraphicDrawer graphicDrawer;
+    
 
     public static void main(String[] args){  
         graphicDrawer = new GraphicDrawer();
