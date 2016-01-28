@@ -127,7 +127,11 @@ public class MitarbeiterGraphic
     
     
     // Test Funktionen
-    public void setStreckArme()
+    public void streckArme()
+    {
+        FahrstuhlSimulator.graphicDrawer.addTask("Mitarbeiter.streckArme", this);
+    }
+    public void setGestreckteArme()
     {
         animator.setArmRotation(90);
     }

@@ -40,9 +40,11 @@ public class TestPanel extends JPanel {
     {
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).setPosition(300, 0);
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(1).setPosition(400, 0);
-        mitarbeiterGraphics.get(0).setStreckArme();
+        mitarbeiterGraphics.get(0).streckArme();
+        
+//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+//        mitarbeiterGraphics.get(1).setPosition(400, 0);
+//        mitarbeiterGraphics.get(1).setGestreckteArme();
     }
     
     @Override
