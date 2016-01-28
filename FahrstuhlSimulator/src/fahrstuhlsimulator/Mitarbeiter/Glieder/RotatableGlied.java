@@ -11,10 +11,10 @@ import java.awt.geom.AffineTransform;
  *
  * @author Sebastian
  */
-public class RotateGlied extends AffineTransform{
+public class RotatableGlied extends AffineTransform{
     private double winkel = 0;
     private double ziel_winkel = 0;
-    public RotateGlied()
+    public RotatableGlied()
     {
         super();
     }

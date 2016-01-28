@@ -5,7 +5,7 @@
  */
 package fahrstuhlsimulator.animaton;
 
-import fahrstuhlsimulator.Mitarbeiter.Glieder.RotateGlied;
+import fahrstuhlsimulator.Mitarbeiter.Glieder.RotatableGlied;
 import java.awt.geom.AffineTransform;
 
 /**
@@ -13,19 +13,19 @@ import java.awt.geom.AffineTransform;
  * @author Sebastian
  */
 public class MitarbeiterAnimator extends Animator {
-    private RotateGlied img_trans_arm_rechts;
-    private RotateGlied img_trans_arm_links;
-    private RotateGlied img_trans_koerper;
-    private RotateGlied img_trans_bein_links;
-    private RotateGlied img_trans_bein_rechts;
+    private RotatableGlied img_trans_arm_rechts;
+    private RotatableGlied img_trans_arm_links;
+    private RotatableGlied img_trans_koerper;
+    private RotatableGlied img_trans_bein_links;
+    private RotatableGlied img_trans_bein_rechts;
     
     public MitarbeiterAnimator()
     {
-        img_trans_arm_rechts = new RotateGlied();
-        img_trans_arm_links = new RotateGlied();
-        img_trans_koerper = new RotateGlied();
-        img_trans_bein_links = new RotateGlied();
-        img_trans_bein_rechts = new RotateGlied();
+        img_trans_arm_rechts = new RotatableGlied();
+        img_trans_arm_links = new RotatableGlied();
+        img_trans_koerper = new RotatableGlied();
+        img_trans_bein_links = new RotatableGlied();
+        img_trans_bein_rechts = new RotatableGlied();
     }
     
     private void spielLaufanimation()
@@ -59,23 +59,23 @@ public class MitarbeiterAnimator extends Animator {
     }
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
     
-    public RotateGlied getImg_trans_arm_rechts()
+    public RotatableGlied getImg_trans_arm_rechts()
     {
         return img_trans_arm_rechts;
     }
-    public RotateGlied getImg_trans_arm_links()
+    public RotatableGlied getImg_trans_arm_links()
     {
         return img_trans_arm_links;
     }
-    public RotateGlied getImg_trans_koerper()
+    public RotatableGlied getImg_trans_koerper()
     {
         return img_trans_koerper;
     }
-    public RotateGlied getImg_trans_bein_links()
+    public RotatableGlied getImg_trans_bein_links()
     {
         return img_trans_bein_links;
     }
-    public RotateGlied getImg_trans_bein_rechts()
+    public RotatableGlied getImg_trans_bein_rechts()
     {
         return img_trans_bein_rechts;
     }
