@@ -70,10 +70,14 @@ public class Konsole {
             String[] array = command.split("[(),]");
             for(int i =0; i<array.length ; i++){
                 
+<<<<<<< HEAD
               mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).setPosition(300, 0);
         mitarbeiterGraphics.get(0).schrittVor();
         mitarbeiterGraphics.get(0).streckeArmLinks();
+=======
+                //Auslesen dein Eingabe als Array
+>>>>>>> origin/master
             
             }
             

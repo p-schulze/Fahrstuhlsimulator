@@ -11,28 +11,30 @@ import java.awt.geom.AffineTransform;
  *
  * @author Sebastian
  */
-public class RotateGlied extends AffineTransform{
+public class RotatableGlied extends AffineTransform{
     private double winkel = 0;
-    private double ziel_winkel = 0;
-    public RotateGlied()
+    public RotatableGlied()
     {
         super();
     }
     
-    public boolean checkWinkelGleichZielWinkel()
+    
+//    public boolean checkPositionGleichZielPosition(double x_pos_ziel)
+//    {
+//        System.out.println(x_pos + " " + x_pos_ziel);
+//        return(x_pos <= x_pos_ziel);
+//    }
+    
+    public boolean checkWinkelGleichZielWinkel(double ziel_winkel)
     {
-        System.out.println(winkel +" " + ziel_winkel);
+        //System.out.println(winkel +" " + ziel_winkel);
         return(winkel >= ziel_winkel);
     }
-    public boolean checkRevertWinkelGleichZielWinkel()
+    public boolean checkRevertWinkelGleichZielWinkel(double ziel_winkel)
     {
         return(winkel <= ziel_winkel);
     }
     
-    public void setZielWinkel(double winkel)
-    {
-        ziel_winkel = winkel;
-    }
     public double getWinkel()
     {
         return winkel;

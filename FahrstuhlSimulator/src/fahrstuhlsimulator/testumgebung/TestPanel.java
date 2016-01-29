@@ -39,10 +39,16 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
+        
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).setPosition(300, 0);
         mitarbeiterGraphics.get(0).schrittVor();
-        mitarbeiterGraphics.get(0).streckeArmLinks();
+        mitarbeiterGraphics.get(0).moveToPosition(100);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
+        mitarbeiterGraphics.get(1).schrittVor();
+        mitarbeiterGraphics.get(1).moveToPosition(150);
+        
+        
+        
         
         
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
@@ -63,11 +69,23 @@ public class TestPanel extends JPanel {
     
     private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)
     {
-        g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts(), null);
-        g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
-        g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getAnimator().getImg_trans_koerper(), null);
-        g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_links(), null);
-        g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_links(), null);
+        
+        
+        g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
+        g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+        g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
+        g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+        g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+        g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+        g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
+        g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+        g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
+        g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+//        g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts(), null);
+//        g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts(), null);
+//        g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getAnimator().getImg_trans_koerper(), null);
+//        g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getAnimator().getImg_trans_arm_links(), null);
+//        g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getAnimator().getImg_trans_bein_links(), null);
         
     }
     
