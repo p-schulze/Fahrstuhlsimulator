@@ -6,10 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FahrstuhlSimulator {
-<<<<<<< HEAD
 
-=======
->>>>>>> origin/master
     public static GraphicDrawer graphicDrawer;
     
 
@@ -18,16 +15,11 @@ public class FahrstuhlSimulator {
         Thread th = new Thread(graphicDrawer);
         th.start();
         ImageLoader.loadImages();
-<<<<<<< HEAD
-      
+
         new fahrstuhlsimulator.testumgebung.TestFenster();
 
         new fahrstuhlsimulator.Konsole.Konsole().kStart();    
-=======
-        new fahrstuhlsimulator.Konsole.Konsole().kStart();
-        new fahrstuhlsimulator.testumgebung.TestFenster();
-        
->>>>>>> origin/master
+
         
         
     }

@@ -67,19 +67,18 @@ public class Konsole {
     private void analyze(String command){
         if(command.contains("person")){
            schreibe(".." + "Person wird erzeugt");
-            String[] array = command.split("[(),]");
-            for(int i =0; i<array.length ; i++){
+             //String[] array = command.split("[(),]");
+            //for(int i =0; i<array.length ; i++){
                 
-<<<<<<< HEAD
-              mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).setPosition(300, 0);
+
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).schrittVor();
-        mitarbeiterGraphics.get(0).streckeArmLinks();
-=======
-                //Auslesen dein Eingabe als Array
->>>>>>> origin/master
+        mitarbeiterGraphics.get(0).moveToPosition(100);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
+        mitarbeiterGraphics.get(1).schrittVor();
+        mitarbeiterGraphics.get(1).moveToPosition(150);
             
-            }
+           
             
             
         }
