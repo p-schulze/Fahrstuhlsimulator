@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Misc;
 
+import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import java.util.logging.Logger;
  */
 public class GraphicDrawer implements Runnable {
     
+    private boolean pausiert = false;
     private final int timeForFrame = 40;
     private static ArrayList<ArrayList<String>> taskList_task = new ArrayList();
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
@@ -32,12 +34,25 @@ public class GraphicDrawer implements Runnable {
         taskList_object.add(objects);
     }
     
+    public boolean isPausiert()
+    {
+        return pausiert;
+    }
+    public void resumeThread()
+    {
+        pausiert = false;
+        System.out.println("GraphicDrawer_Thread: wieder aufgenommen");
+        FahrstuhlSimulator.graphicDrawer_th.resume();
+    }
+    
     @Override
     public void run()
     {
+        boolean zeichnen = false;
         try{
             for(int i = 0; i < taskList_task.size();i++)
             {
+                zeichnen = true;
                 String temp_taskList_task = taskList_task.get(i).get(0);
                 Object temp_taskList_object = taskList_object.get(i).get(0);
 
@@ -224,8 +239,8 @@ public class GraphicDrawer implements Runnable {
             //System.out.println("Keine Aufgaben vorhanden");
         }
         //System.out.println("GraphicDrawer: Gestartet");
-        try {TestFenster.panel.repaint();} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
-        try {Thread.sleep(timeForFrame);} catch (InterruptedException ex) {Logger.getLogger(GraphicDrawer.class.getName()).log(Level.SEVERE, null, ex);}
+        try {if(zeichnen){TestFenster.panel.repaint();}else{System.out.println("GraphicDrawer_Thread: Pausiert");pausiert = true;FahrstuhlSimulator.graphicDrawer_th.suspend();}} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
+        try {Thread.sleep(timeForFrame);} catch (InterruptedException ex) {}
         //System.out.println("GraphicDrawer: Fertig");
         this.run();
     }

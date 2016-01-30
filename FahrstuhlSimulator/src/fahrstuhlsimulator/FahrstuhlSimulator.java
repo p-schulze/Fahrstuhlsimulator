@@ -8,12 +8,13 @@ import java.util.HashMap;
 public class FahrstuhlSimulator {
 
     public static GraphicDrawer graphicDrawer;
+    public static Thread graphicDrawer_th;
     
 
     public static void main(String[] args){  
         graphicDrawer = new GraphicDrawer();
-        Thread th = new Thread(graphicDrawer);
-        th.start();
+        graphicDrawer_th = new Thread(graphicDrawer);
+        graphicDrawer_th.start();
         ImageLoader.loadImages();
 
         new fahrstuhlsimulator.Konsole.Konsole().kStart();    

@@ -160,6 +160,7 @@ public class MitarbeiterGraphic
         objects1.add(this);
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        if(FahrstuhlSimulator.graphicDrawer.isPausiert()){FahrstuhlSimulator.graphicDrawer.resumeThread();}
     }
     public void moveDistanceWithAnimation(int x)
     {
