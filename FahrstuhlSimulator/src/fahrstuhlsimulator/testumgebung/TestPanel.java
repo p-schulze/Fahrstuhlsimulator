@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public class TestPanel extends JPanel {
     
     private BufferedImage skin;
-    public ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    public static ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     
     public TestPanel()
     {
@@ -32,7 +32,7 @@ public class TestPanel extends JPanel {
         this.setSize(800, 600);
         this.setLayout(null);
         this.setVisible(true);
-        erstelleTestPerson();
+        //erstelleTestPerson();
         repaint();
         
     }

@@ -10,6 +10,7 @@ import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
+import javax.swing.text.DefaultCaret;
 
 
 /**
@@ -35,6 +36,8 @@ public class Konsole {
         masterPanel.add(masterArea);
         masterPanel.add(masterField);
         masterFrame.add(masterPanel);
+        DefaultCaret caret = (DefaultCaret)masterArea.getCaret();
+        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         masterFrame.setVisible(true);
         masterFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.out.println("Konsole gestartet...");
@@ -67,18 +70,22 @@ public class Konsole {
     private void analyze(String command){
         if(command.contains("person")){
            schreibe(".." + "Person wird erzeugt");
-             //String[] array = command.split("[(),]");
-            //for(int i =0; i<array.length ; i++){
-                
+             String[] array = command.split("[(),]");
+              
+        
 
+<<<<<<< Updated upstream
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
         mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
         mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
+=======
+        fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
+        
+>>>>>>> Stashed changes
             
            
-            
-            
+                   
         }
     }
     
