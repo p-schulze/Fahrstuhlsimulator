@@ -72,11 +72,9 @@ public class Konsole {
                 
 
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).schrittVor();
-        mitarbeiterGraphics.get(0).moveToPosition(100);
+        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
-        mitarbeiterGraphics.get(1).schrittVor();
-        mitarbeiterGraphics.get(1).moveToPosition(150);
+        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
             
            
             
