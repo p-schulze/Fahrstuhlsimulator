@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FahrstuhlSimulator {
+
     public static GraphicDrawer graphicDrawer;
     
 
@@ -14,9 +15,11 @@ public class FahrstuhlSimulator {
         Thread th = new Thread(graphicDrawer);
         th.start();
         ImageLoader.loadImages();
-        new fahrstuhlsimulator.Konsole.Konsole().kStart();
+
         new fahrstuhlsimulator.testumgebung.TestFenster();
-        
+
+        new fahrstuhlsimulator.Konsole.Konsole().kStart();    
+
         
         
     }

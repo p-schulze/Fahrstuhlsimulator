@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 public class TestPanel extends JPanel {
     
     private BufferedImage skin;
-    private ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    public ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     
     public TestPanel()
     {

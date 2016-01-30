@@ -5,9 +5,11 @@
  */
 package fahrstuhlsimulator.Konsole;
 
+import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 
 /**
@@ -20,7 +22,7 @@ public class Konsole {
     private JPanel masterPanel = new JPanel();
     private JTextArea masterArea = new JTextArea();
     private JTextField masterField = new JTextField();
-
+    private ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     
     public void kStart (){
         
@@ -65,12 +67,18 @@ public class Konsole {
     private void analyze(String command){
         if(command.contains("person")){
            schreibe(".." + "Person wird erzeugt");
-            String[] array = command.split("[(),]");
-            for(int i =0; i<array.length ; i++){
+             //String[] array = command.split("[(),]");
+            //for(int i =0; i<array.length ; i++){
                 
-                //Auslesen dein Eingabe als Array
+
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+        mitarbeiterGraphics.get(0).schrittVor();
+        mitarbeiterGraphics.get(0).moveToPosition(100);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
+        mitarbeiterGraphics.get(1).schrittVor();
+        mitarbeiterGraphics.get(1).moveToPosition(150);
             
-            }
+           
             
             
         }
