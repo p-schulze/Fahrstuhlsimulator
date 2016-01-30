@@ -176,35 +176,47 @@ public class GraphicDrawer implements Runnable {
                         }
                         else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("move"))
                         {
-                            
+                            //<editor-fold defaultstate="collapsed" desc="Move">
                             MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
                             
                             String[] parameter = taskList_taskSplit[1].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                int ziel = mitarbeiterG.getX_Pos();
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                            int speed = 0;
+                            int ziel = mitarbeiterG.getX_Pos();
+                            for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                            {
+                                //System.out.println(parameter[i_parameter]);
+                                if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                 {
-                                    //System.out.println(parameter[i_parameter]);
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
-                                    {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
-                                    {
-                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                    
+                                    speed = Integer.parseInt(parameter[i_parameter+1]);
+                                }
+                                else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                {
+                                    ziel = Integer.parseInt(parameter[i_parameter+1]);
                                 }
                                 
-                                if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
-                                {
-                                    mitarbeiterG.addToX(-5);
-                                }
-                                else{
-                                    
-                                    deleteTask(i);
-                                }
+                            }
+                            
+                            if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
+                            {
+                                mitarbeiterG.addToX(-5);
+                            }
+                            else{
                                 
+                                deleteTask(i);
+                            }
+//</editor-fold>
+                        }
+                        else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("umdrehen"))
+                        {
+                            MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                            mitarbeiterG.getAnimator().setArmLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                            mitarbeiterG.getAnimator().setArmRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                            mitarbeiterG.getAnimator().setBeinLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                            mitarbeiterG.getAnimator().setBeinRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                            mitarbeiterG.getAnimator().setKoerperFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                            
+                            mitarbeiterG.setFlipped(!mitarbeiterG.getFlipped());
+                            deleteTask(i);
                         }
                     }
             }

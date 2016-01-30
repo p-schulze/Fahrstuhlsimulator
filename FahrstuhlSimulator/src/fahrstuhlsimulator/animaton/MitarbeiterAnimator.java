@@ -49,6 +49,27 @@ public class MitarbeiterAnimator extends Animator {
         this.rotateImg(img_trans_bein_rechts, winkel, 32, 96, x, y);
     }
     
+    public void setArmLinksFlip(int x, int y)
+    {
+        this.scaleImg(img_trans_arm_links, 32, 64, x, y);
+    }
+    public void setArmRechtsFlip(int x, int y)
+    {
+        this.scaleImg(img_trans_arm_rechts, 32, 64, x, y);
+    }
+    public void setBeinLinksFlip(int x, int y)
+    {
+        this.scaleImg(img_trans_bein_links, 32, 96, x, y);
+    }
+    public void setBeinRechtsFlip(int x, int y)
+    {
+        this.scaleImg(img_trans_bein_rechts, 32, 96, x, y);
+    }
+    public void setKoerperFlip(int x, int y)
+    {
+        this.scaleImg(img_trans_koerper, 32, 64, x, y);
+    }
+    
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer AffineTransformObjekte">
     
     public RotatableGlied getImg_trans_arm_rechts()

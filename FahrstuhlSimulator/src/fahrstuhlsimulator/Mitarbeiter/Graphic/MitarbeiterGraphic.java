@@ -15,6 +15,7 @@ import java.util.HashMap;
 public class MitarbeiterGraphic
 {
     private MitarbeiterAnimator animator;
+    private boolean flipped = false;
     //<editor-fold defaultstate="collapsed" desc="BufferedImages fuer KoerperGlieder">
     private BufferedImage koerper;
     private BufferedImage bein_links;
@@ -65,13 +66,10 @@ public class MitarbeiterGraphic
         this.etage = etage;
 //</editor-fold>
         animator = new MitarbeiterAnimator();
-        /**
-        animator.getImg_trans_koerper().translate((32/2)+ getX_Pos(), (32/2)+getY_Pos());
-        System.out.println(animator.getImg_trans_koerper().getScaleX());
-        animator.getImg_trans_koerper().scale(-1, 1);
-        System.out.println(animator.getImg_trans_koerper().getScaleX());
-        animator.getImg_trans_koerper().translate((32/2)- getX_Pos(), (32/2)-getY_Pos());
-        **/
+        
+        
+        
+        
         
     }
     public MitarbeiterAnimator getAnimator()
@@ -118,24 +116,28 @@ public class MitarbeiterGraphic
     }
 //</editor-fold>
 
+    //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
     public void setPosition(int x, int etage) // TODO: Klasse etagen mit einbeziehen
     {
         setX_Pos(x);
         setEtage(etage);
     }
-    //<editor-fold defaultstate="collapsed" desc="Setter Methoden fuer die Koordinaten">
+    
     private void setX_Pos(int x)
     {
-        // Verbesserungswuedig!:D
+        // Verbesserungswuedig!:D Wie so viele andere Teile im code^^ 
         double tempDegrees_bein_rechts = Math.toDegrees(animator.getImg_trans_bein_rechts().getWinkel());
         double tempDegrees_bein_links = Math.toDegrees(animator.getImg_trans_bein_links().getWinkel());
         double tempDegrees_arm_links = Math.toDegrees(animator.getImg_trans_arm_links().getWinkel());
         double tempDegrees_arm_rechts = Math.toDegrees(animator.getImg_trans_arm_rechts().getWinkel());
+        
         animator.setBeinRechtsRotation(-tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
         animator.setBeinLinksRotation(-tempDegrees_bein_links, getX_Pos(), getY_Pos());
         animator.setArmLinksRotation(-tempDegrees_arm_links, getX_Pos(), getY_Pos());
         animator.setArmRechtsRotation(-tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
+        
         x_pos = x;
+        
         animator.setBeinRechtsRotation(tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
         animator.setBeinLinksRotation(tempDegrees_bein_links, getX_Pos(), getY_Pos());
         animator.setArmLinksRotation(tempDegrees_arm_links, getX_Pos(), getY_Pos());
@@ -148,9 +150,9 @@ public class MitarbeiterGraphic
 //</editor-fold>
     
     
-    
-    public void moveToPosition(int x)
+    public void moveDistance(int x_distance)
     {
+        int x = getX_Pos() - x_distance;
         ArrayList<String> tasks1 = new ArrayList();
         ArrayList<Object> objects1 = new ArrayList();
         
@@ -159,10 +161,18 @@ public class MitarbeiterGraphic
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
     }
+    public void moveDistanceWithAnimation(int x)
+    {
+        int weg = x;
+        int anzahlAnimationen = weg/200;
+        schritteVor(anzahlAnimationen, weg%200>=50);
+        
+        moveDistance(x);
+    }
     
     public boolean checkPositionGleichZielPosition(int x_ziel)
     {
-        //System.out.println(x_pos + " "+ x_ziel);
+        System.out.println(x_pos + " "+ x_ziel);
         return(x_pos <= x_ziel);
     }
     public void addToX(int add)
@@ -170,57 +180,101 @@ public class MitarbeiterGraphic
         setX_Pos(x_pos + add);
     }
     
-    public void schrittVor()
+    public void schritteVor(int anzSchritte, boolean plusHalberSchritt)
     {
-        
+        //<editor-fold defaultstate="collapsed" desc="SchritteVorVerarbeitung">
         ArrayList<String> tasks1 = new ArrayList();
         ArrayList<Object> objects1 = new ArrayList();
-        
-        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
-        objects1.add(this);
-        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(20)winkel(50)");
-        objects1.add(this);
-        tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-1)");
-        objects1.add(this);
         
         ArrayList<String> tasks2 = new ArrayList();
         ArrayList<Object> objects2 = new ArrayList();
         
-        tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
-        objects2.add(this);
-        tasks2.add("Mitarbeiter.hebFuss.links:speed(-20)winkel(-50)");
-        objects2.add(this);
-        tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(1)");
-        objects2.add(this);
-        
         ArrayList<String> tasks3 = new ArrayList();
         ArrayList<Object> objects3 = new ArrayList();
-        
-        tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
-        objects3.add(this);
-        tasks3.add("Mitarbeiter.hebArm.links:speed(20)winkel(50)");
-        objects3.add(this);
-        tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-1)");
-        objects3.add(this);
         
         ArrayList<String> tasks4 = new ArrayList();
         ArrayList<Object> objects4 = new ArrayList();
         
-        tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
-        objects4.add(this);
-        tasks4.add("Mitarbeiter.hebArm.rechts:speed(-20)winkel(-50)");
-        objects4.add(this);
-        tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(1)");
-        objects4.add(this);
+        for(int i = 0; i < anzSchritte; i++)
+        {
+            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
+            objects1.add(this);
+            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(20)winkel(50)");
+            objects1.add(this);
+            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-1)");
+            objects1.add(this);
+            
+            tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
+            objects2.add(this);
+            tasks2.add("Mitarbeiter.hebFuss.links:speed(-20)winkel(-50)");
+            objects2.add(this);
+            tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(1)");
+            objects2.add(this);
+            
+            tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
+            objects3.add(this);
+            tasks3.add("Mitarbeiter.hebArm.links:speed(20)winkel(50)");
+            objects3.add(this);
+            tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-1)");
+            objects3.add(this);
+            
+            tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
+            objects4.add(this);
+            tasks4.add("Mitarbeiter.hebArm.rechts:speed(-20)winkel(-50)");
+            objects4.add(this);
+            tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(1)");
+            objects4.add(this);
+        }
+        if(plusHalberSchritt)
+        {
+            boolean zufall = Math.random()>=0.5;
+            tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
+            objects1.add(this);
+            tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
+            objects1.add(this);
+
+            tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
+            objects2.add(this);
+            tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
+            objects2.add(this);
+
+            tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
+            objects3.add(this);
+            tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
+            objects3.add(this);
+
+            tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
+            objects4.add(this);
+            tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
+            objects4.add(this);
+        }
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks3, objects3);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks4, objects4);
+//</editor-fold>
+    }
+    public void umdrehen()
+    {
         
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
         
+        tasks1.add("Mitarbeiter.umdrehen");
+        objects1.add(this);
+        
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
     }
     
+    public boolean getFlipped()
+    {
+        return flipped;
+    }
+
+    public void setFlipped(boolean b) {
+        flipped = b;
+    }
     
     
 }

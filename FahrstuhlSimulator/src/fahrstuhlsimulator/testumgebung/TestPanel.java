@@ -40,20 +40,16 @@ public class TestPanel extends JPanel {
     private void erstelleTestPerson()
     {
         
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).schrittVor();
-        mitarbeiterGraphics.get(0).moveToPosition(100);
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
-        mitarbeiterGraphics.get(1).schrittVor();
-        mitarbeiterGraphics.get(1).moveToPosition(150);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 700, 3));
+        //mitarbeiterGraphics.get(0).umdrehen();
+        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(732);
         
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person1/", 700, 2));
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2/", 668, 2));
+        mitarbeiterGraphics.get(2).umdrehen();
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/SebastianArndt/", 500, 2));
+        mitarbeiterGraphics.get(3).moveDistanceWithAnimation(100);
         
-        
-        
-        
-//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-//        mitarbeiterGraphics.get(1).setPosition(400, 0);
-//        mitarbeiterGraphics.get(1).setGestreckteArme();
     }
     
     @Override
