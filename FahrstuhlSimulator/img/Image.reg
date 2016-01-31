@@ -1,9 +1,15 @@
-//Administrator Grafiken
-img/Person/Administrator/Glieder/Administrator_Arm_Links.png
-img/Person/Administrator/Glieder/Administrator_Arm_Rechts.png
-img/Person/Administrator/Glieder/Administrator_Bein_Links.png
-img/Person/Administrator/Glieder/Administrator_Bein_Rechts.png
-img/Person/Administrator/Glieder/Administrator_Koerper.png
+//AdministratorLinks Grafiken
+img/Person/Administrator/Glieder/Administrator_Links_Arm_Links.png
+img/Person/Administrator/Glieder/Administrator_Links_Arm_Rechts.png
+img/Person/Administrator/Glieder/Administrator_Links_Bein_Links.png
+img/Person/Administrator/Glieder/Administrator_Links_Bein_Rechts.png
+img/Person/Administrator/Glieder/Administrator_Links_Koerper.png
+//AdministratorRechts Grafiken
+img/Person/Administrator/Glieder/Administrator_Rechts_Arm_Links.png
+img/Person/Administrator/Glieder/Administrator_Rechts_Arm_Rechts.png
+img/Person/Administrator/Glieder/Administrator_Rechts_Bein_Links.png
+img/Person/Administrator/Glieder/Administrator_Rechts_Bein_Rechts.png
+img/Person/Administrator/Glieder/Administrator_Rechts_Koerper.png
 //Person1 Grafiken
 img/Person/Person1/Glieder/Person1_Arm_Links.png
 img/Person/Person1/Glieder/Person1_Arm_Rechts.png

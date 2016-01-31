@@ -26,8 +26,8 @@ public class Animator {
     }
     protected void scaleImg(AffineTransform img_transformer, int widthFromImg, int heightFromImg, int x, int y)
     {
-        img_transformer.translate((widthFromImg/2)+ x, (heightFromImg/2)+y);
-        img_transformer.scale(-1, 1);
-        img_transformer.translate(-(widthFromImg/2)- x, -(heightFromImg/2)-y);
+//        img_transformer.translate((widthFromImg/2)+ x, (heightFromImg/2)+y);
+//        img_transformer.scale(-1, 1);
+//        img_transformer.translate(-(widthFromImg/2)- x, -(heightFromImg/2)-y);
     }
 }

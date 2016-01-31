@@ -23,6 +23,8 @@ public class GraphicDrawer implements Runnable {
     private static ArrayList<ArrayList<String>> taskList_task = new ArrayList();
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
     
+    private ArrayList<Object> mitarbeiterMoveListenerList = new ArrayList();
+    
     public GraphicDrawer()
     {
         
@@ -32,6 +34,7 @@ public class GraphicDrawer implements Runnable {
     {
         taskList_task.add(tasks);
         taskList_object.add(objects);
+        System.out.println("Tasks: "+taskList_task +"  "+taskList_object);
     }
     
     public boolean isPausiert()
@@ -72,7 +75,7 @@ public class GraphicDrawer implements Runnable {
                                 double ziel_winkel = 0;
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    //System.out.println("HebArm: X: "+ mitarbeiterG.getY_Pos());
+                                    //System.out.println("HebArm: Y: "+ mitarbeiterG.getY_Pos());
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
@@ -213,11 +216,12 @@ public class GraphicDrawer implements Runnable {
                             
                             if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
                             {
-                                mitarbeiterG.addToX(-5);
+                                mitarbeiterG.addToX(mitarbeiterG.getFlipped()?5:-5);
                             }
                             else{
                                 
                                 deleteTask(i);
+                                sendOnPositionEvent(mitarbeiterG);
                             }
 //</editor-fold>
                         }
@@ -246,7 +250,7 @@ public class GraphicDrawer implements Runnable {
     }
     private void deleteTask(int i)
     {
-        if((taskList_task.get(i).size()==1)) // TODO: Koennte zum ERROR fuehren
+        if((taskList_task.get(i).size()==1))
         {
             taskList_task.remove(i);
             taskList_object.remove(i);
@@ -255,6 +259,22 @@ public class GraphicDrawer implements Runnable {
         {
             taskList_task.get(i).remove(0);
             taskList_object.get(i).remove(0);
+        }
+    }
+    
+    public void addMitarbeiterMoveListener(Object e)
+    {
+        mitarbeiterMoveListenerList.add(e);
+    }
+    public void removeMitarbeiterMoveListener(Object e)
+    {
+        mitarbeiterMoveListenerList.remove(e);
+    }
+    public void sendOnPositionEvent(MitarbeiterGraphic mG)
+    {
+        for(Object mitarbeiterMoveListener:mitarbeiterMoveListenerList)
+        {
+            ((MitarbeiterMoveListener) mitarbeiterMoveListener).onPosition(mG);
         }
     }
     

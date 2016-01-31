@@ -42,7 +42,6 @@ public class RotatableGlied extends AffineTransform{
     
     @Override
     public void rotate(double theta) {
-        System.out.println(this.getTranslateX() + " "+ this.getTranslateY());
         winkel = winkel + theta;
         super.rotate(theta); //To change body of generated methods, choose Tools | Templates.
         

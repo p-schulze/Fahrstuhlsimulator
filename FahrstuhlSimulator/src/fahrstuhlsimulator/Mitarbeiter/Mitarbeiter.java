@@ -7,12 +7,14 @@ package fahrstuhlsimulator.Mitarbeiter;
 
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
+import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
+import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 
 /**
  *
  * @author becksusanna
  */
-public class Mitarbeiter {
+public class Mitarbeiter implements MitarbeiterMoveListener {
     private int id;
     private String name;
     private Etage aktuelleEtage;
@@ -51,5 +53,10 @@ public class Mitarbeiter {
     }
     protected void setErlaubteEtagen(ArrayList<Etage> nErlaubteEtagen) {
         this.erlaubteEtagen=nErlaubteEtagen;
+    }
+
+    @Override
+    public void onPosition(MitarbeiterGraphic mG) {
+        System.out.println(mG +" auf Position");
     }
 }

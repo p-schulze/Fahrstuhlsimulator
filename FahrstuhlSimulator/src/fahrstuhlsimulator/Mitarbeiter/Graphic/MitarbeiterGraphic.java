@@ -16,6 +16,7 @@ public class MitarbeiterGraphic
 {
     private MitarbeiterAnimator animator;
     private boolean flipped = false;
+    private String gliederPfad;
     //<editor-fold defaultstate="collapsed" desc="BufferedImages fuer KoerperGlieder">
     private BufferedImage koerper;
     private BufferedImage bein_links;
@@ -31,36 +32,10 @@ public class MitarbeiterGraphic
     
     public MitarbeiterGraphic(String gliederPfad, int x_position, int etage)
     {
-        HashMap gliederImgs = ImageLoader.getImagesVomPfad(gliederPfad);
+        this.gliederPfad = gliederPfad;
+        saveBufferedImages(gliederPfad, "Links");
         
-        ArrayList<String> images_keySet = new ArrayList(gliederImgs.keySet());
-        for(String image_key:images_keySet)
-        {
-            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
         
-            if(image_key.contains("Koerper"))
-            {
-                koerper = (BufferedImage) gliederImgs.get(image_key);
-            }
-            else if(image_key.contains("Arm_Links"))
-            {
-                arm_links = (BufferedImage) gliederImgs.get(image_key);
-            }
-            else if(image_key.contains("Arm_Rechts"))
-            {
-                arm_rechts = (BufferedImage) gliederImgs.get(image_key);
-            }
-            else if(image_key.contains("Bein_Links"))
-            {
-                bein_links = (BufferedImage) gliederImgs.get(image_key);
-            }
-            else if(image_key.contains("Bein_Rechts"))
-            {
-                bein_rechts =  (BufferedImage) gliederImgs.get(image_key);
-            }
-        
-//</editor-fold>
-        }
         //<editor-fold defaultstate="collapsed" desc="Speicherung der Koordinaten">
         x_pos = x_position;
         this.etage = etage;
@@ -125,13 +100,11 @@ public class MitarbeiterGraphic
     
     private void setX_Pos(int x)
     {
-        
         // Verbesserungswuedig!:D Wie so viele andere Teile im code^^ 
         double tempDegrees_bein_rechts = Math.toDegrees(animator.getImg_trans_bein_rechts().getWinkel());
         double tempDegrees_bein_links = Math.toDegrees(animator.getImg_trans_bein_links().getWinkel());
         double tempDegrees_arm_links = Math.toDegrees(animator.getImg_trans_arm_links().getWinkel());
         double tempDegrees_arm_rechts = Math.toDegrees(animator.getImg_trans_arm_rechts().getWinkel());
-        
         
         animator.setBeinRechtsRotation(-tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
         animator.setBeinLinksRotation(-tempDegrees_bein_links, getX_Pos(), getY_Pos());
@@ -154,7 +127,15 @@ public class MitarbeiterGraphic
     
     public void moveDistance(int x_distance)
     {
-        int x = getX_Pos() - x_distance;
+        int x = 0;
+        if(flipped)
+        {
+            x = getX_Pos() + x_distance;
+        }
+        else
+        {    
+            x = getX_Pos() - x_distance;
+        }
         ArrayList<String> tasks1 = new ArrayList();
         ArrayList<Object> objects1 = new ArrayList();
         
@@ -175,8 +156,15 @@ public class MitarbeiterGraphic
     
     public boolean checkPositionGleichZielPosition(int x_ziel)
     {
-        //System.out.println(x_pos + " "+ x_ziel);
-        return(x_pos <= x_ziel);
+        System.out.println(x_pos + " "+ x_ziel);
+        if(flipped)
+        {
+            return(x_pos >= x_ziel);
+        }else
+        {
+            return(x_pos <= x_ziel);
+        }
+        
     }
     public void addToX(int add)
     {
@@ -260,14 +248,16 @@ public class MitarbeiterGraphic
     }
     public void umdrehen()
     {
-        
-        ArrayList<String> tasks1 = new ArrayList();
-        ArrayList<Object> objects1 = new ArrayList();
-        
-        tasks1.add("Mitarbeiter.umdrehen");
-        objects1.add(this);
-        
-        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        if(flipped)
+        {
+            saveBufferedImages(gliederPfad, "Links");
+            flipped = false;
+        }
+        else
+        {
+            saveBufferedImages(gliederPfad, "Rechts");
+            flipped = true;
+        }
     }
     
     public boolean getFlipped()
@@ -277,6 +267,42 @@ public class MitarbeiterGraphic
 
     public void setFlipped(boolean b) {
         flipped = b;
+    }
+
+    private void saveBufferedImages(String gliederPfad, String seite) {
+        HashMap gliederImgs = ImageLoader.getImagesVomPfad(gliederPfad);
+        ArrayList<String> images_keySet = new ArrayList(gliederImgs.keySet());
+        for(String image_key:images_keySet)
+        {
+            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
+            String[] image_keySplit = image_key.split("_");
+            
+            if(image_keySplit[1].equalsIgnoreCase(seite))
+            {
+                if(image_key.contains("Koerper"))
+                {
+                    koerper = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Arm_Links"))
+                {
+                    arm_links = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Arm_Rechts"))
+                {
+                    arm_rechts = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Bein_Links"))
+                {
+                    bein_links = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Bein_Rechts"))
+                {
+                    bein_rechts =  (BufferedImage) gliederImgs.get(image_key);
+                }
+            }
+        
+//</editor-fold>
+        }
     }
     
     

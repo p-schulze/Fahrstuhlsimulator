@@ -27,7 +27,7 @@ public class TestPanel extends JPanel {
         this.setBounds(0,0, 800, 600);
         this.setLayout(null);
         this.setVisible(true);
-        //erstelleTestPerson();
+        erstelleTestPerson();
         repaint();
         
     }
@@ -35,19 +35,24 @@ public class TestPanel extends JPanel {
     private void erstelleTestPerson()
     {
         
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 100, 3));
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 500, 0));
         //mitarbeiterGraphics.get(0).umdrehen();
-        //mitarbeiterGraphics.get(0).moveDistanceWithAnimation(500);
-        //mitarbeiterGraphics.get(0).umdrehen();
-//        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(732);
-//        
-//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person1/", 700, 2));
-//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2/", 668, 2));
-//        mitarbeiterGraphics.get(2).umdrehen();
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/SebastianArndt/", 100, 2));
+        
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 400, 2));
         mitarbeiterGraphics.get(1).umdrehen();
-        mitarbeiterGraphics.get(1).schritteVor(2, false);
-        //mitarbeiterGraphics.get(1).moveDistanceWithAnimation(500);
+        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
+        //mitarbeiterGraphics.get(1).umdrehen();
+//        
+//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 100, 3));
+//        mitarbeiterGraphics.get(2).umdrehen();
+//        mitarbeiterGraphics.get(2).moveDistanceWithAnimation(500);
+//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 100, 4));
+//        mitarbeiterGraphics.get(3).umdrehen();
+//        mitarbeiterGraphics.get(3).moveDistanceWithAnimation(500);
+//        
+//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 500, 5));
+//        mitarbeiterGraphics.get(4).umdrehen();mitarbeiterGraphics.get(4).umdrehen();
+//        mitarbeiterGraphics.get(4).moveDistanceWithAnimation(500);
         
         
 //        fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 200, 2));
