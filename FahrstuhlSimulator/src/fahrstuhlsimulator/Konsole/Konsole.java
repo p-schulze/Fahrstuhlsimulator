@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Konsole;
 
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
+import fahrstuhlsimulator.testumgebung.TestFenster;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -79,7 +80,7 @@ public class Konsole {
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
 //        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
         fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
-        
+        TestFenster.panel.repaint();
             
            
                    
