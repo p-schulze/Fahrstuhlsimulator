@@ -28,10 +28,6 @@ public class MitarbeiterAnimator extends Animator {
         img_trans_bein_rechts = new RotatableGlied();
     }
     
-    private void spielLaufanimation()
-    {
-        
-    }
     public void setArmLinksRotation(double winkel, int x, int y)
     {
         this.rotateImg(img_trans_arm_links, winkel, 32, 64, x, y);
