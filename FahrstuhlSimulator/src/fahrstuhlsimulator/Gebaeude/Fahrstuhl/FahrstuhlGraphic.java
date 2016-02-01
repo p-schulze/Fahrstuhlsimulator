@@ -147,6 +147,7 @@ public class FahrstuhlGraphic {
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+        if(FahrstuhlSimulator.graphicDrawer.isPausiert()){FahrstuhlSimulator.graphicDrawer.resumeThread();}
     }
     public void schliesseTuer()
     {
@@ -164,6 +165,7 @@ public class FahrstuhlGraphic {
         
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+        if(FahrstuhlSimulator.graphicDrawer.isPausiert()){FahrstuhlSimulator.graphicDrawer.resumeThread();}
     }
 
     public void addToX_tuerLinks(int add) 

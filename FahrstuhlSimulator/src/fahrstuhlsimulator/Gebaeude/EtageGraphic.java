@@ -10,9 +10,10 @@ package fahrstuhlsimulator.Gebaeude;
  * @author becksusanna
  */
 public class EtageGraphic {
-    protected int hoehe;
+    
+    private int y_pos = 0;
     
     public EtageGraphic() {
-        this.hoehe=64;
+        this.y_pos=64;
     }
 }

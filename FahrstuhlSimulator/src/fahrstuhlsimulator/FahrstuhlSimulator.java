@@ -2,6 +2,7 @@ package fahrstuhlsimulator;
 
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.ImageLoader;
+import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Koch;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import java.util.ArrayList;

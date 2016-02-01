@@ -19,6 +19,9 @@ public class GraphicDrawer implements Runnable {
     
     private boolean pausiert = false;
     public static final int TIME_FOR_A_FRAME = 40;
+    
+    private static long durationForFrame = 0;
+    
     private static ArrayList<ArrayList<String>> taskList_task = new ArrayList();
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
     
@@ -51,6 +54,7 @@ public class GraphicDrawer implements Runnable {
     @Override
     public void run()
     {
+        long systemTime =  System.currentTimeMillis();
         boolean zeichnen = false;
         try{
             for(int i = 0; i < taskList_task.size();i++)
@@ -322,8 +326,16 @@ public class GraphicDrawer implements Runnable {
         //System.out.println("GraphicDrawer: Gestartet");
         try {if(zeichnen){TestFenster.panel.repaint();}else{System.out.println("GraphicDrawer_Thread: Pausiert");pausiert = true;FahrstuhlSimulator.graphicDrawer_th.suspend();}} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
         try {Thread.sleep(TIME_FOR_A_FRAME);} catch (InterruptedException ex) {}
+        durationForFrame = System.currentTimeMillis() - systemTime;
+        
         this.run();
     }
+    
+    public static long getDurrationForFrame()
+    {
+        return durationForFrame;
+    }
+    
     private void deleteTask(int i)
     {
         if((taskList_task.get(i).size()==1))

@@ -35,22 +35,35 @@ public class MitarbeiterGraphic
     private int etage;
     //</editor-fold>
     
+    private int koerperImgID = -1;
+    private int armeImgID = -1;
+    private int beineImgID = -1;
+    
     public MitarbeiterGraphic(String gliederPfad, int x_position, int etage, boolean wichtig)
     {
         markiert = wichtig;
-        this.MitarbeiterGraphicConsturctor(gliederPfad,x_position,etage);
+        this.gliederPfad = gliederPfad;
+        saveBufferedImages(gliederPfad, "Links");
+        this.MitarbeiterGraphicConsturctor(x_position,etage);
+    }
+    public MitarbeiterGraphic(int randomKoerperImgID, int randomArmeImgID,int randomBeineImgID, int x_position, int etage, boolean wichtig)
+    {
+        markiert = wichtig;
+        koerperImgID= randomKoerperImgID;
+        armeImgID   = randomArmeImgID;
+        beineImgID  = randomBeineImgID;
+        saveBufferedImages(randomKoerperImgID,randomArmeImgID,randomBeineImgID,"Links");
+        this.MitarbeiterGraphicConsturctor(x_position,etage);
     }
     public MitarbeiterGraphic(String gliederPfad, int x_position, int etage)
     {
-        this.MitarbeiterGraphicConsturctor(gliederPfad,x_position,etage);
-    }
-    private void MitarbeiterGraphicConsturctor(String gliederPfad, int x_position, int etage)
-    {
-        graphic_id = idcounter++;
         this.gliederPfad = gliederPfad;
         saveBufferedImages(gliederPfad, "Links");
-        
-        
+        this.MitarbeiterGraphicConsturctor(x_position,etage);
+    }
+    private void MitarbeiterGraphicConsturctor(int x_position, int etage)
+    {
+        graphic_id = idcounter++;
         //<editor-fold defaultstate="collapsed" desc="Speicherung der Koordinaten">
         x_pos = x_position;
         this.etage = etage;
@@ -265,12 +278,24 @@ public class MitarbeiterGraphic
     {
         if(flipped)
         {
-            saveBufferedImages(gliederPfad, "Links");
+            if(koerperImgID >= 0)
+            {
+                saveBufferedImages(koerperImgID,armeImgID,beineImgID, "Links");
+            }else
+            {
+                saveBufferedImages(gliederPfad, "Links");
+            }
             flipped = false;
         }
         else
         {
-            saveBufferedImages(gliederPfad, "Rechts");
+            if(koerperImgID >= 0)
+            {
+                saveBufferedImages(koerperImgID,armeImgID,beineImgID, "Rechts");
+            }else
+            {
+                saveBufferedImages(gliederPfad, "Rechts");
+            }
             flipped = true;
         }
     }
@@ -307,6 +332,68 @@ public class MitarbeiterGraphic
                     arm_rechts = (BufferedImage) gliederImgs.get(image_key);
                 }
                 else if(image_key.contains("Bein_Links"))
+                {
+                    bein_links = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Bein_Rechts"))
+                {
+                    bein_rechts =  (BufferedImage) gliederImgs.get(image_key);
+                }
+            }
+        
+//</editor-fold>
+        }
+    }
+    
+    private void saveBufferedImages(int randomKoerperImgID, int randomArmeImgID,int randomBeineImgID, String seite) {
+        HashMap gliederImgs = ImageLoader.getImagesVomPfad("img/Person/RandomMitarbeiter/Koerper/"+randomKoerperImgID);
+        ArrayList<String> images_keySet = new ArrayList(gliederImgs.keySet());
+        for(String image_key:images_keySet)
+        {
+            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
+            String[] image_keySplit = image_key.split("_");
+            
+            if(image_keySplit[0].equalsIgnoreCase(seite))
+            {
+                if(image_key.contains("Koerper"))
+                {
+                    koerper = (BufferedImage) gliederImgs.get(image_key);
+                }
+            }
+        
+//</editor-fold>
+        }
+        gliederImgs = ImageLoader.getImagesVomPfad("img/Person/RandomMitarbeiter/Arme/"+randomArmeImgID);
+        images_keySet = new ArrayList(gliederImgs.keySet());
+        for(String image_key:images_keySet)
+        {
+            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
+            String[] image_keySplit = image_key.split("_");
+            
+            if(image_keySplit[0].equalsIgnoreCase(seite))
+            {
+                if(image_key.contains("Arm_Links"))
+                {
+                    arm_links = (BufferedImage) gliederImgs.get(image_key);
+                }
+                else if(image_key.contains("Arm_Rechts"))
+                {
+                    arm_rechts = (BufferedImage) gliederImgs.get(image_key);
+                }
+            }
+        
+//</editor-fold>
+        }
+        gliederImgs = ImageLoader.getImagesVomPfad("img/Person/RandomMitarbeiter/Beine/"+randomBeineImgID);
+        images_keySet = new ArrayList(gliederImgs.keySet());
+        for(String image_key:images_keySet)
+        {
+            //<editor-fold defaultstate="collapsed" desc="Speicherung der BufferedImages">
+            String[] image_keySplit = image_key.split("_");
+            
+            if(image_keySplit[0].equalsIgnoreCase(seite))
+            {
+                if(image_key.contains("Bein_Links"))
                 {
                     bein_links = (BufferedImage) gliederImgs.get(image_key);
                 }
