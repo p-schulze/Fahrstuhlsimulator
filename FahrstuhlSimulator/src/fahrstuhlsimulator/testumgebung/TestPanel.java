@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.testumgebung;
 
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -130,6 +131,10 @@ public class TestPanel extends JPanel {
         {
             g2d.setColor(Color.DARK_GRAY);
             g2d.fillRect(0, 0, 800, 600);
+            g2d.setColor(Color.cyan);
+            g2d.drawString("X-Ray Modus", 700, 15);
+            g2d.setColor(Color.blue);
+            g2d.drawString("(600/"+GraphicDrawer.TIME_FOR_A_FRAME+")Fps", 705,30);
             g2d.setColor(Color.black);
         }
         for(FahrstuhlGraphic fahrstuhlGraphic:fahrstuhlGraphics)
