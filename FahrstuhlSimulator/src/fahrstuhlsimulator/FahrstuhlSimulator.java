@@ -21,9 +21,6 @@ public class FahrstuhlSimulator {
 
         new fahrstuhlsimulator.Konsole.Konsole().kStart();    
         
-        Koch mitarbeiter1 = new Koch(1, "Sebastian");
-        graphicDrawer.addMitarbeiterMoveListener(mitarbeiter1);
-        
         new fahrstuhlsimulator.testumgebung.TestFenster();
 
         

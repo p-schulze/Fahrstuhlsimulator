@@ -37,12 +37,21 @@ img/Person/Person2/Glieder/Person2_Rechts_Bein_Links.png
 img/Person/Person2/Glieder/Person2_Rechts_Bein_Rechts.png
 img/Person/Person2/Glieder/Person2_Rechts_Koerper.png
 
-//SebastianArndt Grafiken
-img/Person/SebastianArndt/Glieder/SebastianArndt_Arm_Links.png
-img/Person/SebastianArndt/Glieder/SebastianArndt_Arm_Rechts.png
-img/Person/SebastianArndt/Glieder/SebastianArndt_Bein_Links.png
-img/Person/SebastianArndt/Glieder/SebastianArndt_Bein_Rechts.png
-img/Person/SebastianArndt/Glieder/SebastianArndt_Koerper.png
+//SebastianArndtLinks Grafiken
+img/Person/SebastianArndt/Glieder/SebastianArndt_Links_Arm_Links.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Links_Arm_Rechts.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Links_Bein_Links.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Links_Bein_Rechts.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Links_Koerper.png
+//SebastianArndtRechts Grafiken
+img/Person/SebastianArndt/Glieder/SebastianArndt_Rechts_Arm_Links.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Rechts_Arm_Rechts.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Rechts_Bein_Links.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Rechts_Bein_Rechts.png
+img/Person/SebastianArndt/Glieder/SebastianArndt_Rechts_Koerper.png
+
+
+
 //Fahrstuhl Grafiken
 img/Fahrstuhl/Fahrstuhl1/Fahrstuhl1_Rahmen.png
 img/Fahrstuhl/Fahrstuhl1/Fahrstuhl1_Tuer_Links.png

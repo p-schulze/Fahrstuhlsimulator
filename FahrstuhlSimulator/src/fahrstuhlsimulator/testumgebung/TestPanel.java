@@ -78,7 +78,7 @@ public class TestPanel extends JPanel {
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2/", 864, 3));
         mitarbeiterGraphics.get(14).moveDistanceWithAnimation(368);
         
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 800, 2));
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/SebastianArndt/", 800, 2));
         mitarbeiterGraphics.get(15).moveDistanceWithAnimation(368);
         mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person1/", 832, 2));
         mitarbeiterGraphics.get(16).moveDistanceWithAnimation(368);

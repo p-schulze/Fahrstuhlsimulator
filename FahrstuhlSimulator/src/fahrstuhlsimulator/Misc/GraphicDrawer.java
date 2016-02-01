@@ -10,8 +10,6 @@ import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
