@@ -7,6 +7,7 @@ package fahrstuhlsimulator.Konsole;
 
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
+import fahrstuhlsimulator.testumgebung.TestPanel;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -84,6 +85,11 @@ public class Konsole {
             
            
                    
+        }
+        else if(command.equalsIgnoreCase("X-RAY") || command.equalsIgnoreCase("X") )
+        {
+            TestPanel.X_RAY = !TestPanel.X_RAY;
+            TestFenster.panel.repaint();
         }
     }
     

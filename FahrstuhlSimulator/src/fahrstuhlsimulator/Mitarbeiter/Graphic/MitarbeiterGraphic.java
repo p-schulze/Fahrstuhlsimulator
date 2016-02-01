@@ -14,6 +14,11 @@ import java.util.HashMap;
 
 public class MitarbeiterGraphic
 {
+    //Nur fuer X-Ray:
+    public int graphic_id = 0;
+    private static int idcounter = 0;
+    public boolean markiert = false;
+    //#######
     private MitarbeiterAnimator animator;
     private boolean flipped = false;
     private String gliederPfad;
@@ -30,8 +35,18 @@ public class MitarbeiterGraphic
     private int etage;
     //</editor-fold>
     
+    public MitarbeiterGraphic(String gliederPfad, int x_position, int etage, boolean wichtig)
+    {
+        markiert = wichtig;
+        this.MitarbeiterGraphicConsturctor(gliederPfad,x_position,etage);
+    }
     public MitarbeiterGraphic(String gliederPfad, int x_position, int etage)
     {
+        this.MitarbeiterGraphicConsturctor(gliederPfad,x_position,etage);
+    }
+    private void MitarbeiterGraphicConsturctor(String gliederPfad, int x_position, int etage)
+    {
+        graphic_id = idcounter++;
         this.gliederPfad = gliederPfad;
         saveBufferedImages(gliederPfad, "Links");
         
@@ -41,12 +56,9 @@ public class MitarbeiterGraphic
         this.etage = etage;
 //</editor-fold>
         animator = new MitarbeiterAnimator();
-        
-        
-        
-        
-        
+          
     }
+    
     public MitarbeiterAnimator getAnimator()
     {
         return animator;
