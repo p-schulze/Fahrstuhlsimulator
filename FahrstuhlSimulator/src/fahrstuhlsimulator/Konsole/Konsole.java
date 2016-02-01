@@ -8,6 +8,7 @@ package fahrstuhlsimulator.Konsole;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import fahrstuhlsimulator.testumgebung.TestPanel;
+import java.awt.BorderLayout;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -21,25 +22,27 @@ import javax.swing.text.DefaultCaret;
  */
 
 public class Konsole {
-    private JFrame masterFrame = new JFrame();
-    private JPanel masterPanel = new JPanel();
-    private JTextArea masterArea = new JTextArea();
-    private JTextField masterField = new JTextField();
-    private ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    final JFrame masterFrame = new JFrame();
+    final JTextArea masterArea = new JTextArea();
+    final JTextField masterField = new JTextField();
+    final JScrollPane masterPane = new JScrollPane(masterArea);
+    
+    final ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     
     public void kStart (){
         
-        masterFrame.setSize(500, 170);
-        masterFrame.setResizable(false);
-        masterPanel.setLayout(null);
         masterArea.setEditable(false);
-        masterArea.setBounds(0, 0, 500, 120);
-        masterField.setBounds(0, 120, 500, 30);
-        masterPanel.add(masterArea);
-        masterPanel.add(masterField);
-        masterFrame.add(masterPanel);
-        DefaultCaret caret = (DefaultCaret)masterArea.getCaret();
-        caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+        
+        masterFrame.add(masterField, BorderLayout.SOUTH);
+      
+        masterFrame.add(masterPane, BorderLayout.CENTER);
+        
+        masterFrame.pack();
+        
+        masterFrame.setSize(380, 175);
+        masterFrame.setResizable(false);
+        masterFrame.setLocationByPlatform(true);
+
         masterFrame.setVisible(true);
         masterFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.out.println("Konsole gestartet...");
@@ -70,42 +73,31 @@ public class Konsole {
 }
     
     private void analyze(String command){
-        if(command.contains("person")){
-           schreibe(".." + "Person wird erzeugt");
-             String[] array = command.split("[(),]");
-              
-        
-
-<<<<<<< Updated upstream
-//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-//        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
-//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
-//        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
-        fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
-        TestFenster.panel.repaint();
-=======
-
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
-        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
-        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
-
-        fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
-        
-
->>>>>>> Stashed changes
-            
-           
-                   
+        String[] commandArray = command.split("[(),]");
+        if(commandArray[0].equalsIgnoreCase("Person")){
+            //1. Command
+            schreibeAktion("Person wird erzeugt");            
         }
-        else if(command.equalsIgnoreCase("X-RAY") || command.equalsIgnoreCase("X") )
+        else if(commandArray[0].equalsIgnoreCase("xray"))
         {
+            //2. Command
             TestPanel.X_RAY = !TestPanel.X_RAY;
+            schreibeAktion("X-Ray: " + TestPanel.X_RAY);
             TestFenster.panel.repaint();
-        }
+        }  else 
+        {
+            //Error
+            schreibeAktion("Error: Befehl nicht erkannt");
+        } 
     }
     
     private void schreibe(String command){
-        masterArea.append("> "+ command + "\n");
+       
+        masterArea.append(">"+ command + "\n");
+    }
+    
+    private void schreibeAktion(String command){
+       
+        masterArea.append(".. "+ command + "\n");
     }
 }
