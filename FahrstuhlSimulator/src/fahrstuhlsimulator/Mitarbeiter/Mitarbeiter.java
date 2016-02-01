@@ -14,7 +14,7 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  *
  * @author becksusanna
  */
-public class Mitarbeiter implements MitarbeiterMoveListener {
+public class Mitarbeiter{
     private int id;
     private String name;
     private Etage aktuelleEtage;
@@ -53,10 +53,5 @@ public class Mitarbeiter implements MitarbeiterMoveListener {
     }
     protected void setErlaubteEtagen(ArrayList<Etage> nErlaubteEtagen) {
         this.erlaubteEtagen=nErlaubteEtagen;
-    }
-
-    @Override
-    public void onPosition(MitarbeiterGraphic mG) {
-        System.out.println(mG +" auf Position");
     }
 }
