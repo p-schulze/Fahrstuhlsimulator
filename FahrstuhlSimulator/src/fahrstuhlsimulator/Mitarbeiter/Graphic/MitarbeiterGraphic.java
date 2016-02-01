@@ -147,16 +147,16 @@ public class MitarbeiterGraphic
     }
     public void moveDistanceWithAnimation(int x)
     {
+        
         int weg = x;
         int anzahlAnimationen = weg/200;
         schritteVor(anzahlAnimationen, weg%200>=50);
-        
         moveDistance(x);
     }
     
     public boolean checkPositionGleichZielPosition(int x_ziel)
     {
-        System.out.println(x_pos + " "+ x_ziel);
+        //System.out.println(x_pos + " "+ x_ziel);
         if(flipped)
         {
             return(x_pos >= x_ziel);
@@ -173,77 +173,80 @@ public class MitarbeiterGraphic
     
     public void schritteVor(int anzSchritte, boolean plusHalberSchritt)
     {
-        //<editor-fold defaultstate="collapsed" desc="SchritteVorVerarbeitung">
-        ArrayList<String> tasks1 = new ArrayList();
-        ArrayList<Object> objects1 = new ArrayList();
-        
-        ArrayList<String> tasks2 = new ArrayList();
-        ArrayList<Object> objects2 = new ArrayList();
-        
-        ArrayList<String> tasks3 = new ArrayList();
-        ArrayList<Object> objects3 = new ArrayList();
-        
-        ArrayList<String> tasks4 = new ArrayList();
-        ArrayList<Object> objects4 = new ArrayList();
-        
-        for(int i = 0; i < anzSchritte; i++)
+        if(anzSchritte > 0)
         {
-            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
-            objects1.add(this);
-            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(20)winkel(50)");
-            objects1.add(this);
-            tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-1)");
-            objects1.add(this);
-            
-            tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
-            objects2.add(this);
-            tasks2.add("Mitarbeiter.hebFuss.links:speed(-20)winkel(-50)");
-            objects2.add(this);
-            tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(1)");
-            objects2.add(this);
-            
-            tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
-            objects3.add(this);
-            tasks3.add("Mitarbeiter.hebArm.links:speed(20)winkel(50)");
-            objects3.add(this);
-            tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-1)");
-            objects3.add(this);
-            
-            tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
-            objects4.add(this);
-            tasks4.add("Mitarbeiter.hebArm.rechts:speed(-20)winkel(-50)");
-            objects4.add(this);
-            tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(1)");
-            objects4.add(this);
+            //<editor-fold defaultstate="collapsed" desc="SchritteVorVerarbeitung">
+            ArrayList<String> tasks1 = new ArrayList();
+            ArrayList<Object> objects1 = new ArrayList();
+
+            ArrayList<String> tasks2 = new ArrayList();
+            ArrayList<Object> objects2 = new ArrayList();
+
+            ArrayList<String> tasks3 = new ArrayList();
+            ArrayList<Object> objects3 = new ArrayList();
+
+            ArrayList<String> tasks4 = new ArrayList();
+            ArrayList<Object> objects4 = new ArrayList();
+
+            for(int i = 0; i < anzSchritte; i++)
+            {
+                tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-50)");
+                objects1.add(this);
+                tasks1.add("Mitarbeiter.hebFuss.rechts:speed(20)winkel(50)");
+                objects1.add(this);
+                tasks1.add("Mitarbeiter.hebFuss.rechts:speed(-20)winkel(-1)");
+                objects1.add(this);
+
+                tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(50)");
+                objects2.add(this);
+                tasks2.add("Mitarbeiter.hebFuss.links:speed(-20)winkel(-50)");
+                objects2.add(this);
+                tasks2.add("Mitarbeiter.hebFuss.links:speed(20)winkel(1)");
+                objects2.add(this);
+
+                tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-50)");
+                objects3.add(this);
+                tasks3.add("Mitarbeiter.hebArm.links:speed(20)winkel(50)");
+                objects3.add(this);
+                tasks3.add("Mitarbeiter.hebArm.links:speed(-20)winkel(-1)");
+                objects3.add(this);
+
+                tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(50)");
+                objects4.add(this);
+                tasks4.add("Mitarbeiter.hebArm.rechts:speed(-20)winkel(-50)");
+                objects4.add(this);
+                tasks4.add("Mitarbeiter.hebArm.rechts:speed(20)winkel(1)");
+                objects4.add(this);
+            }
+            if(plusHalberSchritt)
+            {
+                boolean zufall = Math.random()>=0.5;
+                tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
+                objects1.add(this);
+                tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
+                objects1.add(this);
+
+                tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
+                objects2.add(this);
+                tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
+                objects2.add(this);
+
+                tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
+                objects3.add(this);
+                tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
+                objects3.add(this);
+
+                tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
+                objects4.add(this);
+                tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
+                objects4.add(this);
+            }
+
+            FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+            FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+            FahrstuhlSimulator.graphicDrawer.addTask(tasks3, objects3);
+            FahrstuhlSimulator.graphicDrawer.addTask(tasks4, objects4);
         }
-        if(plusHalberSchritt)
-        {
-            boolean zufall = Math.random()>=0.5;
-            tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
-            objects1.add(this);
-            tasks1.add("Mitarbeiter.hebFuss.rechts:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
-            objects1.add(this);
-
-            tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
-            objects2.add(this);
-            tasks2.add("Mitarbeiter.hebFuss.links:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
-            objects2.add(this);
-
-            tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(-20)winkel(-50)":"speed(20)winkel(50)"));
-            objects3.add(this);
-            tasks3.add("Mitarbeiter.hebArm.links:"+(zufall?"speed(20)winkel(1)":"speed(-20)winkel(-1)"));
-            objects3.add(this);
-
-            tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(20)winkel(50)":"speed(-20)winkel(-50)"));
-            objects4.add(this);
-            tasks4.add("Mitarbeiter.hebArm.rechts:"+(zufall?"speed(-20)winkel(-1)":"speed(20)winkel(1)"));
-            objects4.add(this);
-        }
-        
-        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
-        FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
-        FahrstuhlSimulator.graphicDrawer.addTask(tasks3, objects3);
-        FahrstuhlSimulator.graphicDrawer.addTask(tasks4, objects4);
 //</editor-fold>
     }
     public void umdrehen()

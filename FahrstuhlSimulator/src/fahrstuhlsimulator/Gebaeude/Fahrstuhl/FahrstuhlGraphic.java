@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Gebaeude.Fahrstuhl;
 
+import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Misc.ImageLoader;
 import fahrstuhlsimulator.animaton.FahrstuhlAnimator;
 import java.awt.image.BufferedImage;
@@ -26,9 +27,12 @@ public class FahrstuhlGraphic {
     //<editor-fold defaultstate="collapsed" desc="Koordinaten">
     private int x_pos;
     private int etage;
+    
+    private int x_pos_tuerLinks;
+    private int x_pos_tuerRechts;
     //</editor-fold>
     
-    public FahrstuhlGraphic(String fahrstuhlPfad, int x_position, int etage)
+    public FahrstuhlGraphic(String fahrstuhlPfad, int x_position, int etage, boolean open)
     {
         HashMap fastuhlImgs = ImageLoader.getImagesVomPfad(fahrstuhlPfad);
         
@@ -54,6 +58,9 @@ public class FahrstuhlGraphic {
         }
         x_pos = x_position;
         this.etage = etage;
+        
+        x_pos_tuerLinks = x_pos-(open?20:0);
+        x_pos_tuerRechts = x_pos+(open?20:0);
         animator = new FahrstuhlAnimator();
     }
     
@@ -74,7 +81,14 @@ public class FahrstuhlGraphic {
         return fahrstuhl_gesperrt;
     }
     
-    
+    public int getX_Pos_TuerLinks()
+    {
+        return x_pos_tuerLinks;
+    }
+    public int getX_Pos_TuerRechts()
+    {
+        return x_pos_tuerRechts;
+    }
     public int getX_Pos()
     {
         return x_pos;
@@ -94,6 +108,14 @@ public class FahrstuhlGraphic {
         setEtage(etage);
     }
     
+    public void setX_Pos_TuerLinks(int x)
+    {
+        x_pos_tuerLinks = x;
+    }
+    public void setX_Pos_TuerRechts(int x)
+    {
+        x_pos_tuerRechts = x;
+    }
     private void setX_Pos(int x)
     {
         x_pos = x;
@@ -106,6 +128,74 @@ public class FahrstuhlGraphic {
     public FahrstuhlAnimator getAnimator()
     {
         return animator;
+    }
+    
+    
+    public void oeffneTuer()
+    {
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
+
+        ArrayList<String> tasks2 = new ArrayList();
+        ArrayList<Object> objects2 = new ArrayList();
+        
+        tasks1.add("Fahrstuhl.tuer.links.oeffnen:speed(20)ziel("+(getX_Pos_TuerLinks()-20)+")");
+        objects1.add(this);
+
+        tasks2.add("Fahrstuhl.tuer.rechts.oeffnen:speed(20)ziel("+(getX_Pos_TuerRechts()+20)+")");
+        objects2.add(this);
+        
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+    }
+    public void schliesseTuer()
+    {
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
+
+        ArrayList<String> tasks2 = new ArrayList();
+        ArrayList<Object> objects2 = new ArrayList();
+        
+        tasks1.add("Fahrstuhl.tuer.links.schliessen:speed(20)ziel("+(getX_Pos_TuerLinks()+20)+")");
+        objects1.add(this);
+
+        tasks2.add("Fahrstuhl.tuer.rechts.schliessen:speed(20)ziel("+(getX_Pos_TuerRechts()-20)+")");
+        objects2.add(this);
+        
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks2, objects2);
+    }
+
+    public void addToX_tuerLinks(int add) 
+    {
+        setX_Pos_TuerLinks(x_pos_tuerLinks + add);
+    }
+    public void addToX_tuerRechts(int add) 
+    {
+        setX_Pos_TuerRechts(x_pos_tuerRechts + add);
+    }
+
+    public boolean checkTuerLinksPositionGleichZielPosition(int x_ziel, boolean opening)
+    {
+        System.out.println(x_pos_tuerLinks +" "+ x_ziel);
+        if(opening)
+        {
+            return(x_pos_tuerLinks <= x_ziel);
+        }else
+        {
+            return(x_pos_tuerLinks >= x_ziel);
+        }
+        
+    }
+    public boolean checkTuerRechtsPositionGleichZielPosition(int x_ziel, boolean opening)
+    {
+        if(opening)
+        {
+            return(x_pos_tuerRechts >= x_ziel);
+        }else
+        {
+            return(x_pos_tuerRechts <= x_ziel);
+        }
     }
         
 }

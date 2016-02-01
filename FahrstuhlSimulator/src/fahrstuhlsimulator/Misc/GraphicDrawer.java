@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Misc;
 
 import fahrstuhlsimulator.FahrstuhlSimulator;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ public class GraphicDrawer implements Runnable {
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
     
     private ArrayList<Object> mitarbeiterMoveListenerList = new ArrayList();
+    private ArrayList<Object> fahrstuhlOpenListenerList = new ArrayList();
     
     public GraphicDrawer()
     {
@@ -34,7 +36,7 @@ public class GraphicDrawer implements Runnable {
     {
         taskList_task.add(tasks);
         taskList_object.add(objects);
-        System.out.println("Tasks: "+taskList_task +"  "+taskList_object);
+        
     }
     
     public boolean isPausiert()
@@ -238,6 +240,83 @@ public class GraphicDrawer implements Runnable {
                             deleteTask(i);
                         }
                     }
+                    else if(taskList_taskSplit[0].equalsIgnoreCase("Fahrstuhl"))
+                    {
+                        if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
+                        {
+                            if(taskList_taskSplit[2].equalsIgnoreCase("links"))
+                            {
+                                boolean tempOeffnen = true;
+                                if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
+                                {
+                                    tempOeffnen = false;
+                                }    
+                                FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
+
+                                String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
+                                int speed = 0;
+                                int ziel = fahrstuhlG.getX_Pos();
+                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                {
+                                    //System.out.println(parameter[i_parameter]);
+                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    {
+                                        speed = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                    {
+                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                }
+
+                                if(!(fahrstuhlG.checkTuerLinksPositionGleichZielPosition(ziel, tempOeffnen)))
+                                {
+                                    fahrstuhlG.addToX_tuerLinks(tempOeffnen?-1:1);
+                                }
+                                else{
+
+                                    deleteTask(i);
+                                    //sendOnPositionEvent(fahrstuhlG);
+                                }
+                                    
+                                
+                            }
+                            else if(taskList_taskSplit[2].equalsIgnoreCase("rechts"))
+                            {
+                                boolean tempOeffnen = true;
+                                if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
+                                {
+                                    tempOeffnen = false;
+                                }
+                                FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
+
+                                String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
+                                int speed = 0;
+                                int ziel = fahrstuhlG.getX_Pos();
+                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                {
+                                    //System.out.println(parameter[i_parameter]);
+                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    {
+                                        speed = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                    {
+                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                }
+                                if(!(fahrstuhlG.checkTuerRechtsPositionGleichZielPosition(ziel, tempOeffnen)))
+                                {
+                                    fahrstuhlG.addToX_tuerRechts(tempOeffnen?1:-1);
+                                }
+                                else{
+
+                                    deleteTask(i);
+                                    if(tempOeffnen) {sendOpenedEvent(fahrstuhlG);} else {sendClosedEvent(fahrstuhlG);}
+                                }
+                            }
+                        }
+                    }
             }
         }catch(IndexOutOfBoundsException ex) {
             //System.out.println("Keine Aufgaben vorhanden");
@@ -245,7 +324,6 @@ public class GraphicDrawer implements Runnable {
         //System.out.println("GraphicDrawer: Gestartet");
         try {if(zeichnen){TestFenster.panel.repaint();}else{System.out.println("GraphicDrawer_Thread: Pausiert");pausiert = true;FahrstuhlSimulator.graphicDrawer_th.suspend();}} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
         try {Thread.sleep(timeForFrame);} catch (InterruptedException ex) {}
-        //System.out.println("GraphicDrawer: Fertig");
         this.run();
     }
     private void deleteTask(int i)
@@ -275,6 +353,29 @@ public class GraphicDrawer implements Runnable {
         for(Object mitarbeiterMoveListener:mitarbeiterMoveListenerList)
         {
             ((MitarbeiterMoveListener) mitarbeiterMoveListener).onPosition(mG);
+        }
+    }
+    
+    public void addFahrstuhlOpenListenerList(Object e)
+    {
+        fahrstuhlOpenListenerList.add(e);
+    }
+    public void removeFahrstuhlOpenListenerList(Object e)
+    {
+        fahrstuhlOpenListenerList.remove(e);
+    }
+    public void sendOpenedEvent(FahrstuhlGraphic fG)
+    {
+        for(Object fahrstuhlOpenListener:fahrstuhlOpenListenerList)
+        {
+            ((FahrstuhlOpenListener) fahrstuhlOpenListener).opened(fG);
+        }
+    }
+    public void sendClosedEvent(FahrstuhlGraphic fG)
+    {
+        for(Object fahrstuhlOpenListener:fahrstuhlOpenListenerList)
+        {
+            ((FahrstuhlOpenListener) fahrstuhlOpenListener).closed(fG);
         }
     }
     

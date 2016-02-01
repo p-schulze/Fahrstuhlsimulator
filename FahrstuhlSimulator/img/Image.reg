@@ -10,18 +10,33 @@ img/Person/Administrator/Glieder/Administrator_Rechts_Arm_Rechts.png
 img/Person/Administrator/Glieder/Administrator_Rechts_Bein_Links.png
 img/Person/Administrator/Glieder/Administrator_Rechts_Bein_Rechts.png
 img/Person/Administrator/Glieder/Administrator_Rechts_Koerper.png
-//Person1 Grafiken
-img/Person/Person1/Glieder/Person1_Arm_Links.png
-img/Person/Person1/Glieder/Person1_Arm_Rechts.png
-img/Person/Person1/Glieder/Person1_Bein_Links.png
-img/Person/Person1/Glieder/Person1_Bein_Rechts.png
-img/Person/Person1/Glieder/Person1_Koerper.png
-//Person2 Grafiken
-img/Person/Person2/Glieder/Person2_Arm_Links.png
-img/Person/Person2/Glieder/Person2_Arm_Rechts.png
-img/Person/Person2/Glieder/Person2_Bein_Links.png
-img/Person/Person2/Glieder/Person2_Bein_Rechts.png
-img/Person/Person2/Glieder/Person2_Koerper.png
+
+//Person1Links Grafiken
+img/Person/Person1/Glieder/Person1_Links_Arm_Links.png
+img/Person/Person1/Glieder/Person1_Links_Arm_Rechts.png
+img/Person/Person1/Glieder/Person1_Links_Bein_Links.png
+img/Person/Person1/Glieder/Person1_Links_Bein_Rechts.png
+img/Person/Person1/Glieder/Person1_Links_Koerper.png
+//Person1Rechts Grafiken
+img/Person/Person1/Glieder/Person1_Rechts_Arm_Links.png
+img/Person/Person1/Glieder/Person1_Rechts_Arm_Rechts.png
+img/Person/Person1/Glieder/Person1_Rechts_Bein_Links.png
+img/Person/Person1/Glieder/Person1_Rechts_Bein_Rechts.png
+img/Person/Person1/Glieder/Person1_Rechts_Koerper.png
+
+//Person2Links Grafiken
+img/Person/Person2/Glieder/Person2_Links_Arm_Links.png
+img/Person/Person2/Glieder/Person2_Links_Arm_Rechts.png
+img/Person/Person2/Glieder/Person2_Links_Bein_Links.png
+img/Person/Person2/Glieder/Person2_Links_Bein_Rechts.png
+img/Person/Person2/Glieder/Person2_Links_Koerper.png
+//Person2Rechts Grafiken
+img/Person/Person2/Glieder/Person2_Rechts_Arm_Links.png
+img/Person/Person2/Glieder/Person2_Rechts_Arm_Rechts.png
+img/Person/Person2/Glieder/Person2_Rechts_Bein_Links.png
+img/Person/Person2/Glieder/Person2_Rechts_Bein_Rechts.png
+img/Person/Person2/Glieder/Person2_Rechts_Koerper.png
+
 //SebastianArndt Grafiken
 img/Person/SebastianArndt/Glieder/SebastianArndt_Arm_Links.png
 img/Person/SebastianArndt/Glieder/SebastianArndt_Arm_Rechts.png
