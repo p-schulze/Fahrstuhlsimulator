@@ -73,7 +73,7 @@ public class Konsole {
 }
     
     private void analyze(String command){
-        String[] commandArray = command.split("[(),]");
+        String[] commandArray = command.split("\\s+");
         if(commandArray[0].equalsIgnoreCase("Person")){
             //1. Command
             schreibeAktion("Person wird erzeugt");            
@@ -84,7 +84,18 @@ public class Konsole {
             TestPanel.X_RAY = !TestPanel.X_RAY;
             schreibeAktion("X-Ray: " + TestPanel.X_RAY);
             TestFenster.panel.repaint();
-        }  else 
+        }
+        else if(commandArray[0].equalsIgnoreCase("open"))
+        {
+             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
+             schreibeAktion("open door: " + commandArray[1]);
+        }  
+        else if(commandArray[0].equalsIgnoreCase("close"))
+        {
+             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
+             schreibeAktion("close door: " + commandArray[1]);
+        }   
+        else 
         {
             //Error
             schreibeAktion("Error: Befehl nicht erkannt");

@@ -22,7 +22,7 @@ import javax.swing.JPanel;
 public class TestPanel extends JPanel {
     
     public static ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
-    public ArrayList<FahrstuhlGraphic> fahrstuhlGraphics = new ArrayList();
+    public static ArrayList<FahrstuhlGraphic> fahrstuhlGraphics = new ArrayList();
     
     public static boolean X_RAY = false;
     
