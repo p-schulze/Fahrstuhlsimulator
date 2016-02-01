@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class GraphicDrawer implements Runnable {
     
     private boolean pausiert = false;
-    public static final int TIME_FOR_A_FRAME = 600;
+    public static final int TIME_FOR_A_FRAME = 40;
     private static ArrayList<ArrayList<String>> taskList_task = new ArrayList();
     private static ArrayList<ArrayList<Object>> taskList_object = new ArrayList();
     
