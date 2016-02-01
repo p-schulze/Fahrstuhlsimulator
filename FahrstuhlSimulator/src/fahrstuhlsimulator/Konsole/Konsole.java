@@ -76,12 +76,24 @@ public class Konsole {
               
         
 
+<<<<<<< Updated upstream
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
 //        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
 //        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
 //        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
         fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
         TestFenster.panel.repaint();
+=======
+
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 0));
+        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(100);
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", 300, 1));
+        mitarbeiterGraphics.get(1).moveDistanceWithAnimation(100);
+
+        fahrstuhlsimulator.testumgebung.TestPanel.mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator/", Integer.parseInt(array[1]), Integer.parseInt(array[2])));
+        
+
+>>>>>>> Stashed changes
             
            
                    
