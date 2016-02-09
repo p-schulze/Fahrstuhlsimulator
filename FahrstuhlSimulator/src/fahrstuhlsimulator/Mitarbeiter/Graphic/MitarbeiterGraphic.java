@@ -61,7 +61,7 @@ public class MitarbeiterGraphic
         saveBufferedImages(gliederPfad, "Links");
         this.MitarbeiterGraphicConsturctor(x_position,etage);
     }
-    private void MitarbeiterGraphicConsturctor(int x_position, int etage)
+    public void MitarbeiterGraphicConsturctor(int x_position, int etage)
     {
         graphic_id = idcounter++;
         //<editor-fold defaultstate="collapsed" desc="Speicherung der Koordinaten">
