@@ -39,31 +39,10 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
-        //mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person3", 0, 0));
-        //mitarbeiterGraphics.get(0).umdrehen();
-        //mitarbeiterGraphics.get(0).moveDistanceWithAnimation(368);
-        int tempx = 0;
-        int tempy = 0;
-        for(int i = 0; i < 176; i++)
-        {
-            tempx += 16;
-            RandomMitarbeiterGenerator.makeRandomMitarbeiter();
-            if(i == 50)
-            {
-                mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Administrator", tempx, tempy,true));
-                mitarbeiterGraphics.get(i).umdrehen();
-            }else
-            {
-                mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic(RandomMitarbeiterGenerator.getKoerperImgID(),RandomMitarbeiterGenerator.getArmeImgID(),RandomMitarbeiterGenerator.getBeineImgID(), tempx, tempy,false));
-                mitarbeiterGraphics.get(i).umdrehen();
-            }
-            //mitarbeiterGraphics.get(i).moveDistanceWithAnimation(10000);
-            if(tempx >= 350)
-            {
-                tempx = 0;
-                tempy +=1;
-            }
-        }
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person3", 0, 0));
+        mitarbeiterGraphics.get(0).umdrehen();
+        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(368);
+        
         //mitarbeiterGraphics.get(1).moveDistanceWithAnimation(368);
         
         
@@ -91,6 +70,7 @@ public class TestPanel extends JPanel {
             g2d.drawString("X-Ray Modus", 700, 15);
             g2d.setColor(Color.blue);
             g2d.drawString("(600/"+GraphicDrawer.getDurrationForFrame()+")Fps", 705,30);
+            g2d.drawString(((float) 600/+GraphicDrawer.getDurrationForFrame())+" Fps", 705,45);
             g2d.setColor(Color.black);
         }
         for(FahrstuhlGraphic fahrstuhlGraphic:fahrstuhlGraphics)
