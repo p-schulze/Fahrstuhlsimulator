@@ -87,13 +87,23 @@ public class Konsole {
         }
         else if(commandArray[0].equalsIgnoreCase("open"))
         {
-             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-             schreibeAktion("open door: " + commandArray[1]);
+            if(!TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){
+            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
+            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = true;
+            schreibeAktion("open door: " + commandArray[1]);
+            }else{
+                schreibeAktion("door: open");
+            }
         }  
         else if(commandArray[0].equalsIgnoreCase("close"))
         {
-             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
-             schreibeAktion("close door: " + commandArray[1]);
+            if(TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){ 
+            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
+            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = false;
+            schreibeAktion("close door: " + commandArray[1]);}
+            else{
+                schreibeAktion("door: close");
+            }
         }
         else if(commandArray[0].equalsIgnoreCase("move"))
         {
@@ -106,7 +116,7 @@ public class Konsole {
             schreibeAktion("move: " + commandArray[1]);
         } else if(commandArray[0].equalsIgnoreCase("etage"))
         {
-            TestPanel.mitarbeiterGraphics.get(0).MitarbeiterGraphicConsturctor(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
+            TestPanel.mitarbeiterGraphics.get(0).setEtage(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
             TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
             schreibeAktion("etage: " + commandArray[1]);
         } else if(commandArray[0].equalsIgnoreCase("goto"))
@@ -114,7 +124,7 @@ public class Konsole {
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.mitarbeiterGraphics.get(0).MitarbeiterGraphicConsturctor(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
+            TestPanel.mitarbeiterGraphics.get(0).setEtage(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
             TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
             schreibeAktion("goto: " + commandArray[1]);
