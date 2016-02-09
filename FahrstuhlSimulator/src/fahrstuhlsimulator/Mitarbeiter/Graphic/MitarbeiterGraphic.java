@@ -143,7 +143,7 @@ public class MitarbeiterGraphic
         animator.setArmLinksRotation(tempDegrees_arm_links, getX_Pos(), getY_Pos());
         animator.setArmRechtsRotation(tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
     }
-    private void setEtage(int etage)
+    public void setEtage(int etage)
     {
         this.etage = etage;
     }

@@ -94,9 +94,35 @@ public class Konsole {
         {
              TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
              schreibeAktion("close door: " + commandArray[1]);
-        }   
+        }
+        else if(commandArray[0].equalsIgnoreCase("move"))
+        {
+            if(Integer.parseInt(commandArray[1]) < 0){
+            TestPanel.mitarbeiterGraphics.get(0).umdrehen();
+            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]) * (-1));
+            }else {
+            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]));
+            }   
+            schreibeAktion("move: " + commandArray[1]);
+        } else if(commandArray[0].equalsIgnoreCase("etage"))
+        {
+            TestPanel.mitarbeiterGraphics.get(0).MitarbeiterGraphicConsturctor(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
+            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
+            schreibeAktion("etage: " + commandArray[1]);
+        } else if(commandArray[0].equalsIgnoreCase("goto"))
+        {
+            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
+            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
+            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
+            TestPanel.mitarbeiterGraphics.get(0).MitarbeiterGraphicConsturctor(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
+            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
+            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
+            schreibeAktion("goto: " + commandArray[1]);
+        } 
         else 
         {
+            
+            
             //Error
             schreibeAktion("Error: Befehl nicht erkannt");
         } 
