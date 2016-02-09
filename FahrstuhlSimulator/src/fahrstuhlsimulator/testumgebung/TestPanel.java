@@ -5,7 +5,7 @@
  */
 package fahrstuhlsimulator.testumgebung;
 
-import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlGraphic;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;

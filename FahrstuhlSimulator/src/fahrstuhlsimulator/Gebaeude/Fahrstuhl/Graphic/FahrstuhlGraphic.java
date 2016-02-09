@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fahrstuhlsimulator.Gebaeude.Fahrstuhl;
+package fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic;
 
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Misc.ImageLoader;

@@ -5,7 +5,7 @@
  */
 package fahrstuhlsimulator.Misc;
 
-import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlGraphic;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 
 /**
  *
