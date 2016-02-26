@@ -122,13 +122,23 @@ public class Konsole {
             schreibeAktion("etage: " + commandArray[1]);
         } else if(commandArray[0].equalsIgnoreCase("goto"))
         {
-            
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
+            if(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() <= 368){
+                if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == false){
+                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
+                }
+                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() - TestPanel.mitarbeiterGraphics.get(0).getX_Pos());
+            } else {
+                 if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == true){
+                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
+                }
+                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() - TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() );
+            }
+          /*  TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
             TestPanel.mitarbeiterGraphics.get(0).setPosition(368, Integer.parseInt(commandArray[1]));
             TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
+            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer(); */
             schreibeAktion("goto: " + commandArray[1]);
         } 
         else 
