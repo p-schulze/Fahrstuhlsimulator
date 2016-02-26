@@ -23,6 +23,7 @@ public class FahrstuhlGraphic {
     private BufferedImage fahrstuhl_tuer_links;
     private BufferedImage fahrstuhl_tuer_rechts;
     private BufferedImage fahrstuhl_gesperrt;
+    public boolean open = false;
     
     //<editor-fold defaultstate="collapsed" desc="Koordinaten">
     private int x_pos;
@@ -120,7 +121,7 @@ public class FahrstuhlGraphic {
     {
         x_pos = x;
     }
-    private void setEtage(int etage)
+    public void setEtage(int etage)
     {
         this.etage = etage;
     }

@@ -116,15 +116,17 @@ public class Konsole {
             schreibeAktion("move: " + commandArray[1]);
         } else if(commandArray[0].equalsIgnoreCase("etage"))
         {
-            TestPanel.mitarbeiterGraphics.get(0).setEtage(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
+            TestPanel.mitarbeiterGraphics.get(0).setEtage(Integer.parseInt(commandArray[1]));
+            TestFenster.panel.repaint();
+            //TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
             schreibeAktion("etage: " + commandArray[1]);
         } else if(commandArray[0].equalsIgnoreCase("goto"))
         {
+            
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.mitarbeiterGraphics.get(0).setEtage(TestPanel.mitarbeiterGraphics.get(0).getX_Pos(),Integer.parseInt(commandArray[1]));
+            TestPanel.mitarbeiterGraphics.get(0).setPosition(368, Integer.parseInt(commandArray[1]));
             TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
             TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
             schreibeAktion("goto: " + commandArray[1]);
