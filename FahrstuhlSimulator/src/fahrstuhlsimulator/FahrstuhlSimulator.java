@@ -20,7 +20,7 @@ public class FahrstuhlSimulator {
         graphicDrawer_th.start();
         ImageLoader.loadImages();
 
-        //new fahrstuhlsimulator.Konsole.Konsole().kStart();    
+        new fahrstuhlsimulator.Konsole.Konsole().kStart();    
         
         new fahrstuhlsimulator.testumgebung.TestFenster();
 
