@@ -20,15 +20,16 @@ import javax.swing.text.DefaultCaret;
  *
  * @author pascalschulze
  */
+import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 
 public class Konsole {
-    final JFrame masterFrame = new JFrame();
-    final JTextArea masterArea = new JTextArea();
-    final JTextField masterField = new JTextField();
-    final JScrollPane masterPane = new JScrollPane(masterArea);
+    private final JFrame masterFrame = new JFrame();
+    private final JTextArea masterArea = new JTextArea();
+    private final JTextField masterField = new JTextField();
+    private final JScrollPane masterPane = new JScrollPane(masterArea);
+    private final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
     
-    final ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
-    
+    //Konsole wird generiert und gestartet
     public void kStart (){
         
         masterArea.setEditable(false);
@@ -46,6 +47,8 @@ public class Konsole {
         masterFrame.setVisible(true);
         masterFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.out.println("Konsole gestartet...");
+        
+        
    
         
     masterField.addKeyListener(new KeyListener(){
@@ -72,11 +75,14 @@ public class Konsole {
        
 }
     
+    //Analyse 
     private void analyze(String command){
         String[] commandArray = command.split("\\s+");
-        if(commandArray[0].equalsIgnoreCase("Person")){
-            //1. Command
-            schreibeAktion("Person wird erzeugt");            
+        if(commandArray[0].equalsIgnoreCase("addKoch")){
+            
+            mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(commandArray[1]));
+           (mitarbeiter.size()-1).move(50);
+                     
         }
         else if(commandArray[0].equalsIgnoreCase("xray"))
         {

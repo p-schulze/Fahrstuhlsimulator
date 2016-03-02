@@ -3,14 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fahrstuhlsimulator.Gebaeude;
+package fahrstuhlsimulator.Mitarbeiter;
 
 /**
  *
- * @author becksusanna
+ * @author schueler
  */
-public class Etage {
-    public Etage(int nummer){
-    int Etagenzahl = nummer;
-    }
+public class Hausmeister {
+    
 }
