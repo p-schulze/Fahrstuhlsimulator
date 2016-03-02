@@ -18,17 +18,18 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 public class Mitarbeiter{
     private String name;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private int aktuelleEtage;
 =======
 <<<<<<< HEAD
     private Etage aktuelleEtage;
     private ArrayList<Etage> erlaubteEtagen;
-    private MitarbeiterGraphic graphic;
 =======
+>>>>>>> origin/master
+    private MitarbeiterGraphic graphic;
     private String aktuelleEtage;
 >>>>>>> origin/master
     private ArrayList<String> erlaubteEtagen;
->>>>>>> origin/master
     
     protected Mitarbeiter(String name) {
         this.name=name;
