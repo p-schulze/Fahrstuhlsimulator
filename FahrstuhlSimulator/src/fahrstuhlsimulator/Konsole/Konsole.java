@@ -125,8 +125,12 @@ public class Konsole {
         //person.teleport(etage);
     }
     
-    private fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int index){
+    public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int index){
         return mitarbeiter.get(index);  
+    }
+    
+    public ArrayList<Mitarbeiter> getMitarbeiterListe(){
+        return mitarbeiter;  
     }
     
     //Analyse 
