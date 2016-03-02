@@ -11,8 +11,8 @@ import fahrstuhlsimulator.Gebaeude.Etage;
  * @author schueler
  */
 public class Putzkolonne extends Mitarbeiter{
-      public Putzkolonne(int id, String name) {   
-        super(id,name);
+      public Putzkolonne(String name) {   
+        super(name);
         ArrayList<String> liste = new ArrayList();
         liste.add("EG");
         liste.add("Cafeteria");

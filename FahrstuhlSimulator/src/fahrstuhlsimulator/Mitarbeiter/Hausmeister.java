@@ -9,6 +9,8 @@ package fahrstuhlsimulator.Mitarbeiter;
  *
  * @author schueler
  */
-public class Hausmeister {
-    
+public class Hausmeister extends Mitarbeiter{
+     public Hausmeister(String name) {
+        super(name);
+     }
 }

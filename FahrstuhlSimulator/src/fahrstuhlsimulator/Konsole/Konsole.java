@@ -10,6 +10,7 @@ import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import fahrstuhlsimulator.testumgebung.TestPanel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -23,16 +24,20 @@ import javax.swing.text.DefaultCaret;
  */
 
 public class Konsole {
-    final JFrame masterFrame = new JFrame();
-    final JTextArea masterArea = new JTextArea();
-    final JTextField masterField = new JTextField();
-    final JScrollPane masterPane = new JScrollPane(masterArea);
+    protected final JFrame masterFrame = new JFrame();
+    protected final JTextArea masterArea = new JTextArea();
+    protected final JTextField masterField = new JTextField();
+    protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
+    protected final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     
+    /**
+     * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
+     */
     public void kStart (){
         
         masterArea.setEditable(false);
+        masterFrame.setMinimumSize(new Dimension(380, 175));
         
         masterFrame.add(masterField, BorderLayout.SOUTH);
       
@@ -41,7 +46,7 @@ public class Konsole {
         masterFrame.pack();
         
         masterFrame.setSize(380, 175);
-        masterFrame.setResizable(false);
+        masterFrame.setResizable(true);
         masterFrame.setLocationByPlatform(true);
 
         masterFrame.setVisible(true);
@@ -74,37 +79,71 @@ public class Konsole {
        
 }
     
-    private void schreibe(String command){
+    /**
+     * Die Funktion schreibt einen String in das JTextArea.
+     * @param command der Befehl
+     */
+    protected void schreibe(String command){
        
         masterArea.append(">"+ command + "\n");
     }
     
-    private void schreibeAktion(String command){
+    /**
+     * Die Funktion schreibt einen formatierten String in das JTextArea.
+     * @param command die Ausfürung
+     */
+    protected void schreibeAktion(String command){
        
         masterArea.append(".. "+ command + "\n");
     }
     
-    private void help(){
-        schreibeAktion("addKoch Art(String) Name(String)");
+    /**
+     * Die Funktion zeigt alle Eingabemvarianten für den User ein. (Mit der richtigen Reihenfolge und Datentyp)
+     */
+    protected void help(){
+        schreibeAktion("add Art(String) Name(String)");
         schreibeAktion("move id(int) pixel(int)");
         schreibeAktion("flip id(int)");
         schreibeAktion("fahre id(int) etage(int)");
         schreibeAktion("teleport id(int) etage(int)");
     }
-       
-    private void addPerson(String name, String art){
+  
+    /**
+     * Eine neue Person wird erstellt.
+     * @param name Name des neuen Mitarbeiters
+     * @param art Rolle des neuen Mitarbeites
+     */
+    protected void addPerson(String name, String art){
         switch (art) {
             case "Koch":
+                schreibeAktion(art + " wurde erstellt.");
                 mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));
                 break;
-            case "Entwickler":
+            case "Hausmeister":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Hausmeister(name));
+                break;
+            case "Putzkolonne":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Putzkolonne(name));
+                break;
+            default:
+                schreibeAktion("Der angegebene Typ existiert nicht. Bitte wählen sie:");
+                schreibeAktion("  Koch");
+                schreibeAktion("  Hausmeister");
+                schreibeAktion("  Putzkolonne");
                 break;
         }
         
         mitarbeiter.get(mitarbeiter.size()-1).move(50);
     }
     
-    private void move(Mitarbeiter person, int pix){
+    /**
+     * Die Bewegungsmethode des Mitarbeiters wird aufgerufen. Ist die Pixelanzahl kleiner also 0, so dreht sich die Person vorher um.
+     * @param person ein Mitarbeiter
+     * @param pix Anzahl der Pixel
+     */
+    protected void move(Mitarbeiter person, int pix){
          if(pix < 0){
             flip(person);
             person.move(pix*(-1));
@@ -113,29 +152,58 @@ public class Konsole {
             }   
     }
     
-    private void flip(Mitarbeiter person){
+    /**
+     * Die Umdrehen-Methode des Mitarbeiters wird aufgerufen. Sie hat dann die umgekehrte Blickrichtung.
+     * @param person ein Mitarbeiter
+     */
+    protected void flip(Mitarbeiter person){
       //  person.umdrehen();       
     }
     
-    private void fahre(Mitarbeiter person, int etage){
+    /**
+     * Die Fahrfunktion des Mitarbeiters wird aufgerufen und die Zieletage übergeben.
+     * @param person ein Mitarbeiter
+     * @param etage eine Etage
+     */
+    protected void fahre(Mitarbeiter person, int etage){
       //  person.goto(etage);
     }
     
-    private void teleport(Mitarbeiter person, int etage){
+    /**
+     * Die Teleportmethode des Mitarbeiters wird aufgerufen.
+     * @param person ein Mitarbeiter
+     * @param etage Zieletage
+     */
+    protected void teleport(Mitarbeiter person, int etage){
         //person.teleport(etage);
     }
     
-    private fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int index){
-        return mitarbeiter.get(index);  
+    /**
+     * Der Mitarbeiter mit dem Index "id" in der Liste Mitarbeiter wird zurückgegeben.
+     * @param id Erkennung eines Mitarbeiters
+     * @return Mitarbeiter der den Index "id" besitzt
+     */
+    public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int id){
+        return mitarbeiter.get(id);  
     }
     
-    //Analyse 
+    /**
+     * Die Liste aller Mitarbeiter wird zurückgegeben.
+     * @return alle Mitarbeiter
+     */
+    public ArrayList<Mitarbeiter> getMitarbeiterListe(){
+        return mitarbeiter;  
+    }
+    
+    /**
+     * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
+     * @param command Eingabebefehl des Users
+     */ 
     private void analyze(String command){
         String[] commandArray = command.split("\\s+");
         
         switch (commandArray[0]) {
             case "add":
-                schreibeAktion(commandArray[1] +" "+ commandArray[2] + " wurde erstellt.");
                 addPerson(commandArray[2], commandArray[1]);
                 break;
             case "move":
