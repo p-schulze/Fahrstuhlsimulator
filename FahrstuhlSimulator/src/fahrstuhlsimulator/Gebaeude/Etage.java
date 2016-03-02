@@ -10,5 +10,7 @@ package fahrstuhlsimulator.Gebaeude;
  * @author becksusanna
  */
 public class Etage {
-
+    public Etage(int nummer){
+    int Etagenzahl = nummer;
+    }
 }
