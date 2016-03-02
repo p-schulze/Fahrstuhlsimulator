@@ -39,7 +39,7 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person3", 0, 0));
+        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2", 0, 0));
         mitarbeiterGraphics.get(0).umdrehen();
         mitarbeiterGraphics.get(0).moveDistanceWithAnimation(368);
         
