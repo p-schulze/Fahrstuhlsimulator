@@ -30,7 +30,7 @@ public class Mitarbeiter{
         //this.aktuelleEtage=EG;
     }
     
-    protected String getName() {
+    public String getName() {
         return name;
     }
     protected void setName(String name) {
