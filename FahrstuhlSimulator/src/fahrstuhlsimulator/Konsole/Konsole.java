@@ -157,7 +157,7 @@ public class Konsole {
      * @param person ein Mitarbeiter
      */
     protected void flip(Mitarbeiter person){
-      //  person.umdrehen();       
+        person.umdrehen();       
     }
     
     /**
@@ -175,7 +175,7 @@ public class Konsole {
      * @param etage Zieletage
      */
     protected void teleport(Mitarbeiter person, int etage){
-        //person.teleport(etage);
+        person.teleport(etage);
     }
     
     /**
@@ -222,7 +222,8 @@ public class Konsole {
                 teleport(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
                 break;
             case "xray":
-                //XRay an / aus
+                fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY = !fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY;
+                fahrstuhlsimulator.testumgebung.TestFenster.panel.repaint();
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");

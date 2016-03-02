@@ -80,12 +80,12 @@ public class TestPanel extends JPanel {
         {
             drawFahrstuhlGraphic(g2d,fahrstuhlGraphic);
         }
-        for(MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
-        {
-            drawMitarbeiterGraphic(g2d,mitarbeiterGraphic);
-        }
+//        for(MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
+//        {
+//            drawMitarbeiterGraphic(g2d,mitarbeiterGraphic);
+//        }
         //###
-        ArrayList<Mitarbeiter> mitarbeiter = MitarbeiterFahrstuhlSimulator.konsole.getMitarbeiter();
+        ArrayList<Mitarbeiter> mitarbeiter = FahrstuhlSimulator.konsole.getMitarbeiterListe();
         for(Mitarbeiter einMitarbeiter:mitarbeiter)
         {
             MitarbeiterGraphic mGf = einMitarbeiter.getGraphic();

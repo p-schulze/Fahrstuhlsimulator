@@ -77,6 +77,16 @@ public class Mitarbeiter{
     {
         graphic.moveDistanceWithAnimation(pix);
     }
+    
+    public void umdrehen()
+    {
+        graphic.umdrehen();
+    }
+    
+    public void teleport(int etage)
+    {
+        graphic.setEtage(etage);
+    }
 }
         
     /**

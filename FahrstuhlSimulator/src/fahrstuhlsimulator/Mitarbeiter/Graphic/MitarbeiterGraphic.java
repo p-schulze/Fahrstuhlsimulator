@@ -145,7 +145,23 @@ public class MitarbeiterGraphic
     }
     public void setEtage(int etage)
     {
+        // Verbesserungswuedig!:D Wie so viele andere Teile im code^^ 
+        double tempDegrees_bein_rechts = Math.toDegrees(animator.getImg_trans_bein_rechts().getWinkel());
+        double tempDegrees_bein_links = Math.toDegrees(animator.getImg_trans_bein_links().getWinkel());
+        double tempDegrees_arm_links = Math.toDegrees(animator.getImg_trans_arm_links().getWinkel());
+        double tempDegrees_arm_rechts = Math.toDegrees(animator.getImg_trans_arm_rechts().getWinkel());
+        
+        animator.setBeinRechtsRotation(-tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
+        animator.setBeinLinksRotation(-tempDegrees_bein_links, getX_Pos(), getY_Pos());
+        animator.setArmLinksRotation(-tempDegrees_arm_links, getX_Pos(), getY_Pos());
+        animator.setArmRechtsRotation(-tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
+        
         this.etage = etage;
+        
+        animator.setBeinRechtsRotation(tempDegrees_bein_rechts, getX_Pos(), getY_Pos());
+        animator.setBeinLinksRotation(tempDegrees_bein_links, getX_Pos(), getY_Pos());
+        animator.setArmLinksRotation(tempDegrees_arm_links, getX_Pos(), getY_Pos());
+        animator.setArmRechtsRotation(tempDegrees_arm_rechts, getX_Pos(), getY_Pos());
     }
 //</editor-fold>
     
