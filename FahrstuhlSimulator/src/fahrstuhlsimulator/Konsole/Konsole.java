@@ -85,67 +85,91 @@ public class Konsole {
     }
     
     private void help(){
-        schreibeAktion("addKoch Position Name");
-        schreibeAktion("move id Pixel");
-        schreibeAktion("flip id");        
+        schreibeAktion("addKoch Art(String) Name(String)");
+        schreibeAktion("move id(int) pixel(int)");
+        schreibeAktion("flip id(int)");
+        schreibeAktion("fahre id(int) etage(int)");
+        schreibeAktion("teleport id(int) etage(int)");
     }
        
     private void addPerson(String name, String art){
-        if(art == "Koch"){
-            mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));}
-        else if(art == "Entwickler"){
-             }
-
-//andere Arten von Mitarbeitern
+        switch (art) {
+            case "Koch":
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));
+                break;
+            case "Entwickler":
+                break;
+        }
         
         mitarbeiter.get(mitarbeiter.size()-1).move(50);
     }
     
     private void move(Mitarbeiter person, int pix){
-        person.move(pix);
+         if(pix < 0){
+            flip(person);
+            person.move(pix*(-1));
+            } else {
+            person.move(pix);
+            }   
+    }
+    
+    private void flip(Mitarbeiter person){
+      //  person.umdrehen();       
     }
     
     private void fahre(Mitarbeiter person, int etage){
       //  person.goto(etage);
     }
     
+    private void teleport(Mitarbeiter person, int etage){
+        //person.teleport(etage);
+    }
+    
+    private fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int index){
+        return mitarbeiter.get(index);  
+    }
+    
     //Analyse 
     private void analyze(String command){
         String[] commandArray = command.split("\\s+");
-       
-        //AddKoch
-        if(commandArray[0].equalsIgnoreCase("add")){
-            // bibliothekar, entwickler, hausmeister, koch, laborant, putze
-            addPerson(commandArray[2], commandArray[1]);}
         
-        else if(commandArray[0].equalsIgnoreCase("move")){
-            for (Mitarbeiter mitarbeiter1 : mitarbeiter) {
-                if (mitarbeiter1.getName() == commandArray[1]) {
-                    move(mitarbeiter1, Integer.parseInt(commandArray[1]));
-                }
-            }
+        switch (commandArray[0]) {
+            case "add":
+                schreibeAktion(commandArray[1] +" "+ commandArray[2] + " wurde erstellt.");
+                addPerson(commandArray[2], commandArray[1]);
+                break;
+            case "move":
+                schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
+                move(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                break;
+            case "fahre":
+                fahre(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                schreibeAktion("Person " +commandArray[1] + " fährt in die " + commandArray[2] + " Etage.");
+                break;    
+            case "help":
+                help();
+                break;
+            case "teleport":
+                schreibeAktion("Person " +commandArray[1] + " wird in die " + commandArray[2] + " Etage teleportiert.");
+                teleport(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                break;
+            case "xray":
+                //XRay an / aus
+                break;
+            default:
+                schreibeAktion("Error: Befehl nicht erkannt");
+                break;
+            
         }
        
-        else if(commandArray[0].equalsIgnoreCase("goto")){
-            for (Mitarbeiter mitarbeiter1 : mitarbeiter) {
-                if (mitarbeiter1.getName() == commandArray[1]) {
-                    fahre(mitarbeiter1, Integer.parseInt(commandArray[1]));
-                }
-            }
-        }  
-       
-        else if(commandArray[0].equalsIgnoreCase("help")){
-            help();
-        }
-        
-        else if(commandArray[0].equalsIgnoreCase("xray"))
+      
+       /* else if(commandArray[0].equalsIgnoreCase("xray"))
         {
-            //2. Command
-            TestPanel.X_RAY = !TestPanel.X_RAY;
-            schreibeAktion("X-Ray: " + TestPanel.X_RAY);
-            TestFenster.panel.repaint();
+            //TestPanel.X_RAY = !TestPanel.X_RAY;
+           // schreibeAktion("X-Ray: " + TestPanel.X_RAY);
+           // TestFenster.panel.repaint();
         }
-        else if(commandArray[0].equalsIgnoreCase("open"))
+        /*else if(commandArray[0].equalsIgnoreCase("open"))
         {
             if(!TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){
             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
@@ -164,50 +188,8 @@ public class Konsole {
             else{
                 schreibeAktion("door: close");
             }
-        }
-        else if(commandArray[0].equalsIgnoreCase("move"))
-        {
-            if(Integer.parseInt(commandArray[1]) < 0){
-            TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]) * (-1));
-            }else {
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]));
-            }   
-            schreibeAktion("move: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("etage"))
-        {
-            TestPanel.mitarbeiterGraphics.get(0).setEtage(Integer.parseInt(commandArray[1]));
-            TestFenster.panel.repaint();
-            //TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            schreibeAktion("etage: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("goto"))
-        {
-            if(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() <= 368){
-                if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == false){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() - TestPanel.mitarbeiterGraphics.get(0).getX_Pos());
-            } else {
-                 if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == true){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() - TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() );
-            }
-          /*  TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.mitarbeiterGraphics.get(0).setPosition(368, Integer.parseInt(commandArray[1]));
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer(); */
-            schreibeAktion("goto: " + commandArray[1]);
-        } 
-        else 
-        {
-            
-            
-            //Error
-            schreibeAktion("Error: Befehl nicht erkannt");
-        } 
-}
-    
+        }*/
+       
+    }
+}    
   
