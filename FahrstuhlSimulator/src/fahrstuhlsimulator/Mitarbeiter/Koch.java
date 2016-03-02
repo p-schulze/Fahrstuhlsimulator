@@ -13,8 +13,8 @@ import fahrstuhlsimulator.Gebaeude.Etage;
  * @author becksusanna
  */
 public class Koch extends Mitarbeiter{
-    public Koch(int id, String name) {
-        super(id,name);
+    public Koch(String name) {
+        super(name);
         ArrayList<String> liste = new ArrayList();
         liste.add("EG");
         liste.add("Cafeteria");
