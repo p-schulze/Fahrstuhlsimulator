@@ -24,12 +24,12 @@ import javax.swing.text.DefaultCaret;
  */
 
 public class Konsole {
-    final JFrame masterFrame = new JFrame();
-    final JTextArea masterArea = new JTextArea();
-    final JTextField masterField = new JTextField();
-    final JScrollPane masterPane = new JScrollPane(masterArea);
+    protected final JFrame masterFrame = new JFrame();
+    protected final JTextArea masterArea = new JTextArea();
+    protected final JTextField masterField = new JTextField();
+    protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
+    protected final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
@@ -83,7 +83,7 @@ public class Konsole {
      * Die Funktion schreibt einen String in das JTextArea.
      * @param command der Befehl
      */
-    private void schreibe(String command){
+    protected void schreibe(String command){
        
         masterArea.append(">"+ command + "\n");
     }
@@ -92,7 +92,7 @@ public class Konsole {
      * Die Funktion schreibt einen formatierten String in das JTextArea.
      * @param command die Ausfürung
      */
-    private void schreibeAktion(String command){
+    protected void schreibeAktion(String command){
        
         masterArea.append(".. "+ command + "\n");
     }
@@ -100,7 +100,7 @@ public class Konsole {
     /**
      * Die Funktion zeigt alle Eingabemvarianten für den User ein. (Mit der richtigen Reihenfolge und Datentyp)
      */
-    private void help(){
+    protected void help(){
         schreibeAktion("add Art(String) Name(String)");
         schreibeAktion("move id(int) pixel(int)");
         schreibeAktion("flip id(int)");
@@ -113,7 +113,7 @@ public class Konsole {
      * @param name Name des neuen Mitarbeiters
      * @param art Rolle des neuen Mitarbeites
      */
-    private void addPerson(String name, String art){
+    protected void addPerson(String name, String art){
         switch (art) {
             case "Koch":
                 schreibeAktion(art + " wurde erstellt.");
@@ -143,7 +143,7 @@ public class Konsole {
      * @param person ein Mitarbeiter
      * @param pix Anzahl der Pixel
      */
-    private void move(Mitarbeiter person, int pix){
+    protected void move(Mitarbeiter person, int pix){
          if(pix < 0){
             flip(person);
             person.move(pix*(-1));
@@ -156,7 +156,7 @@ public class Konsole {
      * Die Umdrehen-Methode des Mitarbeiters wird aufgerufen. Sie hat dann die umgekehrte Blickrichtung.
      * @param person ein Mitarbeiter
      */
-    private void flip(Mitarbeiter person){
+    protected void flip(Mitarbeiter person){
       //  person.umdrehen();       
     }
     
@@ -165,7 +165,7 @@ public class Konsole {
      * @param person ein Mitarbeiter
      * @param etage eine Etage
      */
-    private void fahre(Mitarbeiter person, int etage){
+    protected void fahre(Mitarbeiter person, int etage){
       //  person.goto(etage);
     }
     
@@ -174,7 +174,7 @@ public class Konsole {
      * @param person ein Mitarbeiter
      * @param etage Zieletage
      */
-    private void teleport(Mitarbeiter person, int etage){
+    protected void teleport(Mitarbeiter person, int etage){
         //person.teleport(etage);
     }
     
