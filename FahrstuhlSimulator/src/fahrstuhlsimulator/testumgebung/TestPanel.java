@@ -5,10 +5,12 @@
  */
 package fahrstuhlsimulator.testumgebung;
 
+import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
+import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -73,6 +75,7 @@ public class TestPanel extends JPanel {
             g2d.drawString(((float) 600/+GraphicDrawer.getDurrationForFrame())+" Fps", 705,45);
             g2d.setColor(Color.black);
         }
+        //Veraltet###
         for(FahrstuhlGraphic fahrstuhlGraphic:fahrstuhlGraphics)
         {
             drawFahrstuhlGraphic(g2d,fahrstuhlGraphic);
@@ -81,7 +84,13 @@ public class TestPanel extends JPanel {
         {
             drawMitarbeiterGraphic(g2d,mitarbeiterGraphic);
         }
-        
+        //###
+        ArrayList<Mitarbeiter> mitarbeiter = MitarbeiterFahrstuhlSimulator.konsole.getMitarbeiter();
+        for(Mitarbeiter einMitarbeiter:mitarbeiter)
+        {
+            MitarbeiterGraphic mGf = einMitarbeiter.getGraphic();
+            drawMitarbeiterGraphic(g2d, mGf);
+        }        
     }
     
     private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)

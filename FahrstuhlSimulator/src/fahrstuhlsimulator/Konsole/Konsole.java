@@ -28,7 +28,7 @@ public class Konsole {
     final JTextField masterField = new JTextField();
     final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
+    final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
     
     public void kStart (){
         
