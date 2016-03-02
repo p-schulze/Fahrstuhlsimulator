@@ -57,7 +57,7 @@ public class Mitarbeiter{
     protected void verringereEtage()
     {
         aktuelleEtage--;
-    }    
+    }
     
 //    public void openFahrstuhl()
 //    {
@@ -69,7 +69,10 @@ public class Mitarbeiter{
 //                schreibeAktion("door: open");
 //            }
 //    }
-    
+    public MitarbeiterGraphic getGraphic()
+    {
+        return graphic;
+    }
     public void move(int pix)
     {
         graphic.moveDistanceWithAnimation(pix);

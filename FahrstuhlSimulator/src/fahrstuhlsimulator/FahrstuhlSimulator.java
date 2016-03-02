@@ -1,5 +1,6 @@
 package fahrstuhlsimulator;
 
+import fahrstuhlsimulator.Konsole.Konsole;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.ImageLoader;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
@@ -12,6 +13,7 @@ public class FahrstuhlSimulator {
 
     public static GraphicDrawer graphicDrawer;
     public static Thread graphicDrawer_th;
+    public static Konsole konsole;
     
 
     public static void main(String[] args){  
@@ -20,7 +22,8 @@ public class FahrstuhlSimulator {
         graphicDrawer_th.start();
         ImageLoader.loadImages();
 
-        new fahrstuhlsimulator.Konsole.Konsole().kStart();    
+        konsole = new fahrstuhlsimulator.Konsole.Konsole();
+        konsole.kStart();
         
         new fahrstuhlsimulator.testumgebung.TestFenster();
 
