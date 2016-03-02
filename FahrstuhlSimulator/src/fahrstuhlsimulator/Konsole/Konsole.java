@@ -10,6 +10,7 @@ import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import fahrstuhlsimulator.testumgebung.TestPanel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -36,6 +37,7 @@ public class Konsole {
     public void kStart (){
         
         masterArea.setEditable(false);
+        masterFrame.setMinimumSize(new Dimension(380, 175));
         
         masterFrame.add(masterField, BorderLayout.SOUTH);
       
@@ -44,7 +46,7 @@ public class Konsole {
         masterFrame.pack();
         
         masterFrame.setSize(380, 175);
-        masterFrame.setResizable(false);
+        masterFrame.setResizable(true);
         masterFrame.setLocationByPlatform(true);
 
         masterFrame.setVisible(true);
@@ -99,7 +101,7 @@ public class Konsole {
      * Die Funktion zeigt alle Eingabemvarianten für den User ein. (Mit der richtigen Reihenfolge und Datentyp)
      */
     private void help(){
-        schreibeAktion("addKoch Art(String) Name(String)");
+        schreibeAktion("add Art(String) Name(String)");
         schreibeAktion("move id(int) pixel(int)");
         schreibeAktion("flip id(int)");
         schreibeAktion("fahre id(int) etage(int)");
@@ -114,9 +116,22 @@ public class Konsole {
     private void addPerson(String name, String art){
         switch (art) {
             case "Koch":
+                schreibeAktion(art + " wurde erstellt.");
                 mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));
                 break;
-            case "Entwickler":
+            case "Hausmeister":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Hausmeister(name));
+                break;
+            case "Putzkolonne":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Putzkolonne(name));
+                break;
+            default:
+                schreibeAktion("Der angegebene Typ existiert nicht. Bitte wählen sie:");
+                schreibeAktion("  Koch");
+                schreibeAktion("  Hausmeister");
+                schreibeAktion("  Putzkolonne");
                 break;
         }
         
@@ -189,7 +204,6 @@ public class Konsole {
         
         switch (commandArray[0]) {
             case "add":
-                schreibeAktion(commandArray[1] +" "+ commandArray[2] + " wurde erstellt.");
                 addPerson(commandArray[2], commandArray[1]);
                 break;
             case "move":
