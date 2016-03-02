@@ -30,6 +30,9 @@ public class Konsole {
     
     final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     
+    /**
+     * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
+     */
     public void kStart (){
         
         masterArea.setEditable(false);
@@ -74,16 +77,27 @@ public class Konsole {
        
 }
     
+    /**
+     * Die Funktion schreibt einen String in das JTextArea.
+     * @param command - der Befehl
+     */
     private void schreibe(String command){
        
         masterArea.append(">"+ command + "\n");
     }
     
+    /**
+     * Die Funktion schreibt einen formatierten String in das JTextArea.
+     * @param command - die Ausfürung
+     */
     private void schreibeAktion(String command){
        
         masterArea.append(".. "+ command + "\n");
     }
     
+    /**
+     * Die Funktion zeigt alle Eingabemvarianten für den User ein. (Mit der richtigen Reihenfolge und Datentyp)
+     */
     private void help(){
         schreibeAktion("addKoch Art(String) Name(String)");
         schreibeAktion("move id(int) pixel(int)");
@@ -91,7 +105,12 @@ public class Konsole {
         schreibeAktion("fahre id(int) etage(int)");
         schreibeAktion("teleport id(int) etage(int)");
     }
-       
+  
+    /**
+     * Eine neue Person wird erstellt.
+     * @param name - Name des neuen Mitarbeiters
+     * @param art - Rolle des neuen Mitarbeites
+     */
     private void addPerson(String name, String art){
         switch (art) {
             case "Koch":
@@ -104,6 +123,11 @@ public class Konsole {
         mitarbeiter.get(mitarbeiter.size()-1).move(50);
     }
     
+    /**
+     * Die Bewegungsmethode des Mitarbeiters wird aufgerufen. Ist die Pixelanzahl kleiner also 0, so dreht sich die Person vorher um.
+     * @param person - ein Mitarbeiter
+     * @param pix - Anzahl der Pixel
+     */
     private void move(Mitarbeiter person, int pix){
          if(pix < 0){
             flip(person);
@@ -113,27 +137,53 @@ public class Konsole {
             }   
     }
     
+    /**
+     * Die Umdrehen-Methode des Mitarbeiters wird aufgerufen. Sie hat dann die umgekehrte Blickrichtung.
+     * @param person - ein Mitarbeiter
+     */
     private void flip(Mitarbeiter person){
       //  person.umdrehen();       
     }
     
+    /**
+     * Die Fahrfunktion des Mitarbeiters wird aufgerufen und die Zieletage übergeben.
+     * @param person - ein Mitarbeiter
+     * @param etage - eine Etage
+     */
     private void fahre(Mitarbeiter person, int etage){
       //  person.goto(etage);
     }
     
+    /**
+     * Die Teleportmethode des Mitarbeiters wird aufgerufen.
+     * @param person - ein Mitarbeiter
+     * @param etage - Zieletage
+     */
     private void teleport(Mitarbeiter person, int etage){
         //person.teleport(etage);
     }
     
-    public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int index){
-        return mitarbeiter.get(index);  
+    /**
+     * Der Mitarbeiter mit dem Index "id" in der Liste Mitarbeiter wird zurückgegeben.
+     * @param id - Erkennung eines Mitarbeiters
+     * @return Mitarbeiter der den Index "id" besitzt
+     */
+    public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int id){
+        return mitarbeiter.get(id);  
     }
     
+    /**
+     * Die Liste aller Mitarbeiter wird zurückgegeben.
+     * @return alle Mitarbeiter
+     */
     public ArrayList<Mitarbeiter> getMitarbeiterListe(){
         return mitarbeiter;  
     }
     
-    //Analyse 
+    /**
+     * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
+     * @param command - Eingabebefehl des Users
+     */ 
     private void analyze(String command){
         String[] commandArray = command.split("\\s+");
         
