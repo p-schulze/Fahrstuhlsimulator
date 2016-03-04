@@ -4,16 +4,14 @@
  * and open the template in the editor.
  */
 package fahrstuhlsimulator.Mitarbeiter;
-
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
-
 /**
  *
- * @author becksusanna
+ * @author schueler
  */
-public class Koch extends Mitarbeiter{
-    public Koch(String name) {
+public class Putzkolonne extends Mitarbeiter{
+      public Putzkolonne(String name) {   
         super(name);
         ArrayList<String> liste = new ArrayList();
         liste.add("EG");
@@ -24,6 +22,7 @@ public class Koch extends Mitarbeiter{
         liste.add("Labor");
         liste.add("Besprechung");
         liste.add("IT");
-        setErlaubteEtagen(liste);
+        setErlaubteEtagen(liste); 
     }
+    
 }

@@ -6,9 +6,11 @@
 package fahrstuhlsimulator.Konsole;
 
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
+import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
 import fahrstuhlsimulator.testumgebung.TestPanel;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -22,16 +24,20 @@ import javax.swing.text.DefaultCaret;
  */
 
 public class Konsole {
-    final JFrame masterFrame = new JFrame();
-    final JTextArea masterArea = new JTextArea();
-    final JTextField masterField = new JTextField();
-    final JScrollPane masterPane = new JScrollPane(masterArea);
+    protected final JFrame masterFrame = new JFrame();
+    protected final JTextArea masterArea = new JTextArea();
+    protected final JTextField masterField = new JTextField();
+    protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    final ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
+    protected final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
     
+    /**
+     * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
+     */
     public void kStart (){
         
         masterArea.setEditable(false);
+        masterFrame.setMinimumSize(new Dimension(380, 175));
         
         masterFrame.add(masterField, BorderLayout.SOUTH);
       
@@ -40,14 +46,15 @@ public class Konsole {
         masterFrame.pack();
         
         masterFrame.setSize(380, 175);
-        masterFrame.setResizable(false);
+        masterFrame.setResizable(true);
         masterFrame.setLocationByPlatform(true);
 
         masterFrame.setVisible(true);
         masterFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         System.out.println("Konsole gestartet...");
-   
-        
+
+  
+     
     masterField.addKeyListener(new KeyListener(){
     @Override
     public void keyPressed(KeyEvent e){
@@ -72,20 +79,169 @@ public class Konsole {
        
 }
     
+    /**
+     * Die Funktion schreibt einen String in das JTextArea.
+     * @param command der Befehl
+     */
+    protected void schreibe(String command){
+       
+        masterArea.append(">"+ command + "\n");
+    }
+    
+    /**
+     * Die Funktion schreibt einen formatierten String in das JTextArea.
+     * @param command die Ausfürung
+     */
+    protected void schreibeAktion(String command){
+       
+        masterArea.append(".. "+ command + "\n");
+    }
+    
+    /**
+     * Die Funktion zeigt alle Eingabemvarianten für den User ein. (Mit der richtigen Reihenfolge und Datentyp)
+     */
+    protected void help(){
+        schreibeAktion("add Art(String) Name(String)");
+        schreibeAktion("move id(int) pixel(int)");
+        schreibeAktion("flip id(int)");
+        schreibeAktion("fahre id(int) etage(int)");
+        schreibeAktion("teleport id(int) etage(int)");
+    }
+  
+    /**
+     * Eine neue Person wird erstellt.
+     * @param name Name des neuen Mitarbeiters
+     * @param art Rolle des neuen Mitarbeites
+     */
+    protected void addPerson(String name, String art){
+        switch (art) {
+            case "Koch":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));
+                break;
+            case "Hausmeister":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Hausmeister(name));
+                break;
+            case "Putzkolonne":
+                schreibeAktion(art + " wurde erstellt.");
+                mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Putzkolonne(name));
+                break;
+            default:
+                schreibeAktion("Der angegebene Typ existiert nicht. Bitte wählen sie:");
+                schreibeAktion("  Koch");
+                schreibeAktion("  Hausmeister");
+                schreibeAktion("  Putzkolonne");
+                break;
+        }
+        
+        mitarbeiter.get(mitarbeiter.size()-1).move(50);
+    }
+    
+    /**
+     * Die Bewegungsmethode des Mitarbeiters wird aufgerufen. Ist die Pixelanzahl kleiner also 0, so dreht sich die Person vorher um.
+     * @param person ein Mitarbeiter
+     * @param pix Anzahl der Pixel
+     */
+    protected void move(Mitarbeiter person, int pix){
+         if(pix < 0){
+            flip(person);
+            person.move(pix*(-1));
+            } else {
+            person.move(pix);
+            }   
+    }
+    
+    /**
+     * Die Umdrehen-Methode des Mitarbeiters wird aufgerufen. Sie hat dann die umgekehrte Blickrichtung.
+     * @param person ein Mitarbeiter
+     */
+    protected void flip(Mitarbeiter person){
+        person.umdrehen();       
+    }
+    
+    /**
+     * Die Fahrfunktion des Mitarbeiters wird aufgerufen und die Zieletage übergeben.
+     * @param person ein Mitarbeiter
+     * @param etage eine Etage
+     */
+    protected void fahre(Mitarbeiter person, int etage){
+        person.goTo(etage);
+    }
+    
+    /**
+     * Die Teleportmethode des Mitarbeiters wird aufgerufen.
+     * @param person ein Mitarbeiter
+     * @param etage Zieletage
+     */
+    protected void teleport(Mitarbeiter person, int etage){
+        person.teleport(etage);
+    }
+    
+    /**
+     * Der Mitarbeiter mit dem Index "id" in der Liste Mitarbeiter wird zurückgegeben.
+     * @param id Erkennung eines Mitarbeiters
+     * @return Mitarbeiter der den Index "id" besitzt
+     */
+    public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int id){
+        return mitarbeiter.get(id);  
+    }
+    public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
+        return mitarbeiter.indexOf(mitarbeiterObject);
+    }
+    
+    /**
+     * Die Liste aller Mitarbeiter wird zurückgegeben.
+     * @return alle Mitarbeiter
+     */
+    public ArrayList<Mitarbeiter> getMitarbeiterListe(){
+        return mitarbeiter;  
+    }
+    
+    /**
+     * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
+     * @param command Eingabebefehl des Users
+     */ 
     private void analyze(String command){
         String[] commandArray = command.split("\\s+");
-        if(commandArray[0].equalsIgnoreCase("Person")){
-            //1. Command
-            schreibeAktion("Person wird erzeugt");            
+        
+        switch (commandArray[0]) {
+            case "add":
+                addPerson(commandArray[2], commandArray[1]);
+                break;
+            case "move":
+                schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
+                move(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                break;
+            case "fahre":
+                fahre(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                schreibeAktion("Person " +commandArray[1] + " fährt in die " + commandArray[2] + " Etage.");
+                break;    
+            case "help":
+                help();
+                break;
+            case "teleport":
+                schreibeAktion("Person " +commandArray[1] + " wird in die " + commandArray[2] + " Etage teleportiert.");
+                teleport(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
+                break;
+            case "xray":
+                fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY = !fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY;
+                fahrstuhlsimulator.testumgebung.TestFenster.panel.repaint();
+                break;
+            default:
+                schreibeAktion("Error: Befehl nicht erkannt");
+                break;
+            
         }
-        else if(commandArray[0].equalsIgnoreCase("xray"))
+       
+      
+       /* else if(commandArray[0].equalsIgnoreCase("xray"))
         {
-            //2. Command
-            TestPanel.X_RAY = !TestPanel.X_RAY;
-            schreibeAktion("X-Ray: " + TestPanel.X_RAY);
-            TestFenster.panel.repaint();
+            //TestPanel.X_RAY = !TestPanel.X_RAY;
+           // schreibeAktion("X-Ray: " + TestPanel.X_RAY);
+           // TestFenster.panel.repaint();
         }
-        else if(commandArray[0].equalsIgnoreCase("open"))
+        /*else if(commandArray[0].equalsIgnoreCase("open"))
         {
             if(!TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){
             TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
@@ -104,59 +260,8 @@ public class Konsole {
             else{
                 schreibeAktion("door: close");
             }
-        }
-        else if(commandArray[0].equalsIgnoreCase("move"))
-        {
-            if(Integer.parseInt(commandArray[1]) < 0){
-            TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]) * (-1));
-            }else {
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]));
-            }   
-            schreibeAktion("move: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("etage"))
-        {
-            TestPanel.mitarbeiterGraphics.get(0).setEtage(Integer.parseInt(commandArray[1]));
-            TestFenster.panel.repaint();
-            //TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            schreibeAktion("etage: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("goto"))
-        {
-            if(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() <= 368){
-                if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == false){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() - TestPanel.mitarbeiterGraphics.get(0).getX_Pos());
-            } else {
-                 if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == true){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() - TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() );
-            }
-          /*  TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.mitarbeiterGraphics.get(0).setPosition(368, Integer.parseInt(commandArray[1]));
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer(); */
-            schreibeAktion("goto: " + commandArray[1]);
-        } 
-        else 
-        {
-            
-            
-            //Error
-            schreibeAktion("Error: Befehl nicht erkannt");
-        } 
-    }
-    
-    private void schreibe(String command){
+        }*/
        
-        masterArea.append(">"+ command + "\n");
     }
-    
-    private void schreibeAktion(String command){
-       
-        masterArea.append(".. "+ command + "\n");
-    }
-}
+}    
+  

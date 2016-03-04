@@ -368,6 +368,7 @@ public class GraphicDrawer implements Runnable {
     
     public void addFahrstuhlOpenListenerList(Object e)
     {
+        System.out.println("1");
         fahrstuhlOpenListenerList.add(e);
     }
     public void removeFahrstuhlOpenListenerList(Object e)
@@ -376,6 +377,7 @@ public class GraphicDrawer implements Runnable {
     }
     public void sendOpenedEvent(FahrstuhlGraphic fG)
     {
+        System.out.println(fahrstuhlOpenListenerList);
         for(Object fahrstuhlOpenListener:fahrstuhlOpenListenerList)
         {
             ((FahrstuhlOpenListener) fahrstuhlOpenListener).opened(fG);
