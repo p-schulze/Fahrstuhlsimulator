@@ -44,6 +44,11 @@ public class Mitarbeiter{
         this.aktuelleEtage=aktEtage;
     }
     
+    public MitarbeiterGraphic getGraphic()
+    {
+        return graphic;
+    }
+    
     protected ArrayList<String> getErlaubteEtagen() {
         return erlaubteEtagen;
     }
