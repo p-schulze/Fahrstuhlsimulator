@@ -17,8 +17,8 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  */
 public class Mitarbeiter{
     private String name;
-    private MitarbeiterGraphic graphic;
     private int aktuelleEtage;
+    private MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     
     protected Mitarbeiter(String name) {
@@ -57,7 +57,7 @@ public class Mitarbeiter{
     protected void verringereEtage()
     {
         aktuelleEtage--;
-    }    
+    }
     
 //    public void openFahrstuhl()
 //    {
