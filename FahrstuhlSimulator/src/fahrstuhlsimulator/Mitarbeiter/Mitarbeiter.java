@@ -30,7 +30,7 @@ public class Mitarbeiter{
         //this.aktuelleEtage=EG;
     }
     
-    protected String getName() {
+    public String getName() {
         return name;
     }
     protected void setName(String name) {
@@ -81,6 +81,11 @@ public class Mitarbeiter{
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+    }
+    
+    public void goTo()
+    {
+        
     }
 }
         
