@@ -16,6 +16,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import javax.swing.text.DefaultCaret;
+import java.util.Random;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 
 
 /**
@@ -29,7 +31,8 @@ public class Konsole {
     protected final JTextField masterField = new JTextField();
     protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    protected final ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
+    protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
+   // protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
@@ -106,6 +109,7 @@ public class Konsole {
         schreibeAktion("flip id(int)");
         schreibeAktion("fahre id(int) etage(int)");
         schreibeAktion("teleport id(int) etage(int)");
+        schreibeAktion("create - fügt einen Fahrstuhl hinzu.");
     }
   
     /**
@@ -114,18 +118,27 @@ public class Konsole {
      * @param art Rolle des neuen Mitarbeites
      */
     protected void addPerson(String name, String art){
+        Random rand = new Random();
+        int random = rand.nextInt(120); 
+        
         switch (art) {
             case "Koch":
                 schreibeAktion(art + " wurde erstellt.");
                 mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Koch(name));
+                flip(mitarbeiter.get(mitarbeiter.size()-1));
+                mitarbeiter.get(mitarbeiter.size()-1).move(random);
                 break;
             case "Hausmeister":
                 schreibeAktion(art + " wurde erstellt.");
                 mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Hausmeister(name));
+                flip(mitarbeiter.get(mitarbeiter.size()-1));
+                mitarbeiter.get(mitarbeiter.size()-1).move(random);
                 break;
             case "Putzkolonne":
                 schreibeAktion(art + " wurde erstellt.");
                 mitarbeiter.add(new fahrstuhlsimulator.Mitarbeiter.Putzkolonne(name));
+                flip(mitarbeiter.get(mitarbeiter.size()-1));
+                mitarbeiter.get(mitarbeiter.size()-1).move(random);
                 break;
             default:
                 schreibeAktion("Der angegebene Typ existiert nicht. Bitte wählen sie:");
@@ -133,9 +146,9 @@ public class Konsole {
                 schreibeAktion("  Hausmeister");
                 schreibeAktion("  Putzkolonne");
                 break;
-        }
+            }
+        System.out.println(random);
         
-        mitarbeiter.get(mitarbeiter.size()-1).move(50);
     }
     
     /**
@@ -196,6 +209,33 @@ public class Konsole {
     }
     
     /**
+     * Fügt einen Fahrstuhl hinzu. (maximal 3 Fahrstühle möglich, feste X-Koordinaten)
+     */
+  /*  protected void addFahrstuhl(){
+       int xk = 368;
+       if(farhstuehle.size() < 3){
+        switch(farhstuehle.size()){
+            case 1:
+                xk = 413;
+            case 2:
+                xk = 323;
+            default:
+                farhstuehle.add(new Fahrstuhl(xk));
+        }
+       }
+        
+    } */
+    
+    protected void startRandom(int anzahl){
+        int pause = 60/anzahl;
+        int indexStart = mitarbeiter.size()-1;
+        
+        for(int i=0; i<anzahl; i++){
+            addPerson("randomPerson", "Koch");
+        }
+    } 
+    
+    /**
      * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
      * @param command Eingabebefehl des Users
      */ 
@@ -205,6 +245,10 @@ public class Konsole {
         switch (commandArray[0]) {
             case "add":
                 addPerson(commandArray[2], commandArray[1]);
+                break;
+            case "create":
+                schreibeAktion("Fahrstuhl wird erstellt.");
+                //addFahrstuhl();
                 break;
             case "move":
                 schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
@@ -221,9 +265,16 @@ public class Konsole {
                 schreibeAktion("Person " +commandArray[1] + " wird in die " + commandArray[2] + " Etage teleportiert.");
                 teleport(getMitarbeiter(Integer.parseInt(commandArray[1])), Integer.parseInt(commandArray[2]));
                 break;
+            case "flip":
+                schreibeAktion("Person " +commandArray[1] + " wird in die " + commandArray[2] + " Etage teleportiert.");
+                flip(getMitarbeiter(Integer.parseInt(commandArray[1])));
+                break;
             case "xray":
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY = !fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY;
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.repaint();
+                break;
+            case "random":
+                startRandom(Integer.parseInt(commandArray[1]));
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
