@@ -51,9 +51,10 @@ public class TestPanel extends JPanel {
         for(int i = 0; i < 6; i++)
         {
             fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, i, false));
+            fahrstuhlGraphics.get(i).oeffneTuer();
         }
         fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 6, false));
-        //fahrstuhlGraphics.get(6).oeffneTuer();
+        fahrstuhlGraphics.get(6).oeffneTuer();
         fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 7, true));
         fahrstuhlGraphics.get(7).schliesseTuer();
         
@@ -88,20 +89,24 @@ public class TestPanel extends JPanel {
         ArrayList<Mitarbeiter> mitarbeiter = FahrstuhlSimulator.konsole.getMitarbeiterListe();
         for(Mitarbeiter einMitarbeiter:mitarbeiter)
         {
-            MitarbeiterGraphic mGf = einMitarbeiter.getGraphic();
-            drawMitarbeiterGraphic(g2d, mGf);
+            
+            drawMitarbeiterGraphic(g2d, einMitarbeiter);
         }        
     }
     
-    private void drawMitarbeiterGraphic(Graphics2D g2d, MitarbeiterGraphic mitarbeiterGraphic)
+    private void drawMitarbeiterGraphic(Graphics2D g2d, Mitarbeiter mitarbeiter)
     {
+        
+        MitarbeiterGraphic mitarbeiterGraphic = mitarbeiter.getGraphic();
         if(!X_RAY)
         {
+            
             g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
             g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
             g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
             g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
             g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
@@ -123,7 +128,7 @@ public class TestPanel extends JPanel {
             g2d.setColor(Color.red);
             g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
             g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
-            g2d.drawString(mitarbeiterGraphic.graphic_id+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
+            g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
             
             g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);

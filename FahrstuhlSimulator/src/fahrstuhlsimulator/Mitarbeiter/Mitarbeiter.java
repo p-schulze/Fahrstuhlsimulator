@@ -5,9 +5,11 @@
  */
 package fahrstuhlsimulator.Mitarbeiter;
 
-import java.util.ArrayList;
-import fahrstuhlsimulator.Gebaeude.Etage;
+import fahrstuhlsimulator.FahrstuhlSimulator;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.FahrstuhlOpenListener;
 import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
+import java.util.ArrayList;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 
@@ -15,7 +17,7 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  *
  * @author becksusanna
  */
-public class Mitarbeiter{
+public class Mitarbeiter implements FahrstuhlOpenListener, MitarbeiterMoveListener {
     private String name;
     private MitarbeiterGraphic graphic;
     private int aktuelleEtage;
@@ -25,9 +27,10 @@ public class Mitarbeiter{
         this.name=name;
         //temp
             RandomMitarbeiterGenerator.makeRandomMitarbeiter();
+        //####
         graphic = new MitarbeiterGraphic(RandomMitarbeiterGenerator.getArmeImgID(),RandomMitarbeiterGenerator.getBeineImgID(),RandomMitarbeiterGenerator.getKoerperImgID(),1-0,1,false);
-        //this.erlaubteEtagen=erlaubteEtagen;
-        //this.aktuelleEtage=EG;
+        FahrstuhlSimulator.graphicDrawer.addMitarbeiterMoveListener(this);
+        FahrstuhlSimulator.graphicDrawer.addFahrstuhlOpenListenerList(this);
     }
     
     public String getName() {
@@ -86,6 +89,38 @@ public class Mitarbeiter{
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+    }
+    public void goTo(int etage)
+    {
+        callFahrstuhl();
+        
+    }
+    private void callFahrstuhl()
+    {
+        //Berechnen welcher Fahrstuhl gerufen wird
+        
+    }
+
+    @Override
+    public void opened(FahrstuhlGraphic fG) {
+        if(fG.getEtage() == graphic.getEtage())
+        {
+        }
+        System.out.println("Der Fahrstuhl ist auf Etage '"+fG.getEtage()+"' angekommen");
+    }
+
+    @Override
+    public void closed(FahrstuhlGraphic fG) {
+        
+    }
+
+    @Override
+    public void onPosition(MitarbeiterGraphic mG)
+    {
+        if(mG == this.graphic)
+        {
+            
+        }
     }
 }
         
