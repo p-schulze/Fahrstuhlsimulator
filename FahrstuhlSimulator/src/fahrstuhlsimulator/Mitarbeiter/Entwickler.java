@@ -6,22 +6,20 @@
 package fahrstuhlsimulator.Mitarbeiter;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
-/**
- *
- * @author schueler
- */
-public class Hausmeister extends Mitarbeiter{
-    public Hausmeister(String name) {
+
+ 
+public class Entwickler extends Mitarbeiter {
+    public Entwickler(String name) {
         super(name);
         ArrayList<String> liste = new ArrayList();
         liste.add("EG");
         liste.add("Cafeteria");
-        liste.add("Test");
         liste.add("Bibliothek");
+        liste.add("Test");
         liste.add("Entwicklung");
+        liste.add("Labor");
         liste.add("Besprechung");
-     
-        setErlaubteEtagen(liste);
+        setErlaubteEtagen(liste); 
     }
     
 }
