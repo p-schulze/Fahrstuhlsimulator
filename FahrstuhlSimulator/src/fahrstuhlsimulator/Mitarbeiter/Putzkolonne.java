@@ -19,7 +19,6 @@ public class Putzkolonne extends Mitarbeiter{
         liste.add("Bibliothek");
         liste.add("Test");
         liste.add("Entwicklung");
-        liste.add("Labor");
         liste.add("Besprechung");
         liste.add("IT");
         setErlaubteEtagen(liste); 

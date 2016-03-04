@@ -31,8 +31,12 @@ public class Konsole {
     protected final JTextField masterField = new JTextField();
     protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
+<<<<<<< HEAD
     protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
    // protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
+=======
+    protected final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
+>>>>>>> origin/master
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
@@ -179,7 +183,7 @@ public class Konsole {
      * @param etage eine Etage
      */
     protected void fahre(Mitarbeiter person, int etage){
-      //  person.goto(etage);
+        person.goTo(etage);
     }
     
     /**
@@ -198,6 +202,9 @@ public class Konsole {
      */
     public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int id){
         return mitarbeiter.get(id);  
+    }
+    public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
+        return mitarbeiter.indexOf(mitarbeiterObject);
     }
     
     /**

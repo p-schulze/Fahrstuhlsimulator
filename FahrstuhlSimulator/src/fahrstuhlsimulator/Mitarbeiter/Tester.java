@@ -10,18 +10,14 @@ import fahrstuhlsimulator.Gebaeude.Etage;
  *
  * @author schueler
  */
-public class Hausmeister extends Mitarbeiter{
-    public Hausmeister(String name) {
+public class Tester extends Mitarbeiter{
+    public Tester(String name) {
         super(name);
         ArrayList<String> liste = new ArrayList();
         liste.add("EG");
         liste.add("Cafeteria");
         liste.add("Test");
-        liste.add("Bibliothek");
-        liste.add("Entwicklung");
-        liste.add("Besprechung");
      
         setErlaubteEtagen(liste);
     }
-    
 }

@@ -17,8 +17,8 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  */
 public class Mitarbeiter{
     private String name;
-    private MitarbeiterGraphic graphic;
     private int aktuelleEtage;
+    private MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     
     protected Mitarbeiter(String name) {
@@ -42,6 +42,11 @@ public class Mitarbeiter{
     }
     protected void setAktEtage(int aktEtage) {
         this.aktuelleEtage=aktEtage;
+    }
+    
+    public MitarbeiterGraphic getGraphic()
+    {
+        return graphic;
     }
     
     protected ArrayList<String> getErlaubteEtagen() {
@@ -69,23 +74,23 @@ public class Mitarbeiter{
 //                schreibeAktion("door: open");
 //            }
 //    }
-    public MitarbeiterGraphic getGraphic()
-    {
-        return graphic;
-    }
+    
     public void move(int pix)
     {
         graphic.moveDistanceWithAnimation(pix);
     }
-    
     public void umdrehen()
     {
         graphic.umdrehen();
     }
-    
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+    }
+    
+    public void goTo()
+    {
+        
     }
 }
         
