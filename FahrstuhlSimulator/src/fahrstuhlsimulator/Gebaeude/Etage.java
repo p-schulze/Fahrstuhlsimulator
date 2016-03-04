@@ -22,5 +22,5 @@ public class Etage {
     {
        return etagenzahl;
 
-    }        
+    }
 }
