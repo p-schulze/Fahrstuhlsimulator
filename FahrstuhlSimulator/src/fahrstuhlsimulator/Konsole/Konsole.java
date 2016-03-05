@@ -31,12 +31,8 @@ public class Konsole {
     protected final JTextField masterField = new JTextField();
     protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-<<<<<<< HEAD
     protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
    // protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
-=======
-    protected final ArrayList<Mitarbeiter> mitarbeiter = new ArrayList();
->>>>>>> origin/master
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.

@@ -88,7 +88,7 @@ public class Mitarbeiter{
         graphic.setEtage(etage);
     }
     
-    public void goTo()
+    public void goTo(int etage)
     {
         
     }
