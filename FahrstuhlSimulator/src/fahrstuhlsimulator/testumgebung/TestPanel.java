@@ -9,6 +9,7 @@ import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Gebaeude.EtageGraphic;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
+import fahrstuhlsimulator.Misc.MouseController;
 import fahrstuhlsimulator.Misc.PaneScroller;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
@@ -43,6 +44,9 @@ public class TestPanel extends JPanel{
         this.setBounds(0,-600, 800, 1200);
         this.setLayout(null);
         this.setVisible(true);
+        MouseController mC = new MouseController();
+        this.addMouseMotionListener(mC);
+        this.addMouseListener(mC);
         erstelleTestPerson();
         repaint();
         

@@ -55,7 +55,6 @@ public class PaneScroller implements KeyListener {
             {
                 while(true)
                 {
-                    System.out.println(panel.getY());
                     if(panel.getY() >= -600)
                     {   
                         panel.setLocation(panel.getX(), panel.getY()-scrollnum);
