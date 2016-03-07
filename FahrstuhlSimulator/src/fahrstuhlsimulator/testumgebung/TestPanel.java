@@ -136,7 +136,7 @@ public class TestPanel extends JPanel{
             op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
             g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             
-            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
+            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+15);
             g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             
             tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links().getWinkel(), mitarbeiterGraphic.getArm_links().getWidth()/2, mitarbeiterGraphic.getArm_links().getHeight()/2);
