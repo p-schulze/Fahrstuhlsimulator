@@ -36,6 +36,8 @@ public class TestFenster extends JFrame
         this.addKeyListener(new PaneScroller(panel));
         
         add(panel);
+        
+        
         this.setVisible(true);
                 
     }

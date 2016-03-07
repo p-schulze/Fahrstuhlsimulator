@@ -6,12 +6,11 @@
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/testumgebung/TestPanel.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/PaneScroller.java</file>
             <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/testumgebung/TestFenster.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/animaton/MitarbeiterAnimator.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/animaton/Animator.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Mitarbeiter/Graphic/MitarbeiterGraphic.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Gebaeude/EtageGraphic.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Gebaeude/Fahrstuhl/Graphic/FahrstuhlGraphic.java</file>
-            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/animaton/FahrstuhlAnimator.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/MouseController.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/AuswahlFeld.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/testumgebung/RightClickMenu/RCM_Button.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/testumgebung/RightClickMenu/RightClickMenu.java</file>
+            <file>file:/Users/Sebastian/Documents/workspace/GitHub/Fahrstuhlsimulator/FahrstuhlSimulator/src/fahrstuhlsimulator/Misc/GraphicDrawer.java</file>
         </group>
     </open-files>
 </project-private>
