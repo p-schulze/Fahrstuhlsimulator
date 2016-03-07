@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.testumgebung;
 
+import fahrstuhlsimulator.Misc.PaneScroller;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
@@ -26,7 +27,12 @@ public class TestFenster extends JFrame
         this.setLayout(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        
+        
+        
         panel = new TestPanel();
+        
+        this.addKeyListener(new PaneScroller(panel));
         add(panel);
         this.setVisible(true);
                 

@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package fahrstuhlsimulator.Gebaeude;
+import fahrstuhlsimulator.Misc.ImageLoader;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -12,8 +14,19 @@ package fahrstuhlsimulator.Gebaeude;
 public class EtageGraphic {
     
     private int y_pos = 0;
+    private BufferedImage img;
     
-    public EtageGraphic() {
-        this.y_pos=64;
+    public EtageGraphic(int etage) {
+        this.y_pos= (472+600)-(64*etage);
+        img = (BufferedImage) ImageLoader.getImages().get("img/Etage/Etage"+etage+".png");
+    }
+    
+    public BufferedImage getImg()
+    {
+        return img;
+    }
+    public int getY_Pos()
+    {
+        return y_pos;
     }
 }

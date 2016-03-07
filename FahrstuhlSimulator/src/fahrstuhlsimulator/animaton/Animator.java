@@ -22,7 +22,7 @@ public class Animator {
     {
         img_transformer.translate((widthFromImg/2)+ x, (heightFromImg/2)+y);  // + koordinaten
         img_transformer.rotate(Math.toRadians(winkel));
-        img_transformer.translate(-(widthFromImg/2)- x, -(heightFromImg/2)-y); // - koordinaten
+        img_transformer.translate(-((widthFromImg/2)+ x), -((heightFromImg/2)+y)); // - koordinaten 
     }
     protected void scaleImg(AffineTransform img_transformer, int widthFromImg, int heightFromImg, int x, int y)
     {

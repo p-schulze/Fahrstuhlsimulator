@@ -96,7 +96,7 @@ public class FahrstuhlGraphic {
     }
     public int getY_Pos()
     {
-        return 472-(64*etage); //TODO: An Klasse Etage anpassen
+        return (472+600)-(64*etage); //TODO: An Klasse Etage anpassen
     }
     public int getEtage()
     {

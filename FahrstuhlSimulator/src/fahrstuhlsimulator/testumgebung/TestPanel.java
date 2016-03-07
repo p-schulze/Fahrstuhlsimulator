@@ -6,8 +6,10 @@
 package fahrstuhlsimulator.testumgebung;
 
 import fahrstuhlsimulator.FahrstuhlSimulator;
+import fahrstuhlsimulator.Gebaeude.EtageGraphic;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
+import fahrstuhlsimulator.Misc.PaneScroller;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
@@ -16,22 +18,29 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 import javax.swing.JPanel;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+
 
 /**
  *
  * @author Sebastian
  */
-public class TestPanel extends JPanel {
+public class TestPanel extends JPanel{
     
     public static ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
     public static ArrayList<FahrstuhlGraphic> fahrstuhlGraphics = new ArrayList();
+    public static ArrayList<EtageGraphic> etageGraphics = new ArrayList();
     
     public static boolean X_RAY = false;
     
     public TestPanel()
     {
         
-        this.setBounds(0,0, 800, 600);
+        this.setBounds(0,-600, 800, 1200);
         this.setLayout(null);
         this.setVisible(true);
         erstelleTestPerson();
@@ -41,9 +50,9 @@ public class TestPanel extends JPanel {
     
     private void erstelleTestPerson()
     {
-        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2", 0, 0));
-        mitarbeiterGraphics.get(0).umdrehen();
-        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(368);
+//        mitarbeiterGraphics.add(new fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic("img/Person/Person2", 0, 0));
+//        mitarbeiterGraphics.get(0).umdrehen();
+//        mitarbeiterGraphics.get(0).moveDistanceWithAnimation(368);
         
         //mitarbeiterGraphics.get(1).moveDistanceWithAnimation(368);
         
@@ -51,13 +60,16 @@ public class TestPanel extends JPanel {
         for(int i = 0; i < 6; i++)
         {
             fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, i, false));
-            fahrstuhlGraphics.get(i).oeffneTuer();
         }
         fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 6, false));
         fahrstuhlGraphics.get(6).oeffneTuer();
         fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 7, true));
         fahrstuhlGraphics.get(7).schliesseTuer();
         
+        for(int i = 0; i < 8; i++)
+        {
+            etageGraphics.add(new EtageGraphic(i));
+        }
         
     }
     
@@ -68,15 +80,21 @@ public class TestPanel extends JPanel {
         if(X_RAY)
         {
             g2d.setColor(Color.DARK_GRAY);
-            g2d.fillRect(0, 0, 800, 600);
-            g2d.setColor(Color.cyan);
-            g2d.drawString("X-Ray Modus", 700, 15);
-            g2d.setColor(Color.blue);
-            g2d.drawString("(600/"+GraphicDrawer.getDurrationForFrame()+")Fps", 705,30);
-            g2d.drawString(((float) 600/+GraphicDrawer.getDurrationForFrame())+" Fps", 705,45);
-            g2d.setColor(Color.black);
+            g2d.fillRect(0, 0, 800, 1200);
+            g2d.setColor(Color.BLACK);
+        }
+        else
+        {
+            g2d.setColor(new Color(133,224,255));
+            g2d.fillRect(0, 0, 800, 1200);
+            g2d.setColor(Color.BLACK);
+            g2d.fillRect(0, 1072, 800, 128);
         }
         //Veraltet###
+        for(EtageGraphic etageGraphic: etageGraphics)
+        {
+            drawEtageGraphic(g2d, etageGraphic);
+        }
         for(FahrstuhlGraphic fahrstuhlGraphic:fahrstuhlGraphics)
         {
             drawFahrstuhlGraphic(g2d,fahrstuhlGraphic);
@@ -91,7 +109,16 @@ public class TestPanel extends JPanel {
         {
             
             drawMitarbeiterGraphic(g2d, einMitarbeiter);
-        }        
+        }
+        if(X_RAY)
+        {
+            g2d.setColor(Color.cyan);
+            g2d.drawString("X-Ray Modus", 700, 15);
+            g2d.setColor(Color.blue);
+            g2d.drawString("(600/"+GraphicDrawer.getDurrationForFrame()+")Fps", 705,30);
+            g2d.drawString(((float) 600/+GraphicDrawer.getDurrationForFrame())+" Fps", 705,45);
+            g2d.setColor(Color.black);
+        }
     }
     
     private void drawMitarbeiterGraphic(Graphics2D g2d, Mitarbeiter mitarbeiter)
@@ -101,38 +128,62 @@ public class TestPanel extends JPanel {
         if(!X_RAY)
         {
             
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
-            g2d.drawImage(mitarbeiterGraphic.getArm_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
-            g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+            AffineTransform tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts().getWinkel(), mitarbeiterGraphic.getArm_rechts().getWidth()/2, mitarbeiterGraphic.getArm_rechts().getHeight()/2);
+            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts().getWinkel(), mitarbeiterGraphic.getBein_rechts().getWidth()/2, mitarbeiterGraphic.getBein_rechts().getHeight()/2+16);
+            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
             g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
             g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
-            g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
-            g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links().getWinkel(), mitarbeiterGraphic.getArm_links().getWidth()/2, mitarbeiterGraphic.getArm_links().getHeight()/2);
+            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links().getWinkel(), mitarbeiterGraphic.getBein_links().getWidth()/2, mitarbeiterGraphic.getBein_links().getHeight()/2+16);
+            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+            g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
+            //g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
+//            g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+//            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
+//            g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
+//            g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            
+//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
+//            g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
         }
         else
         {
+            
             g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
             
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+12, mitarbeiterGraphic.getY_Pos()+28, 9, 18);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+13, mitarbeiterGraphic.getY_Pos()+18, 8, 10);
             g2d.setColor(Color.red);
             g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
             g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
             g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
             
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
-            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
+            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
             g2d.setColor(Color.black);
         }
@@ -153,6 +204,18 @@ public class TestPanel extends JPanel {
             g2d.drawRect(fahrstuhlGraphic.getX_Pos_TuerRechts()+32, fahrstuhlGraphic.getY_Pos()+12, 22, 51);
             
             g2d.drawRect(fahrstuhlGraphic.getX_Pos()+4, fahrstuhlGraphic.getY_Pos()+5, 56, 59);
+        }
+    }
+
+    private void drawEtageGraphic(Graphics2D g2d, EtageGraphic etageGraphic)
+    {
+        if(!X_RAY)
+        {
+            g2d.drawImage(etageGraphic.getImg(), 0, etageGraphic.getY_Pos(), null);
+        }
+        else
+        {
+            g2d.drawRect(0, etageGraphic.getY_Pos(), etageGraphic.getImg().getWidth(), etageGraphic.getImg().getHeight());
         }
     }
     
