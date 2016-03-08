@@ -90,11 +90,12 @@ public class Mitarbeiter{
     
     public void goTo(int etage)
     {
-        callFahrstuhl();
+        callFahrstuhl(etage);
     }
     
-    private void callFahrstuhl()
+    private void callFahrstuhl(int etage)
     {
+        
         
     }
 }
