@@ -180,7 +180,7 @@ public class FahrstuhlGraphic {
 
     public boolean checkTuerLinksPositionGleichZielPosition(int x_ziel, boolean opening)
     {
-        System.out.println(x_pos_tuerLinks +" "+ x_ziel);
+        
         if(opening)
         {
             return(x_pos_tuerLinks <= x_ziel);

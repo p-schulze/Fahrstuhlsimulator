@@ -9,6 +9,7 @@ import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Gebaeude.EtageGraphic;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
+import fahrstuhlsimulator.Misc.MouseController;
 import fahrstuhlsimulator.Misc.PaneScroller;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
@@ -35,6 +36,8 @@ public class TestPanel extends JPanel{
     public static ArrayList<FahrstuhlGraphic> fahrstuhlGraphics = new ArrayList();
     public static ArrayList<EtageGraphic> etageGraphics = new ArrayList();
     
+    private MouseController mC;
+    
     public static boolean X_RAY = false;
     
     public TestPanel()
@@ -43,6 +46,9 @@ public class TestPanel extends JPanel{
         this.setBounds(0,-600, 800, 1200);
         this.setLayout(null);
         this.setVisible(true);
+        mC = new MouseController();
+        this.addMouseMotionListener(mC);
+        this.addMouseListener(mC);
         erstelleTestPerson();
         repaint();
         
@@ -110,6 +116,28 @@ public class TestPanel extends JPanel{
             
             drawMitarbeiterGraphic(g2d, einMitarbeiter);
         }
+        
+        g2d.setColor(Color.cyan);
+        g2d.setXORMode(Color.RED);
+        g2d.drawRect(mC.auswahlFeld.x, mC.auswahlFeld.y, mC.auswahlFeld.width, mC.auswahlFeld.height);
+        g2d.setColor(Color.BLACK);
+        g2d.setPaintMode();
+        
+        if(mC.rCM_panel.visible)
+        {
+            g2d.fillRect(mC.rCM_panel.x, mC.rCM_panel.y, mC.rCM_panel.width, mC.rCM_panel.height);
+            g2d.setColor(Color.WHITE);
+            g2d.fillRect(mC.rCM_panel.x+2, mC.rCM_panel.y+2, mC.rCM_panel.width-4, mC.rCM_panel.height-4);
+            
+            g2d.setColor(Color.LIGHT_GRAY);
+            g2d.fill3DRect(mC.rCM_panel.btn.relative_x +mC.rCM_panel.x, mC.rCM_panel.btn.relative_y +mC.rCM_panel.y, mC.rCM_panel.btn.width, mC.rCM_panel.btn.height, true);
+            g2d.setColor(Color.BLACK);
+            g2d.drawString(mC.rCM_panel.btn.text, mC.rCM_panel.btn.relative_x +mC.rCM_panel.x+30, mC.rCM_panel.btn.relative_y +mC.rCM_panel.y+15);
+            //g2d.drawRect(632, 906,100 , 200);
+        }
+        
+        
+        
         if(X_RAY)
         {
             g2d.setColor(Color.cyan);

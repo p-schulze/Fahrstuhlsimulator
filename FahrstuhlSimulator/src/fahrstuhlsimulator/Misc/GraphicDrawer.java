@@ -54,281 +54,283 @@ public class GraphicDrawer implements Runnable {
     @Override
     public void run()
     {
-        long systemTime =  System.currentTimeMillis();
-        boolean zeichnen = false;
-        try{
-            for(int i = 0; i < taskList_task.size();i++)
-            {
-                zeichnen = true;
-                String temp_taskList_task = taskList_task.get(i).get(0);
-                Object temp_taskList_object = taskList_object.get(i).get(0);
+        while(true)
+        {
+            long systemTime =  System.currentTimeMillis();
+            boolean zeichnen = true;
+            try{
+                for(int i = 0; i < taskList_task.size();i++)
+                {
+                    zeichnen = true;
+                    String temp_taskList_task = taskList_task.get(i).get(0);
+                    Object temp_taskList_object = taskList_object.get(i).get(0);
 
-                String[] taskList_taskSplit = temp_taskList_task.split("\\.");
-                    if(taskList_taskSplit[0].equalsIgnoreCase("Mitarbeiter"))
-                    {
-                        if(taskList_taskSplit[1].equalsIgnoreCase("hebArm"))
+                    String[] taskList_taskSplit = temp_taskList_task.split("\\.");
+                        if(taskList_taskSplit[0].equalsIgnoreCase("Mitarbeiter"))
                         {
-                            if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("rechts"))
-                                //<editor-fold defaultstate="collapsed" desc="Heb Arm Rechts">
+                            if(taskList_taskSplit[1].equalsIgnoreCase("hebArm"))
                             {
-                                
+                                if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("rechts"))
+                                    //<editor-fold defaultstate="collapsed" desc="Heb Arm Rechts">
+                                {
+
+                                    MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                                    //split("[(),]");
+                                    String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    double ziel_winkel = 0;
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                    {
+                                        //System.out.println("HebArm: Y: "+ mitarbeiterG.getY_Pos());
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
+                                        {
+                                            ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                    }
+                                    if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
+                                    {
+
+                                        mitarbeiterG.getAnimator().setArmRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                    }
+                                    else{
+
+                                        deleteTask(i);
+                                    }
+                                }
+                                //</editor-fold>
+                                else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
+                                    //<editor-fold defaultstate="collapsed" desc="Heb Arm Links">
+                                {
+
+                                    MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                                    //split("[(),]");
+                                    String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    double ziel_winkel = 0;
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                    {
+
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
+                                        {
+                                            ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                    }
+                                    if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
+                                    {
+
+                                        mitarbeiterG.getAnimator().setArmLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                    }
+                                    else{
+
+                                        deleteTask(i);
+                                    }
+                                }
+                                //</editor-fold>
+                            }
+                            else if(taskList_taskSplit[1].equalsIgnoreCase("hebFuss"))
+                            {
+                                if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("rechts"))
+                                    //<editor-fold defaultstate="collapsed" desc="Heb Fuss Rechts">
+                                {
+
+                                    MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                                    //split("[(),]");
+                                    String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    double ziel_winkel = 0;
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                    {
+
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
+                                        {
+                                            ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                    }
+                                    if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
+                                    {
+
+                                        mitarbeiterG.getAnimator().setBeinRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                    }
+                                    else{
+
+                                        deleteTask(i);
+                                    }
+                                }
+                                //</editor-fold>
+                                else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
+                                    //<editor-fold defaultstate="collapsed" desc="Heb Fuss Links">
+                                {
+
+                                    MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
+                                    //split("[(),]");
+                                    String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    double ziel_winkel = 0;
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                    {
+
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
+                                        {
+                                            ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                    }
+                                    if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
+                                    {
+
+                                        mitarbeiterG.getAnimator().setBeinLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                    }
+                                    else{
+
+                                        deleteTask(i);
+                                    }
+                                }
+    //</editor-fold>
+                            }
+                            else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("move"))
+                            {
+                                //<editor-fold defaultstate="collapsed" desc="Move">
                                 MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                                //split("[(),]");
-                                String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+
+                                String[] parameter = taskList_taskSplit[1].split(":")[1].split("[(),]");
                                 int speed = 0;
-                                double ziel_winkel = 0;
+                                int ziel = mitarbeiterG.getX_Pos();
                                 for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                 {
-                                    //System.out.println("HebArm: Y: "+ mitarbeiterG.getY_Pos());
+                                    //System.out.println(parameter[i_parameter]);
                                     if(parameter[i_parameter].equalsIgnoreCase("speed"))
                                     {
                                         speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
-                                    {
-                                        ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
                                     }
+                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                    {
+                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+
                                 }
-                                if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
+
+                                if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
                                 {
-                                    
-                                    mitarbeiterG.getAnimator().setArmRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                    mitarbeiterG.addToX(mitarbeiterG.getFlipped()?5:-5);
                                 }
                                 else{
-                                    
+
                                     deleteTask(i);
+                                    sendOnPositionEvent(mitarbeiterG);
                                 }
+    //</editor-fold>
                             }
-                            //</editor-fold>
-                            else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
-                                //<editor-fold defaultstate="collapsed" desc="Heb Arm Links">
+                            else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("umdrehen"))
                             {
-                                
                                 MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                                //split("[(),]");
-                                String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                double ziel_winkel = 0;
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                                {
-                                    
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
-                                    {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
-                                    {
-                                        ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                }
-                                if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_arm_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
-                                {
-                                    
-                                    mitarbeiterG.getAnimator().setArmLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                                }
-                                else{
-                                    
-                                    deleteTask(i);
-                                }
-                            }
-                            //</editor-fold>
-                        }
-                        else if(taskList_taskSplit[1].equalsIgnoreCase("hebFuss"))
-                        {
-                            if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("rechts"))
-                                //<editor-fold defaultstate="collapsed" desc="Heb Fuss Rechts">
-                            {
-                                
-                                MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                                //split("[(),]");
-                                String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                double ziel_winkel = 0;
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                                {
-                                    
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
-                                    {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
-                                    {
-                                        ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                }
-                                if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_rechts().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
-                                {
-                                    
-                                    mitarbeiterG.getAnimator().setBeinRechtsRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                                }
-                                else{
-                                    
-                                    deleteTask(i);
-                                }
-                            }
-                            //</editor-fold>
-                            else if(taskList_taskSplit[2].split(":")[0].equalsIgnoreCase("links"))
-                                //<editor-fold defaultstate="collapsed" desc="Heb Fuss Links">
-                            {
-                                
-                                MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                                //split("[(),]");
-                                String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                double ziel_winkel = 0;
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                                {
-                                    
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
-                                    {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }else if(parameter[i_parameter].equalsIgnoreCase("winkel"))
-                                    {
-                                        ziel_winkel = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                }
-                                if(!(ziel_winkel <0?(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkRevertWinkelGleichZielWinkel(Math.toRadians(ziel_winkel))):(mitarbeiterG.getAnimator().getImg_trans_bein_links().checkWinkelGleichZielWinkel(Math.toRadians(ziel_winkel)))))
-                                {
-                                    
-                                    mitarbeiterG.getAnimator().setBeinLinksRotation(100/speed, mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                                }
-                                else{
-                                    
-                                    deleteTask(i);
-                                }
-                            }
-//</editor-fold>
-                        }
-                        else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("move"))
-                        {
-                            //<editor-fold defaultstate="collapsed" desc="Move">
-                            MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                            
-                            String[] parameter = taskList_taskSplit[1].split(":")[1].split("[(),]");
-                            int speed = 0;
-                            int ziel = mitarbeiterG.getX_Pos();
-                            for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                            {
-                                //System.out.println(parameter[i_parameter]);
-                                if(parameter[i_parameter].equalsIgnoreCase("speed"))
-                                {
-                                    speed = Integer.parseInt(parameter[i_parameter+1]);
-                                }
-                                else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
-                                {
-                                    ziel = Integer.parseInt(parameter[i_parameter+1]);
-                                }
-                                
-                            }
-                            
-                            if(!(mitarbeiterG.checkPositionGleichZielPosition(ziel)))
-                            {
-                                mitarbeiterG.addToX(mitarbeiterG.getFlipped()?5:-5);
-                            }
-                            else{
-                                
+                                mitarbeiterG.getAnimator().setArmLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                mitarbeiterG.getAnimator().setArmRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                mitarbeiterG.getAnimator().setBeinLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                mitarbeiterG.getAnimator().setBeinRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+                                mitarbeiterG.getAnimator().setKoerperFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
+
+                                mitarbeiterG.setFlipped(!mitarbeiterG.getFlipped());
                                 deleteTask(i);
-                                sendOnPositionEvent(mitarbeiterG);
                             }
-//</editor-fold>
                         }
-                        else if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("umdrehen"))
+                        else if(taskList_taskSplit[0].equalsIgnoreCase("Fahrstuhl"))
                         {
-                            MitarbeiterGraphic mitarbeiterG = (MitarbeiterGraphic) temp_taskList_object;
-                            mitarbeiterG.getAnimator().setArmLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                            mitarbeiterG.getAnimator().setArmRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                            mitarbeiterG.getAnimator().setBeinLinksFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                            mitarbeiterG.getAnimator().setBeinRechtsFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                            mitarbeiterG.getAnimator().setKoerperFlip(mitarbeiterG.getX_Pos(), mitarbeiterG.getY_Pos());
-                            
-                            mitarbeiterG.setFlipped(!mitarbeiterG.getFlipped());
-                            deleteTask(i);
-                        }
-                    }
-                    else if(taskList_taskSplit[0].equalsIgnoreCase("Fahrstuhl"))
-                    {
-                        if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
-                        {
-                            if(taskList_taskSplit[2].equalsIgnoreCase("links"))
+                            if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
                             {
-                                boolean tempOeffnen = true;
-                                if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
+                                if(taskList_taskSplit[2].equalsIgnoreCase("links"))
                                 {
-                                    tempOeffnen = false;
-                                }    
-                                FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
-
-                                String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                int ziel = fahrstuhlG.getX_Pos();
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                                {
-                                    //System.out.println(parameter[i_parameter]);
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    boolean tempOeffnen = true;
+                                    if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
                                     {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                        tempOeffnen = false;
+                                    }    
+                                    FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
+
+                                    String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    int ziel = fahrstuhlG.getX_Pos();
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
                                     {
-                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                        //System.out.println(parameter[i_parameter]);
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                        else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                        {
+                                            ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
                                     }
-                                }
 
-                                if(!(fahrstuhlG.checkTuerLinksPositionGleichZielPosition(ziel, tempOeffnen)))
-                                {
-                                    fahrstuhlG.addToX_tuerLinks(tempOeffnen?-1:1);
-                                }
-                                else{
-
-                                    deleteTask(i);
-                                    //sendOnPositionEvent(fahrstuhlG);
-                                }
-                                    
-                                
-                            }
-                            else if(taskList_taskSplit[2].equalsIgnoreCase("rechts"))
-                            {
-                                boolean tempOeffnen = true;
-                                if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
-                                {
-                                    tempOeffnen = false;
-                                }
-                                FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
-
-                                String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
-                                int speed = 0;
-                                int ziel = fahrstuhlG.getX_Pos();
-                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
-                                {
-                                    //System.out.println(parameter[i_parameter]);
-                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    if(!(fahrstuhlG.checkTuerLinksPositionGleichZielPosition(ziel, tempOeffnen)))
                                     {
-                                        speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        fahrstuhlG.addToX_tuerLinks(tempOeffnen?-1:1);
                                     }
-                                    else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
-                                    {
-                                        ziel = Integer.parseInt(parameter[i_parameter+1]);
-                                    }
-                                }
-                                if(!(fahrstuhlG.checkTuerRechtsPositionGleichZielPosition(ziel, tempOeffnen)))
-                                {
-                                    fahrstuhlG.addToX_tuerRechts(tempOeffnen?1:-1);
-                                }
-                                else{
+                                    else{
 
-                                    deleteTask(i);
-                                    if(tempOeffnen) {sendOpenedEvent(fahrstuhlG);} else {sendClosedEvent(fahrstuhlG);}
+                                        deleteTask(i);
+                                        //sendOnPositionEvent(fahrstuhlG);
+                                    }
+
+
+                                }
+                                else if(taskList_taskSplit[2].equalsIgnoreCase("rechts"))
+                                {
+                                    boolean tempOeffnen = true;
+                                    if(taskList_taskSplit[3].split(":")[0].equalsIgnoreCase("schliessen"))
+                                    {
+                                        tempOeffnen = false;
+                                    }
+                                    FahrstuhlGraphic fahrstuhlG = (FahrstuhlGraphic) temp_taskList_object;
+
+                                    String[] parameter = taskList_taskSplit[3].split(":")[1].split("[(),]");
+                                    int speed = 0;
+                                    int ziel = fahrstuhlG.getX_Pos();
+                                    for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                    {
+                                        //System.out.println(parameter[i_parameter]);
+                                        if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                        {
+                                            speed = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                        else if(parameter[i_parameter].equalsIgnoreCase("ziel"))
+                                        {
+                                            ziel = Integer.parseInt(parameter[i_parameter+1]);
+                                        }
+                                    }
+                                    if(!(fahrstuhlG.checkTuerRechtsPositionGleichZielPosition(ziel, tempOeffnen)))
+                                    {
+                                        fahrstuhlG.addToX_tuerRechts(tempOeffnen?1:-1);
+                                    }
+                                    else{
+
+                                        deleteTask(i);
+                                        if(tempOeffnen) {sendOpenedEvent(fahrstuhlG);} else {sendClosedEvent(fahrstuhlG);}
+                                    }
                                 }
                             }
                         }
-                    }
+                }
+            }catch(IndexOutOfBoundsException ex) {
+                //System.out.println("Keine Aufgaben vorhanden");
             }
-        }catch(IndexOutOfBoundsException ex) {
-            //System.out.println("Keine Aufgaben vorhanden");
+            //System.out.println("GraphicDrawer: Gestartet");
+            try {if(zeichnen){TestFenster.panel.repaint();}else{System.out.println("GraphicDrawer_Thread: Pausiert");pausiert = true;FahrstuhlSimulator.graphicDrawer_th.suspend();}} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
+            try {Thread.sleep(TIME_FOR_A_FRAME);} catch (InterruptedException ex) {}
+            durationForFrame = System.currentTimeMillis() - systemTime;
         }
-        //System.out.println("GraphicDrawer: Gestartet");
-        try {if(zeichnen){TestFenster.panel.repaint();}else{System.out.println("GraphicDrawer_Thread: Pausiert");pausiert = true;FahrstuhlSimulator.graphicDrawer_th.suspend();}} catch(NullPointerException e) {/**System.out.println("Panel ist nochnicht geladen");**/}
-        try {Thread.sleep(TIME_FOR_A_FRAME);} catch (InterruptedException ex) {}
-        durationForFrame = System.currentTimeMillis() - systemTime;
-        
-        this.run();
+        //this.run();
     }
     
     public static long getDurrationForFrame()
