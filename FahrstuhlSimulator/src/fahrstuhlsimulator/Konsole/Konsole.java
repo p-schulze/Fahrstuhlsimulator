@@ -287,9 +287,11 @@ public class Konsole {
                 break;
             case "close":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
+                schreibeAktion("door: close");
                 break;
             case "open":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).open();
+                schreibeAktion("door: open");
                 break;
             case "goup":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahren(Integer.parseInt(commandArray[2]));
@@ -298,36 +300,7 @@ public class Konsole {
                 schreibeAktion("Error: Befehl nicht erkannt");
                 break;
             
-        }
-       
-      
-       /* else if(commandArray[0].equalsIgnoreCase("xray"))
-        {
-            //TestPanel.X_RAY = !TestPanel.X_RAY;
-           // schreibeAktion("X-Ray: " + TestPanel.X_RAY);
-           // TestFenster.panel.repaint();
-        }
-        /*else if(commandArray[0].equalsIgnoreCase("open"))
-        {
-            if(!TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = true;
-            schreibeAktion("open door: " + commandArray[1]);
-            }else{
-                schreibeAktion("door: open");
-            }
-        }  
-        else if(commandArray[0].equalsIgnoreCase("close"))
-        {
-            if(TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){ 
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = false;
-            schreibeAktion("close door: " + commandArray[1]);}
-            else{
-                schreibeAktion("door: close");
-            }
-        }*/
-       
+        }       
     }
 }    
   
