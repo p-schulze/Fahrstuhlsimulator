@@ -15,6 +15,7 @@ import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
  */
 
 public class Fahrstuhl {
+    private boolean open;
     private int etage;
     private final int max;
     private final int min;
@@ -170,5 +171,23 @@ public class Fahrstuhl {
     }
     public void callFahrstuhl(int etage) {
         fahren(EWandel(etage));
+    }
+    
+    public boolean getOpen(){
+        return open;
+    }
+    
+    public void close(){
+        if(open){
+            open = false;
+            grafik.get(etage).schliesseTuer();
+        }
+    }
+    
+    public void open(){
+        if(!open){
+            open = true;
+            grafik.get(etage).oeffneTuer();
+        }
     }
 }

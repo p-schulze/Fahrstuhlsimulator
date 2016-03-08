@@ -200,6 +200,7 @@ public class Konsole {
     public fahrstuhlsimulator.Mitarbeiter.Mitarbeiter getMitarbeiter(int id){
         return mitarbeiter.get(id);  
     }
+    
     public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
         return mitarbeiter.indexOf(mitarbeiterObject);
     }
@@ -212,7 +213,7 @@ public class Konsole {
         return mitarbeiter;  
     }
     
-     public ArrayList<Fahrstuhl> getFahrstuhlListe(){
+    public ArrayList<Fahrstuhl> getFahrstuhlListe(){
         return farhstuehle;  
     }
     
@@ -285,7 +286,13 @@ public class Konsole {
                 startRandom(Integer.parseInt(commandArray[1]));
                 break;
             case "close":
-                (farhstuehle.get(Integer.parseInt(commandArray[1]))).
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
+                break;
+            case "open":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).open();
+                break;
+            case "goup":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahren(Integer.parseInt(commandArray[2]));
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
