@@ -212,6 +212,10 @@ public class Konsole {
         return mitarbeiter;  
     }
     
+     public ArrayList<Fahrstuhl> getFahrstuhlListe(){
+        return farhstuehle;  
+    }
+    
     /**
      * Fügt einen Fahrstuhl hinzu. (maximal 3 Fahrstühle möglich, feste X-Koordinaten)
      */
@@ -279,6 +283,9 @@ public class Konsole {
                 break;
             case "random":
                 startRandom(Integer.parseInt(commandArray[1]));
+                break;
+            case "close":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
