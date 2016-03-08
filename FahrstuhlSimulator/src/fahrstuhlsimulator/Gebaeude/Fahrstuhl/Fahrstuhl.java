@@ -30,6 +30,7 @@ public class Fahrstuhl {
         this.faehrt=0;
         this.inFahrstuhl = new ArrayList<Mitarbeiter>();
         this.grafik = new ArrayList<FahrstuhlGraphic>();
+         
         for (int i = 0; i<8; i++) {
             //System.out.println(grafik);
             FahrstuhlGraphic element = new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1",x,i,false);
@@ -52,21 +53,25 @@ public class Fahrstuhl {
             }   
             if (pruefen.contains(1) != true) {                      //enthält pruefen eine 1, so fährt der Fahrstuhl nicht los.
                 if (e > this.etage) {
+                    grafik.get(this.getEtage()).schliesseTuer();
                     this.faehrt = 1;
                     while (this.etage<e) {
                         hoch();
                     }
                     for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
                     this.faehrt = 0;
+                    grafik.get(e).oeffneTuer();
                 }
                 else {
                     if (e < this.etage) {
+                        grafik.get(this.getEtage()).schliesseTuer();
                         this.faehrt = 2;
                         while (this.etage>e) {
                             runter();
                         }
                         for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
                         this.faehrt = 0;
+                        grafik.get(e).oeffneTuer();
                     }
                     else {System.out.println("Der Fahrstuhl ist bereits in Etage " + this.getEtage() + ".");}
                 }
