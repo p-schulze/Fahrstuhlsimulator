@@ -257,8 +257,11 @@ public class Konsole {
                 addPerson(commandArray[2], commandArray[1]);
                 break;
             case "create":
+                if(farhstuehle.size()<3){
                 schreibeAktion("Fahrstuhl wird erstellt.");
-                addFahrstuhl();
+                addFahrstuhl();}
+                else{schreibeAktion("Maximale Anzahl erreicht.");}
+                
                 break;
             case "move":
                 schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
