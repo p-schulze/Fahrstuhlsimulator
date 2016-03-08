@@ -49,7 +49,7 @@ public class Mitarbeiter{
         return graphic;
     }
     
-    protected ArrayList<String> getErlaubteEtagen() {
+    public ArrayList<String> getErlaubteEtagen() {
         return erlaubteEtagen;
     }
     protected void setErlaubteEtagen(ArrayList<String> nErlaubteEtagen) {
