@@ -223,14 +223,15 @@ public class Konsole {
     protected void addFahrstuhl(){
        int xk = 368;
        if(farhstuehle.size() < 3){
-        switch(farhstuehle.size()){
-            case 1:
-                xk = 468;
-            case 2:
-                xk = 268;
-            default:
-                farhstuehle.add(new Fahrstuhl(xk));
-        }
+        
+            if(farhstuehle.size() ==1){
+                xk=468;
+            }
+            if(farhstuehle.size() ==2){
+                xk=268;
+            }
+            farhstuehle.add(new Fahrstuhl(xk));
+        
        }
         
     } 
