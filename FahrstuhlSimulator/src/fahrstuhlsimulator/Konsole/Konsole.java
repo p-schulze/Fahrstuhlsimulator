@@ -225,9 +225,9 @@ public class Konsole {
        if(farhstuehle.size() < 3){
         switch(farhstuehle.size()){
             case 1:
-                xk = 413;
+                xk = 468;
             case 2:
-                xk = 323;
+                xk = 268;
             default:
                 farhstuehle.add(new Fahrstuhl(xk));
         }
