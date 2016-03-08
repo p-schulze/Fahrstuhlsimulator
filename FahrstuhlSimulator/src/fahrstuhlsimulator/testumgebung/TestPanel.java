@@ -128,7 +128,7 @@ public class TestPanel extends JPanel{
         
         g2d.setColor(Color.cyan);
         g2d.setXORMode(Color.RED);
-        g2d.drawRect(getmC().auswahlFeld.x, getmC().auswahlFeld.y, getmC().auswahlFeld.width, getmC().auswahlFeld.height);
+        g2d.drawRect(mC.auswahlFeld.x, mC.auswahlFeld.y, mC.auswahlFeld.width, mC.auswahlFeld.height);
         g2d.setColor(Color.BLACK);
         g2d.setPaintMode();
         
@@ -148,7 +148,7 @@ public class TestPanel extends JPanel{
         
         MitarbeiterGraphic mitarbeiterGraphic = mitarbeiter.getGraphic();
         g2d.setColor(Color.BLACK);
-        if(TestFenster.panel.getmC().getAusgewaehlteMitarbeiter().contains(mitarbeiter))
+        if(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter))
         {
             g2d.setColor(Color.GREEN);
             g2d.setXORMode(Color.red);
@@ -209,7 +209,7 @@ public class TestPanel extends JPanel{
             //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+13, mitarbeiterGraphic.getY_Pos()+18, 8, 10);
             
-            g2d.setColor(TestFenster.panel.getmC().getAusgewaehlteMitarbeiter().contains(mitarbeiter)?Color.GREEN:Color.red);
+            g2d.setColor(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter)?Color.GREEN:Color.red);
             g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
             g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
             g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
@@ -256,7 +256,7 @@ public class TestPanel extends JPanel{
             g2d.drawRect(0, etageGraphic.getY_Pos(), etageGraphic.getImg().getWidth(), etageGraphic.getImg().getHeight());
         }
     }
-
+    
     /**
      * @return the mC
      */
