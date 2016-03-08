@@ -30,7 +30,8 @@ public class Fahrstuhl {
         this.faehrt=0;
         this.inFahrstuhl = new ArrayList<Mitarbeiter>();
         this.grafik = new ArrayList<FahrstuhlGraphic>();
-        for (int i = 0; i==7; i++) {
+        for (int i = 0; i<8; i++) {
+            //System.out.println(grafik);
             FahrstuhlGraphic element = new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1",x,i,false);
             this.grafik.add(element);
         }

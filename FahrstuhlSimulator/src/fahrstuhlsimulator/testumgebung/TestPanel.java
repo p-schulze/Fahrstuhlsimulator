@@ -7,6 +7,7 @@ package fahrstuhlsimulator.testumgebung;
 
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import fahrstuhlsimulator.Gebaeude.EtageGraphic;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.MouseController;
@@ -63,14 +64,14 @@ public class TestPanel extends JPanel{
         //mitarbeiterGraphics.get(1).moveDistanceWithAnimation(368);
         
         
-        for(int i = 0; i < 6; i++)
-        {
-            fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, i, false));
-        }
-        fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 6, false));
-        fahrstuhlGraphics.get(6).oeffneTuer();
-        fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 7, true));
-        fahrstuhlGraphics.get(7).schliesseTuer();
+//        for(int i = 0; i < 6; i++)
+//        {
+//            fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, i, false));
+//        }
+//        fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 6, false));
+//        fahrstuhlGraphics.get(6).oeffneTuer();
+//        fahrstuhlGraphics.add(new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1", 368, 7, true));
+//        fahrstuhlGraphics.get(7).schliesseTuer();
         
         for(int i = 0; i < 8; i++)
         {
@@ -101,9 +102,10 @@ public class TestPanel extends JPanel{
         {
             drawEtageGraphic(g2d, etageGraphic);
         }
-        for(FahrstuhlGraphic fahrstuhlGraphic:fahrstuhlGraphics)
+        ArrayList<Fahrstuhl> fahrstuehle = FahrstuhlSimulator.konsole.getFahrstuhlListe();
+        for(Fahrstuhl fahrstuhl:fahrstuehle)
         {
-            drawFahrstuhlGraphic(g2d,fahrstuhlGraphic);
+            drawFahrstuhlGraphic(g2d,fahrstuhl);
         }
 //        for(MitarbeiterGraphic mitarbeiterGraphic:mitarbeiterGraphics)
 //        {
@@ -217,21 +219,26 @@ public class TestPanel extends JPanel{
         }
         
     }
-    private void drawFahrstuhlGraphic(Graphics2D g2d, FahrstuhlGraphic fahrstuhlGraphic)
+    private void drawFahrstuhlGraphic(Graphics2D g2d, Fahrstuhl fahrstuhl)
     {
-        if(!X_RAY)
+        ArrayList<FahrstuhlGraphic> fahrstuhlgrafiken = fahrstuhl.getFahrstuhlGrafik();
+        //System.out.println(fahrstuhlgrafiken);
+        for(FahrstuhlGraphic fahrstuhlGraphic: fahrstuhlgrafiken)
         {
-        g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_tuer_links(), fahrstuhlGraphic.getX_Pos_TuerLinks(), fahrstuhlGraphic.getY_Pos(), null);
-        g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_tuer_rechts(), fahrstuhlGraphic.getX_Pos_TuerRechts(), fahrstuhlGraphic.getY_Pos(), null);
-        
-        g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_rahmen(), fahrstuhlGraphic.getX_Pos(), fahrstuhlGraphic.getY_Pos(), null);
-        }
-        else
-        {
-            g2d.drawRect(fahrstuhlGraphic.getX_Pos_TuerLinks()+10, fahrstuhlGraphic.getY_Pos()+12, 22, 51);
-            g2d.drawRect(fahrstuhlGraphic.getX_Pos_TuerRechts()+32, fahrstuhlGraphic.getY_Pos()+12, 22, 51);
-            
-            g2d.drawRect(fahrstuhlGraphic.getX_Pos()+4, fahrstuhlGraphic.getY_Pos()+5, 56, 59);
+            if(!X_RAY)
+            {
+            g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_tuer_links(), fahrstuhlGraphic.getX_Pos_TuerLinks(), fahrstuhlGraphic.getY_Pos(), null);
+            g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_tuer_rechts(), fahrstuhlGraphic.getX_Pos_TuerRechts(), fahrstuhlGraphic.getY_Pos(), null);
+
+            g2d.drawImage(fahrstuhlGraphic.getFahrstuhl_rahmen(), fahrstuhlGraphic.getX_Pos(), fahrstuhlGraphic.getY_Pos(), null);
+            }
+            else
+            {
+                g2d.drawRect(fahrstuhlGraphic.getX_Pos_TuerLinks()+10, fahrstuhlGraphic.getY_Pos()+12, 22, 51);
+                g2d.drawRect(fahrstuhlGraphic.getX_Pos_TuerRechts()+32, fahrstuhlGraphic.getY_Pos()+12, 22, 51);
+
+                g2d.drawRect(fahrstuhlGraphic.getX_Pos()+4, fahrstuhlGraphic.getY_Pos()+5, 56, 59);
+            }
         }
     }
 
