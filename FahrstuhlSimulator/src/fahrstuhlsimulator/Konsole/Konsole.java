@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Konsole;
 
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
@@ -32,7 +33,7 @@ public class Konsole {
     protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
     protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
-   // protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
+    protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
@@ -214,7 +215,7 @@ public class Konsole {
     /**
      * Fügt einen Fahrstuhl hinzu. (maximal 3 Fahrstühle möglich, feste X-Koordinaten)
      */
-  /*  protected void addFahrstuhl(){
+    protected void addFahrstuhl(){
        int xk = 368;
        if(farhstuehle.size() < 3){
         switch(farhstuehle.size()){
@@ -227,7 +228,7 @@ public class Konsole {
         }
        }
         
-    } */
+    } 
     
     protected void startRandom(int anzahl){
         int pause = 60/anzahl;
@@ -251,7 +252,7 @@ public class Konsole {
                 break;
             case "create":
                 schreibeAktion("Fahrstuhl wird erstellt.");
-                //addFahrstuhl();
+                addFahrstuhl();
                 break;
             case "move":
                 schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
