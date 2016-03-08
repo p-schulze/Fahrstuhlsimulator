@@ -164,6 +164,7 @@ public class Fahrstuhl {
     public void einsteigen(Mitarbeiter p) {inFahrstuhl.add(p);}
     public void aussteigen(Mitarbeiter p) {this.inFahrstuhl.remove(p);}
     public int getEtage() {return etage;}
+    public ArrayList<FahrstuhlGraphic> getFahrstuhlGrafik(){return grafik;}
     public ArrayList<Mitarbeiter> getImFS() {return this.inFahrstuhl;}
     public void callFahrstuhl(String etage) {
         fahren(etage);
