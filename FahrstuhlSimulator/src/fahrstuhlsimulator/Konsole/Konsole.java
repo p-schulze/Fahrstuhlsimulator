@@ -318,6 +318,11 @@ public class Konsole {
             case "call":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(mitarbeiter.get(Integer.parseInt(commandArray[2])).getAktEtage());
                 break;
+            case "statistik":
+                //Objket von deiner Klasse erstellen
+                //Start Methode aufrufen und liste "mitarbeiter"
+                
+                break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
                 break;
