@@ -21,6 +21,7 @@ public class Mitarbeiter{
     private int aktuelleEtage;
     private MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
+    public int zieletage;
     
     protected Mitarbeiter(String name) {
         this.name=name;
@@ -28,7 +29,7 @@ public class Mitarbeiter{
             RandomMitarbeiterGenerator.makeRandomMitarbeiter();
         graphic = new MitarbeiterGraphic(RandomMitarbeiterGenerator.getArmeImgID(),RandomMitarbeiterGenerator.getBeineImgID(),RandomMitarbeiterGenerator.getKoerperImgID(),1-0,1,false);
         //this.erlaubteEtagen=erlaubteEtagen;
-        //this.aktuelleEtage=EG;
+        this.aktuelleEtage=1;
     }
     
     public String getName() {
@@ -38,7 +39,7 @@ public class Mitarbeiter{
         this.name=name;
     }
     
-    protected int getAktEtage() {
+    public int getAktEtage() {
         return aktuelleEtage;
     }
     protected void setAktEtage(int aktEtage) {

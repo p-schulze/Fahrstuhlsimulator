@@ -31,6 +31,7 @@ public class Fahrstuhl {
         this.faehrt=0;
         this.inFahrstuhl = new ArrayList<Mitarbeiter>();
         this.grafik = new ArrayList<FahrstuhlGraphic>();
+        this.fahrliste = new ArrayList();
          
         for (int i = 0; i<8; i++) {
             //System.out.println(grafik);
@@ -39,98 +40,30 @@ public class Fahrstuhl {
         }
     }
     
-    public boolean pruefeE(Mitarbeiter person, String etage) {
-        return person.getErlaubteEtagen().contains(etage);        
-    }
-    public void fahren(int e) {
-        String etage =this.EWandel(e);
-        if (e>=0 && e <=7) {
-            ArrayList<Integer> pruefen = new ArrayList<Integer>();  //erstellen ArrayList pruefen zum überprüfen, ob alle Personen im Fahrstuhl in die gewählte Etage fahren dürfen.
-            for (int i =0;i<this.getImFS().size();i++) {
-                if (this.pruefeE(this.getImFS().get(i),etage)) {
-                    pruefen.add(0);                                 //für jede Person die in die Etage darf wird eine 0 eingefügt.
-                }
-                else {pruefen.add(1);}                              //für jede Person die nicht in die Etage darf wird eine 1 eingefügt.
-            }   
-            if (pruefen.contains(1) != true) {                      //enthält pruefen eine 1, so fährt der Fahrstuhl nicht los.
-                if (e > this.etage) {
-                    grafik.get(this.getEtage()).schliesseTuer();
-                    this.faehrt = 1;
-                    while (this.etage<e) {
-                        hoch();
-                    }
-                    for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
-                    this.faehrt = 0;
-                    grafik.get(e).oeffneTuer();
-                }
-                else {
-                    if (e < this.etage) {
-                        grafik.get(this.getEtage()).schliesseTuer();
-                        this.faehrt = 2;
-                        while (this.etage>e) {
-                            runter();
-                        }
-                        for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
-                        this.faehrt = 0;
-                        grafik.get(e).oeffneTuer();
-                    }
-                    else {System.out.println("Der Fahrstuhl ist bereits in Etage " + this.getEtage() + ".");}
-                }
-            }
-            else {System.out.println("Eine der Personen im Fahrstuhl ist nicht berechtigt in Etage " + etage + " zu fahren.");}
-        }
-        else {System.out.println("Diese Etage existiert nicht.");}
-    }
-    public void fahren(String etage) {
-        int e =this.EWandel(etage);
-        if (e>=0 && e <=7) {
-            ArrayList<Integer> pruefen = new ArrayList<Integer>();  //erstellen ArrayList pruefen zum überprüfen, ob alle Personen im Fahrstuhl in die gewählte Etage fahren dürfen.
-            for (int i =0;i<this.getImFS().size();i++) {
-                if (this.pruefeE(this.getImFS().get(i),etage)) {
-                    pruefen.add(0);                                 //für jede Person die in die Etage darf wird eine 0 eingefügt.
-                }
-                else {pruefen.add(1);}                              //für jede Person die nicht in die Etage darf wird eine 1 eingefügt.
-            }   
-            if (pruefen.contains(1) != true) {                      //enthält pruefen eine 1, so fährt der Fahrstuhl nicht los.
-                if (e > this.etage) {
-                    this.faehrt = 1;
-                    while (this.etage<e) {
-                        hoch();
-                    }
-                    for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
-                    this.faehrt = 0;
-                }
-                else {
-                    if (e < this.etage) {
-                        this.faehrt = 2;
-                        while (this.etage>e) {
-                            runter();
-                        }
-                        for (int i =0;i<this.getImFS().size();i++) {this.getImFS().get(i).teleport(this.getEtage());}  //Teleportieren aller Personen im Fahrstuhl in Zieletage, wenn Fahrstuhl dort angekommen.
-                        this.faehrt = 0;
-                    }
-                    else {System.out.println("Der Fahrstuhl ist bereits in Etage " + this.getEtage() + ".");}
-                }
-            }
-            else {System.out.println("Eine der Personen im Fahrstuhl ist nicht berechtigt in Etage " + etage + " zu fahren.");}
-        }
-        else {System.out.println("Diese Etage existiert nicht.");}
-    }
-    public void hoch() {
-        this.etage ++;
-        //Befehl für Grafik ?
-    }
-    public void runter() {
-        this.etage --;
-        //Befehl für Grafik ?
+    public void addEtageToFahrliste(int e){
+        fahrliste.add(e);
         
     }
     
-    public void fahre(int e){
-        etage = e;
+    public boolean pruefeE(Mitarbeiter person, String etage) {
+        return person.getErlaubteEtagen().contains(etage);        
+    }
+    
+     public void fahren(int e){
+        etage =  e;
         for (int i= 0; i<inFahrstuhl.size(); i++){
-            inFahrstuhl.get(i).teleport(e);
+            inFahrstuhl.get(i).teleport(etage);
         }
+        
+    }
+    
+    public void fahre(){
+        etage = this.fahrliste.get(0);
+        for (int i= 0; i<inFahrstuhl.size(); i++){
+            inFahrstuhl.get(i).teleport(etage);
+        }
+        this.fahrliste.remove(0);
+        this.open();
     }
     
     public String EWandel(int etage) {
@@ -182,12 +115,6 @@ public class Fahrstuhl {
     public int getEtage() {return etage;}
     public ArrayList<FahrstuhlGraphic> getFahrstuhlGrafik(){return grafik;}
     public ArrayList<Mitarbeiter> getImFS() {return this.inFahrstuhl;}
-    public void callFahrstuhl(String etage) {
-        fahren(etage);
-    }
-    public void callFahrstuhl(int etage) {
-        fahren(EWandel(etage));
-    }
     
     public boolean getOpen(){
         return open;
@@ -204,10 +131,11 @@ public class Fahrstuhl {
         if(!open){
             open = true;
             grafik.get(etage).oeffneTuer();
+            for (int i= 0; i<inFahrstuhl.size(); i++){
+                if(inFahrstuhl.get(i).zieletage == etage){
+                    this.aussteigen(inFahrstuhl.get(i));
+                }
+            }
         }
-    }
-    
-    public void personWillEinsteigen(Mitarbeiter p){
-        
     }
 }

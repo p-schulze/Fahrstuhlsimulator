@@ -217,6 +217,10 @@ public class Konsole {
         return farhstuehle;  
     }
     
+    public void einsteigen(Mitarbeiter p, int fahrstuhl){
+        farhstuehle.get(fahrstuhl).einsteigen(p);
+    }
+    
     /**
      * Fügt einen Fahrstuhl hinzu. (maximal 3 Fahrstühle möglich, feste X-Koordinaten)
      */
@@ -298,7 +302,21 @@ public class Konsole {
                 schreibeAktion("door: open");
                 break;
             case "goup":
-                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahre(Integer.parseInt(commandArray[2]));
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahre();
+                break;
+             case "fahredirekt":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahren(Integer.parseInt(commandArray[2]));
+                break;
+            case "einsteigen":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).einsteigen(mitarbeiter.get(Integer.parseInt(commandArray[2])));
+                mitarbeiter.get(Integer.parseInt(commandArray[2])).zieletage = Integer.parseInt(commandArray[3]);
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(Integer.parseInt(commandArray[3]));
+                break;
+            case "aussteigen":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).aussteigen(mitarbeiter.get(Integer.parseInt(commandArray[2])));
+                break;
+            case "call":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(mitarbeiter.get(Integer.parseInt(commandArray[2])).getAktEtage());
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
