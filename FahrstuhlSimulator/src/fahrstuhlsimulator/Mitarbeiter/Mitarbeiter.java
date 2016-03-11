@@ -76,6 +76,7 @@ public class Mitarbeiter{
 //            }
 //    }
     
+   
     public void move(int pix)
     {
         graphic.moveDistanceWithAnimation(pix);

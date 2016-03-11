@@ -22,6 +22,7 @@ public class Fahrstuhl {
     private int faehrt; //0=fährt nicht, 1=hoch, 2=runter
     private ArrayList<Mitarbeiter> inFahrstuhl;
     private final ArrayList<FahrstuhlGraphic> grafik;
+    private ArrayList<Integer> fahrliste;
     
     public Fahrstuhl(int x) {
         this.max=7;
@@ -124,6 +125,14 @@ public class Fahrstuhl {
         //Befehl für Grafik ?
         
     }
+    
+    public void fahre(int e){
+        etage = e;
+        for (int i= 0; i<inFahrstuhl.size(); i++){
+            inFahrstuhl.get(i).teleport(e);
+        }
+    }
+    
     public String EWandel(int etage) {
         switch(etage) {
             case 0:
@@ -196,5 +205,9 @@ public class Fahrstuhl {
             open = true;
             grafik.get(etage).oeffneTuer();
         }
+    }
+    
+    public void personWillEinsteigen(Mitarbeiter p){
+        
     }
 }

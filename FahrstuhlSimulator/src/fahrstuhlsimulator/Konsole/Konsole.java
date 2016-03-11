@@ -298,7 +298,7 @@ public class Konsole {
                 schreibeAktion("door: open");
                 break;
             case "goup":
-                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahren(Integer.parseInt(commandArray[2]));
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahre(Integer.parseInt(commandArray[2]));
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");
