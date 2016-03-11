@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Mitarbeiter;
 
+import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
 import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
@@ -95,7 +96,7 @@ public class Mitarbeiter{
     
     private void callFahrstuhl(int etage)
     {
-        
+        FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
         
     }
 }

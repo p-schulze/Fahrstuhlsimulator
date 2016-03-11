@@ -15,6 +15,7 @@ import fahrstuhlsimulator.Misc.PaneScroller;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
+import fahrstuhlsimulator.testumgebung.RightClickMenu.RightClickMenu;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -38,6 +39,7 @@ public class TestPanel extends JPanel{
     public static ArrayList<EtageGraphic> etageGraphics = new ArrayList();
     
     private MouseController mC;
+    public static RightClickMenu rightClickMenu;
     
     public static boolean X_RAY = false;
     
@@ -51,6 +53,11 @@ public class TestPanel extends JPanel{
         this.addMouseMotionListener(mC);
         this.addMouseListener(mC);
         erstelleTestPerson();
+        
+        rightClickMenu = new RightClickMenu();
+        
+        add(rightClickMenu);
+        
         repaint();
         
     }
@@ -125,21 +132,6 @@ public class TestPanel extends JPanel{
         g2d.setColor(Color.BLACK);
         g2d.setPaintMode();
         
-        if(mC.rCM_panel.visible)
-        {
-            g2d.fillRect(mC.rCM_panel.x, mC.rCM_panel.y, mC.rCM_panel.width, mC.rCM_panel.height);
-            g2d.setColor(Color.WHITE);
-            g2d.fillRect(mC.rCM_panel.x+2, mC.rCM_panel.y+2, mC.rCM_panel.width-4, mC.rCM_panel.height-4);
-            
-            g2d.setColor(Color.LIGHT_GRAY);
-            g2d.fill3DRect(mC.rCM_panel.btn.relative_x +mC.rCM_panel.x, mC.rCM_panel.btn.relative_y +mC.rCM_panel.y, mC.rCM_panel.btn.width, mC.rCM_panel.btn.height, true);
-            g2d.setColor(Color.BLACK);
-            g2d.drawString(mC.rCM_panel.btn.text, mC.rCM_panel.btn.relative_x +mC.rCM_panel.x+30, mC.rCM_panel.btn.relative_y +mC.rCM_panel.y+15);
-            //g2d.drawRect(632, 906,100 , 200);
-        }
-        
-        
-        
         if(X_RAY)
         {
             g2d.setColor(Color.cyan);
@@ -155,8 +147,19 @@ public class TestPanel extends JPanel{
     {
         
         MitarbeiterGraphic mitarbeiterGraphic = mitarbeiter.getGraphic();
+        g2d.setColor(Color.BLACK);
+        if(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter))
+        {
+            g2d.setColor(Color.GREEN);
+            g2d.setXORMode(Color.red);
+            g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), mitarbeiterGraphic.getKoerper().getWidth(), mitarbeiterGraphic.getKoerper().getHeight());
+            g2d.setPaintMode();
+        }
         if(!X_RAY)
         {
+            
+            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+15);
+            g2d.setColor(Color.BLACK);
             
             AffineTransform tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts().getWinkel(), mitarbeiterGraphic.getArm_rechts().getWidth()/2, mitarbeiterGraphic.getArm_rechts().getHeight()/2);
             AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
@@ -166,7 +169,6 @@ public class TestPanel extends JPanel{
             op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
             g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             
-            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+15);
             g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
             
             tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links().getWinkel(), mitarbeiterGraphic.getArm_links().getWidth()/2, mitarbeiterGraphic.getArm_links().getHeight()/2);
@@ -206,7 +208,8 @@ public class TestPanel extends JPanel{
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+12, mitarbeiterGraphic.getY_Pos()+28, 9, 18);
             //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
             g2d.drawRect(mitarbeiterGraphic.getX_Pos()+13, mitarbeiterGraphic.getY_Pos()+18, 8, 10);
-            g2d.setColor(Color.red);
+            
+            g2d.setColor(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter)?Color.GREEN:Color.red);
             g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
             g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
             g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
@@ -252,6 +255,13 @@ public class TestPanel extends JPanel{
         {
             g2d.drawRect(0, etageGraphic.getY_Pos(), etageGraphic.getImg().getWidth(), etageGraphic.getImg().getHeight());
         }
+    }
+    
+    /**
+     * @return the mC
+     */
+    public MouseController getmC() {
+        return mC;
     }
     
 }

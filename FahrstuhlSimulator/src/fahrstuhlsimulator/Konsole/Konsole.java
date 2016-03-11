@@ -87,7 +87,7 @@ public class Konsole {
      * Die Funktion schreibt einen String in das JTextArea.
      * @param command der Befehl
      */
-    protected void schreibe(String command){
+    public void schreibe(String command){
        
         masterArea.append(">"+ command + "\n");
     }
@@ -249,7 +249,7 @@ public class Konsole {
      * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
      * @param command Eingabebefehl des Users
      */ 
-    private void analyze(String command){
+    public void analyze(String command){
         String[] commandArray = command.split("\\s+");
         
         switch (commandArray[0]) {

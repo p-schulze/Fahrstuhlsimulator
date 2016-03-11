@@ -9,6 +9,7 @@ import fahrstuhlsimulator.Misc.MouseController;
 import fahrstuhlsimulator.Misc.PaneScroller;
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 /**
@@ -33,7 +34,9 @@ public class TestFenster extends JFrame
         
         panel = new TestPanel();
         
+        
         this.addKeyListener(new PaneScroller(panel));
+        
         
         add(panel);
         
