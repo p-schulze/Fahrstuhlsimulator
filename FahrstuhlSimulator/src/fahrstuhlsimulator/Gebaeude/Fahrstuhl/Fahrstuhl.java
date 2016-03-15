@@ -15,20 +15,38 @@ import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
  */
 
 public class Fahrstuhl {
+    /**
+     * Variable ob eine Tür des Fahrstuhles geöffnet ist.
+     */
     private boolean open;
+    
+    /**
+     * Aktuelle Etage wo sich der Fahrstuhl befindet.
+     */
     private int etage;
-    private final int max;
-    private final int min;
-    private int faehrt; //0=fährt nicht, 1=hoch, 2=runter
+    
+   /**
+    * In dieser Liste befinden sich alle Pesonen, welche sich momentan im Fahrstuhl befinden.
+    */
     private ArrayList<Mitarbeiter> inFahrstuhl;
+    
+    /**
+     * In dieser Liste befinden sich alle Grafik-Objekte des Fahrstuhles.
+     */
     private final ArrayList<FahrstuhlGraphic> grafik;
+    
+    /**
+     * In der Fahrliste befinden sich alle Ziele, die der Farstuhl nacheinander abarbeiten soll.
+     */
     private ArrayList<Integer> fahrliste;
     
+    /**
+     * Konstrukor des Fahrstuhles. Ein neuer (von max. 3) Fahrstuhl wird erstellt. Der Farshtuhl erhällt seine Grafiken automatisch.
+     * @param x X-Koordinate des Fahrstuhles, an der er sich befinden soll.
+     */
     public Fahrstuhl(int x) {
-        this.max=7;
-        this.min=1;
-        this.etage=1;
-        this.faehrt=0;
+       
+        this.etage=1; 
         this.inFahrstuhl = new ArrayList<Mitarbeiter>();
         this.grafik = new ArrayList<FahrstuhlGraphic>();
         this.fahrliste = new ArrayList();
@@ -40,16 +58,30 @@ public class Fahrstuhl {
         }
     }
     
+    /**
+     * Die Funktionn erhält eine neue Etage. Diese Etage wird dann zur Fahrliste hinzugefügt.
+     * @param e eine neue Etage, welche zur Fahrliste hinzugefügt werden soll.
+     */
     public void addEtageToFahrliste(int e){
         fahrliste.add(e);
         
     }
     
+    /**
+     * Die Funktion überprüft, ob ein Mitarbeiter die Zugangsberechtigung zu einer Etage besitzt.
+     * @param person ein Mitarbeiter
+     * @param etage die Zieletage
+     * @return Erlaubnis bzw. Verweigerung, ob der Mitarbeiter in diese Etage fahren darf
+     */
     public boolean pruefeE(Mitarbeiter person, String etage) {
         return person.getErlaubteEtagen().contains(etage);        
     }
     
-     public void fahren(int e){
+    /**
+     * Der Fahrstuhl fährt direkt mit den Personen im Fahrstuhl in die Zieletage.
+     * @param e Zieletage
+     */
+    public void fahren(int e){
         if(!open){
          etage = e;
         for (int i= 0; i<inFahrstuhl.size(); i++){
@@ -58,6 +90,9 @@ public class Fahrstuhl {
         }
     }
     
+    /**
+     * Die Funktion lässt den Fahrstuhl mit den darin enthaltenen Personen in die nächste Etage der Fahrliste fahren.
+     */
     public void fahre(){
         if(!open){
         etage = this.fahrliste.get(0);
