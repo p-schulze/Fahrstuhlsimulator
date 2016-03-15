@@ -19,7 +19,7 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 public class Mitarbeiter{
     private String name;
     private int aktuelleEtage;
-    private MitarbeiterGraphic graphic;
+    public MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     public int zieletage;
     
