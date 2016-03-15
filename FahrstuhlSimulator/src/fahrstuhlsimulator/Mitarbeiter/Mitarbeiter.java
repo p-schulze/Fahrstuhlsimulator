@@ -16,12 +16,14 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  *
  * @author becksusanna
  */
-public class Mitarbeiter{
+public class Mitarbeiter implements MitarbeiterMoveListener{
     private String name;
     private int aktuelleEtage;
     public MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     public int zieletage;
+    
+    private boolean wartetAufFahrstuhl = false;
     
     protected Mitarbeiter(String name) {
         this.name=name;
@@ -98,8 +100,37 @@ public class Mitarbeiter{
     
     private void callFahrstuhl(int etage)
     {
-        FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
+        System.out.println(this.graphic.getX_Pos());
+        int dis = 0;
+        if(this.graphic.getX_Pos() > 368)
+        {  
+            if(this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = graphic.getX_Pos() - 368;
+        }else if(this.graphic.getX_Pos() < 368)
+        {
+            if(!this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = 368 - graphic.getX_Pos();
+        }
         
+        this.graphic.moveDistanceWithAnimation(dis);
+        //FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
+        
+    }
+
+    @Override
+    public void onPosition(MitarbeiterGraphic mG)
+    {
+        if(mG == this.graphic)
+        {
+            FahrstuhlSimulator.konsole.analyze("fahredirekt 0 " +this.graphic.getEtage());
+            wartetAufFahrstuhl = true;
+        }
     }
 
     /**

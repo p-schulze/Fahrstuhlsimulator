@@ -55,6 +55,7 @@ public class Fahrstuhl {
         for (int i= 0; i<inFahrstuhl.size(); i++){
             inFahrstuhl.get(i).teleport(etage);
         }
+        this.open();
         }
     }
     
