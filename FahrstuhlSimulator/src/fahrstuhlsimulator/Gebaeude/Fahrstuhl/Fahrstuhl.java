@@ -104,6 +104,11 @@ public class Fahrstuhl {
         this.open();
     }}
     
+    /**
+     * Die Funktion wandelt eine Etage in den Bereich (Thema) der Etage.
+     * @param etage (int)
+     * @return String
+     */
     public String EWandel(int etage) {
         switch(etage) {
             case 0:
@@ -127,6 +132,12 @@ public class Fahrstuhl {
                 //"IT", "Tresor"
         }
     }
+    
+     /**
+     * Die Funktion wandelt eine Etage in den Bereich (Thema) der Etage.
+     * @param etage (String)
+     * @return int
+     */
     public int EWandel(String etage) {
         switch(etage) {
             case "EG":
@@ -148,21 +159,48 @@ public class Fahrstuhl {
                 //"IT", "Tresor"
         }
     }
+    
+    /**
+     * Der übergebene Mitarbeiter steigt in den Fahrstuhl ein und wird unsichtbar.
+     * @param p ein Mitarbeiter 
+     */
     public void einsteigen(Mitarbeiter p) {
         inFahrstuhl.add(p);
         p.graphic.setVisible(false);
     }
+    
+    /**
+     * Der übergebene Mitarbeiter steigt aus den den Fahrstuhl aus und wird sichtbar.
+     * @param p ein Mitarbeiter 
+     */
     public void aussteigen(Mitarbeiter p) {
         this.inFahrstuhl.remove(p);
         p.graphic.setVisible(true);
     }
+    
+    /**
+     * Die Funktion gibt die aktuelle Etage in der sich der Fahrstuhl befindet zurück.
+     * @return aktuelle Etage (int)
+     */
     public int getEtage() {return etage;}
+    
+    /**
+     * Die Funktion gibt eine Liste mit allen Grafikelementen des Farstuhles zurück.
+     * @return Grafikliste des Fahrstuhles
+     */
     public ArrayList<FahrstuhlGraphic> getFahrstuhlGrafik(){return grafik;}
+
+    /**
+     * Die Funktion gibt eine Liste zurück, in welcher sich alle Personen befinden, welche sich auch gerade im Fahrstuhl befinden.
+     * @return Liste der Personen, welche sich im Fahrstuhl befinden
+     */
     public ArrayList<Mitarbeiter> getImFS() {return this.inFahrstuhl;}
+    
     
     public boolean getOpen(){
         return open;
     }
+    
     
     public void close(){
         if(open){
@@ -170,6 +208,7 @@ public class Fahrstuhl {
             grafik.get(etage).schliesseTuer();
         }
     }
+    
     
     public void open(){
         if(!open){
