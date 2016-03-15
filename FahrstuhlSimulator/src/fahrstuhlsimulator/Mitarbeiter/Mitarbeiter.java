@@ -138,6 +138,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
             if(mG == this.graphic)
             {
                 FahrstuhlSimulator.konsole.analyze("fahredirekt 0 " +this.graphic.getEtage());
+                ruftFahrstuhl = false;
                 wartetAufFahrstuhl = true;
             }
         }
@@ -148,13 +149,16 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
     {
         if(wartetAufFahrstuhl && fG.getEtage() == this.graphic.getEtage())
         {
+            wartetAufFahrstuhl = false;
             FahrstuhlSimulator.konsole.analyze("einsteigen 0 " +FahrstuhlSimulator.konsole.getMitarbeiterID(this) +" "+zieletage);
+            
         }
     }
 
     @Override
-    public void closed(FahrstuhlGraphic fG) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void closed(FahrstuhlGraphic fG) 
+    {
+        
     }
 
     /**

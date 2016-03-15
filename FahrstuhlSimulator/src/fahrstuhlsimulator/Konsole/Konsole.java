@@ -303,6 +303,7 @@ public class Konsole {
                 schreibeAktion("door: open");
                 break;
             case "goup":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahre();
                 break;
              case "fahredirekt":
