@@ -197,12 +197,17 @@ public class Fahrstuhl {
      */
     public ArrayList<Mitarbeiter> getImFS() {return this.inFahrstuhl;}
     
-    
+    /**
+     * Die Funktion gibt zurück, ob der Fahrstuhl geöffnet ist oder nicht.
+     * @return True oder False, je nachdem ob der Fahrstuhl geöffnet ist oder nicht 
+     */
     public boolean getOpen(){
         return open;
     }
     
-    
+    /**
+     * Die Funktion schließt die offene Tür des Fahrstuhles, falls diese geöffnet sein sollte.
+     */
     public void close(){
         if(open){
             open = false;
@@ -210,7 +215,10 @@ public class Fahrstuhl {
         }
     }
     
-    
+    /**
+     * Die Funktion öffnet die Fahrstuhltür, falls diese geschlossenen sein sollte. 
+     * Innerhalb der Methode wird die "Aussteigen"-Methoden aller Personen, welche sich in diesem Fahrstuhl befinden, aufgerufen.
+     */
     public void open(){
         if(!open){
             open = true;
