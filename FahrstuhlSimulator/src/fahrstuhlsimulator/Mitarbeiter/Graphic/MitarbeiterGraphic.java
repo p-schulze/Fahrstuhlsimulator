@@ -22,7 +22,7 @@ public class MitarbeiterGraphic
     private MitarbeiterAnimator animator;
     private boolean flipped = false;
     private String gliederPfad;
-    private boolean vis = false;
+    private boolean vis = true;
     //<editor-fold defaultstate="collapsed" desc="BufferedImages fuer KoerperGlieder">
     private BufferedImage koerper;
     private BufferedImage bein_links;
