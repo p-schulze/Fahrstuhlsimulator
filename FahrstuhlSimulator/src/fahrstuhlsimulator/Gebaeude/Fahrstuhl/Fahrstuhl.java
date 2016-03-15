@@ -39,7 +39,7 @@ public class Fahrstuhl {
     /**
      * In der Fahrliste befinden sich alle Ziele, die der Farstuhl nacheinander abarbeiten soll.
      */
-    private ArrayList<Integer> fahrliste;
+    public ArrayList<Integer> fahrliste;
     
     /**
      * Konstrukor des Fahrstuhles. Ein neuer (von max. 3) Fahrstuhl wird erstellt. Der Farshtuhl erhällt seine Grafiken automatisch.
@@ -90,6 +90,11 @@ public class Fahrstuhl {
         }
         this.open();
         }
+        else
+        {
+            System.out.println("Test");
+            FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
+        }
     }
     
     /**
@@ -97,12 +102,33 @@ public class Fahrstuhl {
      */
     public void fahre(){
         if(!open){
+        
+        // delay
+        ArrayList<String> tasks1 = new ArrayList();
+        ArrayList<Object> objects1 = new ArrayList();
+        
+        long aktTime = System.currentTimeMillis();
+        if(fahrliste.get(0) > etage)
+        {
+            //System.out.println("Osfipuspaospoiad");
+            aktTime += (((long)fahrliste.get(0))- (long)etage)*((long)1000);
+        }
+        else
+        {
+            System.out.println("Osfipuspaospoiad");
+            aktTime += (((long)etage) - ((long)fahrliste.get(0)))*((long)1000);
+        }
+        System.out.println(aktTime);
+        tasks1.add("Fahrstuhl.delay:delay("+aktTime+")");
+        objects1.add(this);
+        FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
+        
         etage = this.fahrliste.get(0);
         for (int i= 0; i<inFahrstuhl.size(); i++){
             inFahrstuhl.get(i).teleport(etage);
         }
-        this.fahrliste.remove(0);
-        this.open();
+        //this.fahrliste.remove(0);
+        //this.open();
     }}
     
     /**
