@@ -113,8 +113,14 @@ public class Fahrstuhl {
                 //"IT", "Tresor"
         }
     }
-    public void einsteigen(Mitarbeiter p) {inFahrstuhl.add(p);}
-    public void aussteigen(Mitarbeiter p) {this.inFahrstuhl.remove(p);}
+    public void einsteigen(Mitarbeiter p) {
+        inFahrstuhl.add(p);
+        p.graphic.setVisible(false);
+    }
+    public void aussteigen(Mitarbeiter p) {
+        this.inFahrstuhl.remove(p);
+        p.graphic.setVisible(true);
+    }
     public int getEtage() {return etage;}
     public ArrayList<FahrstuhlGraphic> getFahrstuhlGrafik(){return grafik;}
     public ArrayList<Mitarbeiter> getImFS() {return this.inFahrstuhl;}
