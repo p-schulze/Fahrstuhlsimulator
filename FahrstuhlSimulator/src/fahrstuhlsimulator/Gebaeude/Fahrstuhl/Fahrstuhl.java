@@ -5,6 +5,7 @@
  */
 package fahrstuhlsimulator.Gebaeude.Fahrstuhl;
 
+import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;

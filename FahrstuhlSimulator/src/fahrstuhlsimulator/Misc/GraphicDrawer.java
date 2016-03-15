@@ -246,7 +246,21 @@ public class GraphicDrawer implements Runnable {
                         }
                         else if(taskList_taskSplit[0].equalsIgnoreCase("Fahrstuhl"))
                         {
-                            if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
+                            if(taskList_taskSplit[1].equalsIgnoreCase("delay"))
+                            {
+                                String[] parameter = taskList_taskSplit[2].split(":")[1].split("[(),]");
+                                FahrstuhlGraphic fahrstuhl = (FahrstuhlGraphic) temp_taskList_object;
+                                int endSystemTime = 0;
+                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                {
+                                    //System.out.println(parameter[i_parameter]);
+                                    if(parameter[i_parameter].equalsIgnoreCase("speed"))
+                                    {
+                                        endSystemTime = Integer.parseInt(parameter[i_parameter+1]);
+                                    }
+                                }
+                            }
+                            else if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
                             {
                                 if(taskList_taskSplit[2].equalsIgnoreCase("links"))
                                 {
