@@ -50,21 +50,23 @@ public class Fahrstuhl {
     }
     
      public void fahren(int e){
-        etage =  e;
+        if(!open){
+         etage = e;
         for (int i= 0; i<inFahrstuhl.size(); i++){
             inFahrstuhl.get(i).teleport(etage);
         }
-        
+        }
     }
     
     public void fahre(){
+        if(!open){
         etage = this.fahrliste.get(0);
         for (int i= 0; i<inFahrstuhl.size(); i++){
             inFahrstuhl.get(i).teleport(etage);
         }
         this.fahrliste.remove(0);
         this.open();
-    }
+    }}
     
     public String EWandel(int etage) {
         switch(etage) {

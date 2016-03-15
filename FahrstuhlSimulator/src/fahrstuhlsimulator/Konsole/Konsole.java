@@ -201,6 +201,11 @@ public class Konsole {
         return mitarbeiter.get(id);  
     }
     
+    /**
+     * Die Funktion gibt die ID des übergebenen Mitarbteirs zurück.
+     * @param mitarbeiterObject der Mitarbeiter, von welchem die ID gesucht ist
+     * @return  Die ID des gesuchten Mitarbeiter (sein Index innerhalb der Liste)
+     */
     public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
         return mitarbeiter.indexOf(mitarbeiterObject);
     }
@@ -213,10 +218,19 @@ public class Konsole {
         return mitarbeiter;  
     }
     
+    /**
+     * Die Funktion gibt die Liste aller Fahrstüle zurück.
+     * @return Liste, in welcher sich alle Fahrstühle befinden.
+     */
     public ArrayList<Fahrstuhl> getFahrstuhlListe(){
         return farhstuehle;  
     }
     
+    /**
+     * Die Funktion ruft die Einsteigen-Funtkion des Fahrstuhles auf und übergibt die Person, welche dann zu Personenliste des Fahrstuhles hinzugefügt wird.
+     * @param p ein Mitarbeiter, der den Befehl ausführen soll
+     * @param fahrstuhl  der Fahrstuhl, in welchen der Mitarbeiter einsteigen soll
+     */
     public void einsteigen(Mitarbeiter p, int fahrstuhl){
         farhstuehle.get(fahrstuhl).einsteigen(p);
     }
@@ -240,15 +254,6 @@ public class Konsole {
         
     } 
     
-    protected void startRandom(int anzahl){
-        int pause = 60/anzahl;
-        int indexStart = mitarbeiter.size()-1;
-        
-        for(int i=0; i<anzahl; i++){
-            addPerson("randomPerson", "Koch");
-        }
-    } 
-    
     /**
      * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
      * @param command Eingabebefehl des Users
@@ -265,7 +270,6 @@ public class Konsole {
                 schreibeAktion("Fahrstuhl wird erstellt.");
                 addFahrstuhl();}
                 else{schreibeAktion("Maximale Anzahl erreicht.");}
-                
                 break;
             case "move":
                 schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
@@ -289,9 +293,6 @@ public class Konsole {
             case "xray":
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY = !fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY;
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.repaint();
-                break;
-            case "random":
-                startRandom(Integer.parseInt(commandArray[1]));
                 break;
             case "close":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
