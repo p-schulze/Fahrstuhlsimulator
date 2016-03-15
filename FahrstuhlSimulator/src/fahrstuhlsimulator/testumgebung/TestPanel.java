@@ -32,6 +32,7 @@ import java.awt.image.AffineTransformOp;
  *
  * @author Sebastian
  */
+
 public class TestPanel extends JPanel{
     
     public static ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();

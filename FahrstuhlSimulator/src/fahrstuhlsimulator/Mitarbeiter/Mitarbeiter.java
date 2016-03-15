@@ -8,6 +8,8 @@ package fahrstuhlsimulator.Mitarbeiter;
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.FahrstuhlOpenListener;
 import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
@@ -16,12 +18,15 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  *
  * @author becksusanna
  */
-public class Mitarbeiter{
+public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListener{
     private String name;
     private int aktuelleEtage;
     public MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     public int zieletage;
+    
+    private boolean wartetAufFahrstuhl = false;
+    private boolean ruftFahrstuhl = false;
     
     protected Mitarbeiter(String name) {
         this.name=name;
@@ -30,6 +35,8 @@ public class Mitarbeiter{
         graphic = new MitarbeiterGraphic(RandomMitarbeiterGenerator.getArmeImgID(),RandomMitarbeiterGenerator.getBeineImgID(),RandomMitarbeiterGenerator.getKoerperImgID(),1-0,1,false);
         //this.erlaubteEtagen=erlaubteEtagen;
         this.aktuelleEtage=1;
+        FahrstuhlSimulator.graphicDrawer.addMitarbeiterMoveListener(this);
+        FahrstuhlSimulator.graphicDrawer.addFahrstuhlOpenListenerList(this);
     }
     
     public String getName() {
@@ -93,13 +100,61 @@ public class Mitarbeiter{
     
     public void goTo(int etage)
     {
+        zieletage = etage;
+        ruftFahrstuhl = true;
         callFahrstuhl(etage);
     }
     
     private void callFahrstuhl(int etage)
     {
-        FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
+        System.out.println(this.graphic.getX_Pos());
+        int dis = 0;
+        if(this.graphic.getX_Pos() > 368)
+        {  
+            if(this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = graphic.getX_Pos() - 368;
+        }else if(this.graphic.getX_Pos() < 368)
+        {
+            if(!this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = 368 - graphic.getX_Pos();
+        }
         
+        this.graphic.moveDistanceWithAnimation(dis);
+        //FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
+        
+    }
+
+    @Override
+    public void onPosition(MitarbeiterGraphic mG)
+    {
+        if(ruftFahrstuhl)
+        {
+            if(mG == this.graphic)
+            {
+                FahrstuhlSimulator.konsole.analyze("fahredirekt 0 " +this.graphic.getEtage());
+                wartetAufFahrstuhl = true;
+            }
+        }
+    }
+
+    @Override
+    public void opened(FahrstuhlGraphic fG) 
+    {
+        if(wartetAufFahrstuhl && fG.getEtage() == this.graphic.getEtage())
+        {
+            FahrstuhlSimulator.konsole.analyze("einsteigen 0 " +FahrstuhlSimulator.konsole.getMitarbeiterID(this) +" "+zieletage);
+        }
+    }
+
+    @Override
+    public void closed(FahrstuhlGraphic fG) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
