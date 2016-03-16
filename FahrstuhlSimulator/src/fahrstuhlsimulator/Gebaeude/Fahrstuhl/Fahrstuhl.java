@@ -64,6 +64,7 @@ public class Fahrstuhl {
      * @param e eine neue Etage, welche zur Fahrliste hinzugefügt werden soll.
      */
     public void addEtageToFahrliste(int e){
+        System.out.println("etage: "+e);
         fahrliste.add(e);
         
     }

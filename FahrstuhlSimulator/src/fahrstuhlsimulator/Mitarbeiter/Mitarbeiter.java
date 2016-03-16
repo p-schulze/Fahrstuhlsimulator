@@ -139,7 +139,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
             {
                 ruftFahrstuhl = false;
                 wartetAufFahrstuhl = true;
-                FahrstuhlSimulator.konsole.analyze("fahredirekt 0 " +this.graphic.getEtage());
+                FahrstuhlSimulator.konsole.analyze("call 0 " +FahrstuhlSimulator.konsole.getMitarbeiterID(this));
             }
         }
     }
