@@ -8,6 +8,7 @@ package fahrstuhlsimulator.Gebaeude.Fahrstuhl;
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.FahrlisteOrganizar;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 
 /**
@@ -53,7 +54,6 @@ public class Fahrstuhl {
         this.fahrliste = new ArrayList();
          
         for (int i = 0; i<8; i++) {
-            //System.out.println(grafik);
             FahrstuhlGraphic element = new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1",x,i,false);
             this.grafik.add(element);
         }
@@ -111,6 +111,10 @@ public class Fahrstuhl {
      * Die Funktion lässt den Fahrstuhl mit den darin enthaltenen Personen in die nächste Etage der Fahrliste fahren.
      */
     public void fahre(){
+        System.out.println("Alte Fahrliste: "+fahrliste);
+        //Ordnen der Fahrliste
+        //temp:
+        fahrliste = FahrlisteOrganizar.FahrlisteOrdnen(fahrliste);
         if(!open){
         
         // delay
@@ -266,7 +270,6 @@ public class Fahrstuhl {
             grafik.get(etage).oeffneTuer();
             int iTemp = 0;
             for (int i= 0; i<inFahrstuhl.size(); i = 0){
-                System.out.println("Fahrgast Nr: "+ i);
                 if(inFahrstuhl.get(i).zieletage == etage){
                     this.aussteigen(inFahrstuhl.get(i));
                 }
