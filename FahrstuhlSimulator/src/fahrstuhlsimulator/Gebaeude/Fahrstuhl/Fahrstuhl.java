@@ -264,10 +264,19 @@ public class Fahrstuhl {
         if(!open){
             open = true;
             grafik.get(etage).oeffneTuer();
+            int iTemp = 0;
             for (int i= 0; i<inFahrstuhl.size(); i = 0){
                 System.out.println("Fahrgast Nr: "+ i);
                 if(inFahrstuhl.get(i).zieletage == etage){
                     this.aussteigen(inFahrstuhl.get(i));
+                }
+                else
+                {
+                    iTemp++;
+                }
+                if(iTemp == inFahrstuhl.size())
+                {
+                    break;
                 }
             }
         }
