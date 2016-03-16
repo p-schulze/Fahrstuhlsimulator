@@ -65,7 +65,17 @@ public class Fahrstuhl {
      */
     public void addEtageToFahrliste(int e){
         System.out.println("etage: "+e);
-        fahrliste.add(e);
+        if(open && etage == e) {
+            FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(this.grafik.get(etage));
+        }
+        else if (etage != e)
+        {
+            fahrliste.add(e);
+        }
+        else if(!open && etage == e)
+        {
+            this.open();
+        }
         
     }
     

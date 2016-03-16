@@ -96,6 +96,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+        this.setAktEtage(etage);
     }
     
     public void goTo(int etage)
