@@ -25,7 +25,7 @@ public class Fahrstuhl {
     /**
      * Aktuelle Etage wo sich der Fahrstuhl befindet.
      */
-    private int etage;
+    public int etage;
     
    /**
     * In dieser Liste befinden sich alle Pesonen, welche sich momentan im Fahrstuhl befinden.

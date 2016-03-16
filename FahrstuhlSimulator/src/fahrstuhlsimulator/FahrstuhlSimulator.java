@@ -1,5 +1,7 @@
 package fahrstuhlsimulator;
 
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlBrain;
 import fahrstuhlsimulator.Konsole.Konsole;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.ImageLoader;
@@ -22,13 +24,24 @@ public class FahrstuhlSimulator {
         graphicDrawer_th.start();
         ImageLoader.loadImages();
 
-        konsole = new fahrstuhlsimulator.Konsole.Konsole();
-        konsole.kStart();
+        //konsole = new fahrstuhlsimulator.Konsole.Konsole();
+        //konsole.kStart();
         
-        new fahrstuhlsimulator.testumgebung.TestFenster();
+      //  new fahrstuhlsimulator.testumgebung.TestFenster();
 
+        FahrstuhlBrain brain = new FahrstuhlBrain();
+        Fahrstuhl fahrstuhl = new Fahrstuhl(3);
         
-
+        fahrstuhl.etage = 10;
+        fahrstuhl.fahrliste.add(8);
+        fahrstuhl.fahrliste.add(6);
+        fahrstuhl.fahrliste.add(7);
+        fahrstuhl.fahrliste.add(9);
+        
+        brain.sortiertEinfuegen(fahrstuhl, 2);
+       
+       
+        
         
         
     }
