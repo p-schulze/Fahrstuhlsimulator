@@ -70,7 +70,7 @@ public class Fahrstuhl {
         }
         else if (etage != e)
         {
-            fahrliste.add(e);
+            FahrstuhlSimulator.konsole.fBrain.sortiertEinfuegen(this, e);
         }
         else if(!open && etage == e)
         {
@@ -266,22 +266,24 @@ public class Fahrstuhl {
      */
     public void open(){
         if(!open){
+            System.out.println("Anfang: "+inFahrstuhl);
             open = true;
             grafik.get(etage).oeffneTuer();
             int iTemp = 0;
-            for (int i= 0; i<inFahrstuhl.size(); i = 0){
-                if(inFahrstuhl.get(i).zieletage == etage){
-                    this.aussteigen(inFahrstuhl.get(i));
+            for (int i= 0; i<inFahrstuhl.size(); i = 0){ // while(iTemp != inFahrstuhl.size())
+                if(inFahrstuhl.get(iTemp).zieletage == etage){
+                    this.aussteigen(inFahrstuhl.get(iTemp));
                 }
                 else
                 {
                     iTemp++;
                 }
-                if(iTemp == inFahrstuhl.size())
+                if(iTemp == inFahrstuhl.size())   // 1 2
                 {
                     break;
                 }
             }
+            System.out.println("Am Ende: "+inFahrstuhl);
         }
     }
 }

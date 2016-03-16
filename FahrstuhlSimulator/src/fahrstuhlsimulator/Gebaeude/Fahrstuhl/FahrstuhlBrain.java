@@ -29,8 +29,8 @@ public class FahrstuhlBrain {
     
     public void sortiertEinfuegen(Fahrstuhl fahrstuhl, int ziel){
         
-        System.out.println("Fahrliste: "+fahrstuhl.fahrliste);
-        System.out.println("Ziel: "+ziel);
+        //System.out.println("Fahrliste: "+fahrstuhl.fahrliste);
+        //System.out.println("Ziel: "+ziel);
         
         boolean eingetragen = false;
         
@@ -39,7 +39,7 @@ public class FahrstuhlBrain {
                 //Fahrstuhl fährt nach oben
             
                 if(fahrstuhl.getEtage() < ziel){
-                    System.out.println("Fahrstuhl fährt nach oben und ist unter dem Ziel");
+                    //System.out.println("Fahrstuhl fährt nach oben und ist unter dem Ziel");
                     
                     for(int a = 0; a < fahrstuhl.fahrliste.size(); a++){
                     
@@ -62,7 +62,7 @@ public class FahrstuhlBrain {
                     
                     
                 } else{
-                    System.out.println("Fahrstuhl fährt nach oben und ist über dem Ziel");
+                    //System.out.println("Fahrstuhl fährt nach oben und ist über dem Ziel");
                     
                     for(int a = 0; a < fahrstuhl.fahrliste.size(); a++){
                         if(fahrstuhl.fahrliste.get(a) < ziel){
@@ -82,7 +82,7 @@ public class FahrstuhlBrain {
             
                 if(fahrstuhl.getEtage() < ziel){
                    
-                    System.out.println("Fahrstuhl fährt nach unten und ist unter dem Ziel");
+                    //System.out.println("Fahrstuhl fährt nach unten und ist unter dem Ziel");
                     
                     for(int a = 0; a < fahrstuhl.fahrliste.size(); a++){
                         if(fahrstuhl.fahrliste.get(a) > ziel){
@@ -100,7 +100,7 @@ public class FahrstuhlBrain {
                     
                 } else{
                    
-                    System.out.println("Fahrstuhl fährt nach unten und ist über dem Ziel");
+                    //System.out.println("Fahrstuhl fährt nach unten und ist über dem Ziel");
                       for(int a = 0; a < fahrstuhl.fahrliste.size(); a++){
                     
                         if(fahrstuhl.fahrliste.get(a) < ziel){
@@ -130,7 +130,7 @@ public class FahrstuhlBrain {
            fahrstuhl.fahrliste.add(ziel);
         }
         
-        System.out.println("Neue Fahrliste: "+fahrstuhl.fahrliste);
+        //System.out.println("Neue Fahrliste: "+fahrstuhl.fahrliste);
     
 }
 
