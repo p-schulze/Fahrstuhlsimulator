@@ -260,7 +260,6 @@ public class GraphicDrawer implements Runnable {
                                         endSystemTime = Long.parseLong(parameter[i_parameter+1]);
                                     }
                                 }
-                                System.out.println("dsosnkdlanskalnks: "+System.currentTimeMillis()+"       "+endSystemTime);
                                 if(System.currentTimeMillis() >= endSystemTime)
                                 {
                                     fahrstuhl.fahrliste.remove(0);
@@ -270,7 +269,7 @@ public class GraphicDrawer implements Runnable {
                                 }
                                 else
                                 {
-                                    System.out.println("wartet...");
+                                    
                                 }
                             }
                             else if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))

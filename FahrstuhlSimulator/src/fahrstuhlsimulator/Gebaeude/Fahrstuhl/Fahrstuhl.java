@@ -64,7 +64,7 @@ public class Fahrstuhl {
      * @param e eine neue Etage, welche zur Fahrliste hinzugefügt werden soll.
      */
     public void addEtageToFahrliste(int e){
-        System.out.println("etage: "+e);
+        
         if(open && etage == e) {
             FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(this.grafik.get(etage));
         }
@@ -103,7 +103,6 @@ public class Fahrstuhl {
         }
         else
         {
-            System.out.println("Test");
             FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
         }
     }
@@ -126,10 +125,9 @@ public class Fahrstuhl {
         }
         else
         {
-            System.out.println("Osfipuspaospoiad");
             aktTime += (((long)etage) - ((long)fahrliste.get(0)))*((long)1000);
         }
-        System.out.println(aktTime);
+        
         tasks1.add("Fahrstuhl.delay:delay("+aktTime+")");
         objects1.add(this);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
@@ -212,8 +210,14 @@ public class Fahrstuhl {
      * @param p ein Mitarbeiter 
      */
     public void aussteigen(Mitarbeiter p) {
+        System.out.println(p.getName()+ " Steigt aus");
         this.inFahrstuhl.remove(p);
         p.graphic.setVisible(true);
+        System.out.println("Im fahrstuhl sind noch: ");
+        for(Mitarbeiter mit: inFahrstuhl)
+        {
+            System.out.println("    --"+mit+" : zieletage:"+ mit.zieletage);
+        }
     }
     
     /**
@@ -260,7 +264,8 @@ public class Fahrstuhl {
         if(!open){
             open = true;
             grafik.get(etage).oeffneTuer();
-            for (int i= 0; i<inFahrstuhl.size(); i++){
+            for (int i= 0; i<inFahrstuhl.size(); i = 0){
+                System.out.println("Fahrgast Nr: "+ i);
                 if(inFahrstuhl.get(i).zieletage == etage){
                     this.aussteigen(inFahrstuhl.get(i));
                 }
