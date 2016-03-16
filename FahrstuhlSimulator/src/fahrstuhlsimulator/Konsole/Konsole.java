@@ -148,7 +148,6 @@ public class Konsole {
                 schreibeAktion("  Putzkolonne");
                 break;
             }
-        System.out.println(random);
         
     }
     
