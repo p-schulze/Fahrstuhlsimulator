@@ -260,17 +260,17 @@ public class GraphicDrawer implements Runnable {
                                         endSystemTime = Long.parseLong(parameter[i_parameter+1]);
                                     }
                                 }
-                                System.out.println("dsosnkdlanskalnks: "+System.currentTimeMillis()+"       "+endSystemTime);
                                 if(System.currentTimeMillis() >= endSystemTime)
                                 {
                                     fahrstuhl.fahrliste.remove(0);
                                     fahrstuhl.open();
                                     
                                     deleteTask(i);
+                                    System.out.println("Neue Fahrliste: "+fahrstuhl.fahrliste);
                                 }
                                 else
                                 {
-                                    System.out.println("wartet...");
+                                    
                                 }
                             }
                             else if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
@@ -397,7 +397,6 @@ public class GraphicDrawer implements Runnable {
     
     public void addFahrstuhlOpenListenerList(Object e)
     {
-        System.out.println("1");
         fahrstuhlOpenListenerList.add(e);
     }
     public void removeFahrstuhlOpenListenerList(Object e)
@@ -406,7 +405,6 @@ public class GraphicDrawer implements Runnable {
     }
     public void sendOpenedEvent(FahrstuhlGraphic fG)
     {
-        System.out.println(fahrstuhlOpenListenerList);
         for(Object fahrstuhlOpenListener:fahrstuhlOpenListenerList)
         {
             ((FahrstuhlOpenListener) fahrstuhlOpenListener).opened(fG);

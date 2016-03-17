@@ -8,6 +8,7 @@ package fahrstuhlsimulator.Gebaeude.Fahrstuhl;
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.FahrlisteOrganizar;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 
 /**
@@ -24,7 +25,7 @@ public class Fahrstuhl {
     /**
      * Aktuelle Etage wo sich der Fahrstuhl befindet.
      */
-    private int etage;
+    public int etage;
     
    /**
     * In dieser Liste befinden sich alle Pesonen, welche sich momentan im Fahrstuhl befinden.
@@ -53,7 +54,6 @@ public class Fahrstuhl {
         this.fahrliste = new ArrayList();
          
         for (int i = 0; i<8; i++) {
-            //System.out.println(grafik);
             FahrstuhlGraphic element = new FahrstuhlGraphic("img/Fahrstuhl/Fahrstuhl1",x,i,false);
             this.grafik.add(element);
         }
@@ -64,8 +64,18 @@ public class Fahrstuhl {
      * @param e eine neue Etage, welche zur Fahrliste hinzugefügt werden soll.
      */
     public void addEtageToFahrliste(int e){
-        System.out.println("etage: "+e);
-        fahrliste.add(e);
+        
+        if(open && etage == e) {
+            FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(this.grafik.get(etage));
+        }
+        else if (etage != e)
+        {
+            FahrstuhlSimulator.konsole.fBrain.sortiertEinfuegen(this, e);
+        }
+        else if(!open && etage == e)
+        {
+            this.open();
+        }
         
     }
     
@@ -93,7 +103,6 @@ public class Fahrstuhl {
         }
         else
         {
-            System.out.println("Test");
             FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
         }
     }
@@ -102,6 +111,10 @@ public class Fahrstuhl {
      * Die Funktion lässt den Fahrstuhl mit den darin enthaltenen Personen in die nächste Etage der Fahrliste fahren.
      */
     public void fahre(){
+        System.out.println("Alte Fahrliste: "+fahrliste);
+        //Ordnen der Fahrliste
+        //temp:
+        fahrliste = FahrlisteOrganizar.FahrlisteOrdnen(fahrliste);
         if(!open){
         
         // delay
@@ -116,10 +129,9 @@ public class Fahrstuhl {
         }
         else
         {
-            System.out.println("Osfipuspaospoiad");
             aktTime += (((long)etage) - ((long)fahrliste.get(0)))*((long)1000);
         }
-        System.out.println(aktTime);
+        
         tasks1.add("Fahrstuhl.delay:delay("+aktTime+")");
         objects1.add(this);
         FahrstuhlSimulator.graphicDrawer.addTask(tasks1, objects1);
@@ -202,8 +214,14 @@ public class Fahrstuhl {
      * @param p ein Mitarbeiter 
      */
     public void aussteigen(Mitarbeiter p) {
+        System.out.println(p.getName()+ " Steigt aus");
         this.inFahrstuhl.remove(p);
         p.graphic.setVisible(true);
+        System.out.println("Im fahrstuhl sind noch: ");
+        for(Mitarbeiter mit: inFahrstuhl)
+        {
+            System.out.println("    --"+mit+" : zieletage:"+ mit.zieletage);
+        }
     }
     
     /**
@@ -248,13 +266,24 @@ public class Fahrstuhl {
      */
     public void open(){
         if(!open){
+            System.out.println("Anfang: "+inFahrstuhl);
             open = true;
             grafik.get(etage).oeffneTuer();
-            for (int i= 0; i<inFahrstuhl.size(); i++){
-                if(inFahrstuhl.get(i).zieletage == etage){
-                    this.aussteigen(inFahrstuhl.get(i));
+            int iTemp = 0;
+            for (int i= 0; i<inFahrstuhl.size(); i = 0){ // while(iTemp != inFahrstuhl.size())
+                if(inFahrstuhl.get(iTemp).zieletage == etage){
+                    this.aussteigen(inFahrstuhl.get(iTemp));
+                }
+                else
+                {
+                    iTemp++;
+                }
+                if(iTemp == inFahrstuhl.size())   // 1 2
+                {
+                    break;
                 }
             }
+            System.out.println("Am Ende: "+inFahrstuhl);
         }
     }
 }

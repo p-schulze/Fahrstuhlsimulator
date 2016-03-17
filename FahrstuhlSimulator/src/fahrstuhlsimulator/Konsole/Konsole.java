@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Konsole;
 
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlBrain;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
@@ -34,11 +35,14 @@ public class Konsole {
     
     protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
+    public FahrstuhlBrain fBrain;
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
      */
     public void kStart (){
+        
+        fBrain = new FahrstuhlBrain();
         
         masterArea.setEditable(false);
         masterFrame.setMinimumSize(new Dimension(380, 175));
@@ -148,7 +152,6 @@ public class Konsole {
                 schreibeAktion("  Putzkolonne");
                 break;
             }
-        System.out.println(random);
         
     }
     
@@ -208,6 +211,10 @@ public class Konsole {
      */
     public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
         return mitarbeiter.indexOf(mitarbeiterObject);
+    }
+    
+    public int getFahrstuhlID(Fahrstuhl mitarbeiterObject){
+        return this.farhstuehle.indexOf(mitarbeiterObject);
     }
     
     /**

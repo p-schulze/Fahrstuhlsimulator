@@ -8,6 +8,7 @@ package fahrstuhlsimulator.Mitarbeiter;
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Misc.FahrstuhlOpenListener;
 import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
@@ -27,6 +28,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
     
     private boolean wartetAufFahrstuhl = false;
     private boolean ruftFahrstuhl = false;
+    private Fahrstuhl zubenutzenderFahrstuhl;
     
     protected Mitarbeiter(String name) {
         this.name=name;
@@ -96,33 +98,39 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+        this.setAktEtage(etage);
     }
     
     public void goTo(int etage)
     {
         zieletage = etage;
-        ruftFahrstuhl = true;
-        callFahrstuhl(etage);
+        if(!(this.aktuelleEtage == etage))
+        {
+            ruftFahrstuhl = true;
+            callFahrstuhl(etage);
+        }
     }
     
     private void callFahrstuhl(int etage)
     {
-        System.out.println(this.graphic.getX_Pos());
+        zubenutzenderFahrstuhl = FahrstuhlSimulator.konsole.fBrain.welcherFahrstuhl(FahrstuhlSimulator.konsole.getFahrstuhlListe(), etage);
+        FahrstuhlGraphic fahrstuhlG = zubenutzenderFahrstuhl.getFahrstuhlGrafik().get(this.aktuelleEtage);
+        
         int dis = 0;
-        if(this.graphic.getX_Pos() > 368)
+        if(this.graphic.getX_Pos() > fahrstuhlG.getX_Pos())
         {  
             if(this.graphic.getFlipped())
             {
                 this.graphic.umdrehen();
             }
-            dis = graphic.getX_Pos() - 368;
-        }else if(this.graphic.getX_Pos() < 368)
+            dis = graphic.getX_Pos() - fahrstuhlG.getX_Pos();
+        }else if(this.graphic.getX_Pos() < fahrstuhlG.getX_Pos())
         {
             if(!this.graphic.getFlipped())
             {
                 this.graphic.umdrehen();
             }
-            dis = 368 - graphic.getX_Pos();
+            dis = fahrstuhlG.getX_Pos() - graphic.getX_Pos();
         }
         
         this.graphic.moveDistanceWithAnimation(dis);
@@ -139,7 +147,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
             {
                 ruftFahrstuhl = false;
                 wartetAufFahrstuhl = true;
-                FahrstuhlSimulator.konsole.analyze("call 0 " +FahrstuhlSimulator.konsole.getMitarbeiterID(this));
+                FahrstuhlSimulator.konsole.analyze("call "+FahrstuhlSimulator.konsole.getFahrstuhlID(zubenutzenderFahrstuhl) +" "+FahrstuhlSimulator.konsole.getMitarbeiterID(this));
             }
         }
     }
@@ -150,7 +158,7 @@ public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListen
         if(wartetAufFahrstuhl && fG.getEtage() == this.graphic.getEtage())
         {
             wartetAufFahrstuhl = false;
-            FahrstuhlSimulator.konsole.analyze("einsteigen 0 " +FahrstuhlSimulator.konsole.getMitarbeiterID(this) +" "+zieletage);
+            FahrstuhlSimulator.konsole.analyze("einsteigen "+FahrstuhlSimulator.konsole.getFahrstuhlID(zubenutzenderFahrstuhl) +" " +FahrstuhlSimulator.konsole.getMitarbeiterID(this) +" "+zieletage);
             
         }
     }
