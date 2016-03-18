@@ -94,17 +94,25 @@ public class Fahrstuhl {
      * @param e Zieletage
      */
     public void fahren(int e){
-        if(!open){
-         etage = e;
-        for (int i= 0; i<inFahrstuhl.size(); i++){
-            inFahrstuhl.get(i).teleport(etage);
+        ArrayList<Integer> pruefe = new ArrayList<Integer>();
+        for (int i = 0; i<this.inFahrstuhl.size();i++) {
+            if(!pruefeE(this.inFahrstuhl.get(i),EWandel(e))) {
+                pruefe.add(1);
+            }
         }
-        this.open();
+        if (pruefe.isEmpty()) {
+            if(!open){
+                etage = e;
+                for (int i= 0; i<inFahrstuhl.size(); i++){
+                    inFahrstuhl.get(i).teleport(etage);
+                }
+                this.open();
+            }
+            else {
+                FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
+            }
         }
-        else
-        {
-            FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
-        }
+        else {System.out.println("Eine der Personen im Fahrstuhl darf diese Etage nicht betreten.");}
     }
     
     /**
