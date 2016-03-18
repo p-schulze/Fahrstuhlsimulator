@@ -330,9 +330,17 @@ public class Konsole {
             case "statistik":
                 //Objket von deiner Klasse erstellen
                 //Start Methode aufrufen und liste "mitarbeiter"
-                
                 break;
-            default:
+            case "start":
+                analyze("create");
+                analyze("create");
+                analyze("create");
+                analyze("add Koch Karl");
+                analyze("add Koch Peter");
+                analyze("add Koch Franz");
+                analyze("add Koch Heinz");
+                schreibeAktion("Startsimulation wird ausgeführt.");
+                default:
                 schreibeAktion("Error: Befehl nicht erkannt");
                 break;
             
