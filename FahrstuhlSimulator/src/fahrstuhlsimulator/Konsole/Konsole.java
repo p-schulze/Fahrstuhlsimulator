@@ -33,7 +33,7 @@ public class Konsole {
     protected final JTextField masterField = new JTextField();
     protected final JScrollPane masterPane = new JScrollPane(masterArea);
     
-    protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
+    protected static ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
     public FahrstuhlBrain fBrain;
     
@@ -221,7 +221,7 @@ public class Konsole {
      * Die Liste aller Mitarbeiter wird zurückgegeben.
      * @return alle Mitarbeiter
      */
-    public ArrayList<Mitarbeiter> getMitarbeiterListe(){
+    public static ArrayList<Mitarbeiter> getMitarbeiterListe(){
         return mitarbeiter;  
     }
     
@@ -328,8 +328,8 @@ public class Konsole {
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(mitarbeiter.get(Integer.parseInt(commandArray[2])).getAktEtage());
                 break;
             case "statistik":
-                //Objket von deiner Klasse erstellen
-                //Start Methode aufrufen und liste "mitarbeiter"
+                Statistik statistik = new Statistik();
+                statistik.run();
                 break;
             case "start":
                 analyze("create");

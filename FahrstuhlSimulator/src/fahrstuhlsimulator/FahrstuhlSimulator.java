@@ -3,6 +3,7 @@ package fahrstuhlsimulator;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlBrain;
 import fahrstuhlsimulator.Konsole.Konsole;
+import fahrstuhlsimulator.Konsole.Statistik2;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.ImageLoader;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
