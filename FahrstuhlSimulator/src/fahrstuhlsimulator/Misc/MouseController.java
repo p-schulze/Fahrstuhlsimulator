@@ -50,7 +50,6 @@ public class MouseController implements MouseMotionListener, MouseListener {
                 //if (mitarbeiter.getGraphic().getX_Pos() <= e.getX() && mitarbeiter.getGraphic().getX_Pos()+mitarbeiter.getGraphic().getKoerper().getWidth() >= e.getX() && mitarbeiter.getGraphic().getY_Pos() <= e.getY() && mitarbeiter.getGraphic().getY_Pos()+mitarbeiter.getGraphic().getKoerper().getHeight() >= e.getY()) 
                 if (auswahlFeld.x <= mitarbeiter.getGraphic().getX_Pos()+mitarbeiter.getGraphic().getKoerper().getWidth() && auswahlFeld.x+auswahlFeld.width >= mitarbeiter.getGraphic().getX_Pos() && auswahlFeld.y <= mitarbeiter.getGraphic().getY_Pos()+mitarbeiter.getGraphic().getKoerper().getHeight()&& auswahlFeld.y+auswahlFeld.height >= mitarbeiter.getGraphic().getY_Pos())
                 {
-                    System.out.println("JO!");
                     if(!getAusgewaehlteMitarbeiter().contains(mitarbeiter))
                     {
                         getAusgewaehlteMitarbeiter().add(mitarbeiter);
@@ -78,7 +77,6 @@ public class MouseController implements MouseMotionListener, MouseListener {
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == 3)
         {
-            System.out.println(e.getX());
             TestPanel.rightClickMenu.setLocation(e.getX(), e.getY());
             TestPanel.rightClickMenu.setVisible(true);
         }

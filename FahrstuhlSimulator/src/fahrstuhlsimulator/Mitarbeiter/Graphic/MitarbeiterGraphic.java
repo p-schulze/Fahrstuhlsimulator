@@ -22,6 +22,7 @@ public class MitarbeiterGraphic
     private MitarbeiterAnimator animator;
     private boolean flipped = false;
     private String gliederPfad;
+    private boolean vis = true;
     //<editor-fold defaultstate="collapsed" desc="BufferedImages fuer KoerperGlieder">
     private BufferedImage koerper;
     private BufferedImage bein_links;
@@ -75,6 +76,14 @@ public class MitarbeiterGraphic
     public MitarbeiterAnimator getAnimator()
     {
         return animator;
+    }
+    
+    public void setVisible(boolean vis)
+    {
+        this.vis = vis;
+    }
+    public boolean getVisible() {
+        return vis;
     }
     
     //<editor-fold defaultstate="collapsed" desc="Getter Methoden fuer KoerperGlieder">

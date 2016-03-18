@@ -32,6 +32,7 @@ import java.awt.image.AffineTransformOp;
  *
  * @author Sebastian
  */
+
 public class TestPanel extends JPanel{
     
     public static ArrayList<MitarbeiterGraphic> mitarbeiterGraphics = new ArrayList();
@@ -147,78 +148,82 @@ public class TestPanel extends JPanel{
     {
         
         MitarbeiterGraphic mitarbeiterGraphic = mitarbeiter.getGraphic();
-        g2d.setColor(Color.BLACK);
-        if(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter))
+        
+        if(mitarbeiterGraphic.getVisible())
         {
-            g2d.setColor(Color.GREEN);
-            g2d.setXORMode(Color.red);
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), mitarbeiterGraphic.getKoerper().getWidth(), mitarbeiterGraphic.getKoerper().getHeight());
-            g2d.setPaintMode();
-        }
-        if(!X_RAY)
-        {
-            
-            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+15);
             g2d.setColor(Color.BLACK);
-            
-            AffineTransform tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts().getWinkel(), mitarbeiterGraphic.getArm_rechts().getWidth()/2, mitarbeiterGraphic.getArm_rechts().getHeight()/2);
-            AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-            g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts().getWinkel(), mitarbeiterGraphic.getBein_rechts().getWidth()/2, mitarbeiterGraphic.getBein_rechts().getHeight()/2+16);
-            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-            g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-            g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links().getWinkel(), mitarbeiterGraphic.getArm_links().getWidth()/2, mitarbeiterGraphic.getArm_links().getHeight()/2);
-            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-            g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-            tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links().getWinkel(), mitarbeiterGraphic.getBein_links().getWidth()/2, mitarbeiterGraphic.getBein_links().getHeight()/2+16);
-            op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
-            g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
-            //g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
-//            g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
-//            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
-//            g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
-//            g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-            
-//            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
-//            g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
-        }
-        else
-        {
-            
-            g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
-            
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+12, mitarbeiterGraphic.getY_Pos()+28, 9, 18);
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+13, mitarbeiterGraphic.getY_Pos()+18, 8, 10);
-            
-            g2d.setColor(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter)?Color.GREEN:Color.red);
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
-            g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
-            g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
-            
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
-            //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
-            g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
-            g2d.setColor(Color.black);
+            if(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter))
+            {
+                g2d.setColor(Color.GREEN);
+                g2d.setXORMode(Color.red);
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), mitarbeiterGraphic.getKoerper().getWidth(), mitarbeiterGraphic.getKoerper().getHeight());
+                g2d.setPaintMode();
+            }
+            if(!X_RAY)
+            {
+
+                g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+15);
+                g2d.setColor(Color.BLACK);
+
+                AffineTransform tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts().getWinkel(), mitarbeiterGraphic.getArm_rechts().getWidth()/2, mitarbeiterGraphic.getArm_rechts().getHeight()/2);
+                AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+                tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts().getWinkel(), mitarbeiterGraphic.getBein_rechts().getWidth()/2, mitarbeiterGraphic.getBein_rechts().getHeight()/2+16);
+                op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+                g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+                tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links().getWinkel(), mitarbeiterGraphic.getArm_links().getWidth()/2, mitarbeiterGraphic.getArm_links().getHeight()/2);
+                op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+                tx = AffineTransform.getRotateInstance(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links().getWinkel(), mitarbeiterGraphic.getBein_links().getWidth()/2, mitarbeiterGraphic.getBein_links().getHeight()/2+16);
+                op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+                g2d.drawImage(op.filter(mitarbeiterGraphic.getBein_links(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
+                //g2d.drawImage(op.filter(mitarbeiterGraphic.getArm_rechts(), null), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+    //            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
+    //            g2d.drawImage(mitarbeiterGraphic.getBein_rechts(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+    //            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+    //            g2d.drawString(mitarbeiter.getName(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos()+10);
+    //            g2d.drawImage(mitarbeiterGraphic.getKoerper(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+    //            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
+    //            g2d.drawImage(mitarbeiterGraphic.getArm_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+
+    //            g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
+    //            g2d.drawImage(mitarbeiterGraphic.getBein_links(), mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), null);
+            }
+            else
+            {
+
+                g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_rechts());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_rechts());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
+
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+12, mitarbeiterGraphic.getY_Pos()+28, 9, 18);
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_koerper());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+13, mitarbeiterGraphic.getY_Pos()+18, 8, 10);
+
+                g2d.setColor(TestFenster.panel.mC.getAusgewaehlteMitarbeiter().contains(mitarbeiter)?Color.GREEN:Color.red);
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos(), mitarbeiterGraphic.getY_Pos(), 32, 64);
+                g2d.setColor(mitarbeiterGraphic.markiert?Color.green:Color.blue);
+                g2d.drawString(FahrstuhlSimulator.konsole.getMitarbeiterID(mitarbeiter)+"", mitarbeiterGraphic.getX_Pos()+5, mitarbeiterGraphic.getY_Pos()+15);
+
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_arm_links());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+31, 5, 16);
+                //g2d.setTransform(mitarbeiterGraphic.getAnimator().getImg_trans_bein_links());
+                g2d.drawRect(mitarbeiterGraphic.getX_Pos()+14, mitarbeiterGraphic.getY_Pos()+45, 6, 19);
+                g2d.setColor(Color.black);
+            }
         }
         
     }

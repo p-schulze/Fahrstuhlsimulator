@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Konsole;
 
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlBrain;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Mitarbeiter;
 import fahrstuhlsimulator.testumgebung.TestFenster;
@@ -34,11 +35,14 @@ public class Konsole {
     
     protected ArrayList<Mitarbeiter> mitarbeiter= new ArrayList();
     protected ArrayList<Fahrstuhl> farhstuehle = new ArrayList();
+    public FahrstuhlBrain fBrain;
     
     /**
      * Die Konsole wird grafisch generiert und gestartet. Der KeyListener wird erstellt und zum Frame hinzugefügt.
      */
     public void kStart (){
+        
+        fBrain = new FahrstuhlBrain();
         
         masterArea.setEditable(false);
         masterFrame.setMinimumSize(new Dimension(380, 175));
@@ -148,7 +152,6 @@ public class Konsole {
                 schreibeAktion("  Putzkolonne");
                 break;
             }
-        System.out.println(random);
         
     }
     
@@ -201,8 +204,17 @@ public class Konsole {
         return mitarbeiter.get(id);  
     }
     
+    /**
+     * Die Funktion gibt die ID des übergebenen Mitarbteirs zurück.
+     * @param mitarbeiterObject der Mitarbeiter, von welchem die ID gesucht ist
+     * @return  Die ID des gesuchten Mitarbeiter (sein Index innerhalb der Liste)
+     */
     public int getMitarbeiterID(Mitarbeiter mitarbeiterObject){
         return mitarbeiter.indexOf(mitarbeiterObject);
+    }
+    
+    public int getFahrstuhlID(Fahrstuhl mitarbeiterObject){
+        return this.farhstuehle.indexOf(mitarbeiterObject);
     }
     
     /**
@@ -213,10 +225,19 @@ public class Konsole {
         return mitarbeiter;  
     }
     
+    /**
+     * Die Funktion gibt die Liste aller Fahrstüle zurück.
+     * @return Liste, in welcher sich alle Fahrstühle befinden.
+     */
     public ArrayList<Fahrstuhl> getFahrstuhlListe(){
         return farhstuehle;  
     }
     
+    /**
+     * Die Funktion ruft die Einsteigen-Funtkion des Fahrstuhles auf und übergibt die Person, welche dann zu Personenliste des Fahrstuhles hinzugefügt wird.
+     * @param p ein Mitarbeiter, der den Befehl ausführen soll
+     * @param fahrstuhl  der Fahrstuhl, in welchen der Mitarbeiter einsteigen soll
+     */
     public void einsteigen(Mitarbeiter p, int fahrstuhl){
         farhstuehle.get(fahrstuhl).einsteigen(p);
     }
@@ -240,15 +261,6 @@ public class Konsole {
         
     } 
     
-    protected void startRandom(int anzahl){
-        int pause = 60/anzahl;
-        int indexStart = mitarbeiter.size()-1;
-        
-        for(int i=0; i<anzahl; i++){
-            addPerson("randomPerson", "Koch");
-        }
-    } 
-    
     /**
      * Der Befehl des Users (String) wird in ein String[] zerlegt. Dann wird das Feld analysiert und die richtigen Methoden werden aufgerufen.
      * @param command Eingabebefehl des Users
@@ -265,7 +277,6 @@ public class Konsole {
                 schreibeAktion("Fahrstuhl wird erstellt.");
                 addFahrstuhl();}
                 else{schreibeAktion("Maximale Anzahl erreicht.");}
-                
                 break;
             case "move":
                 schreibeAktion("Person " +commandArray[1] + " läuft " + commandArray[2] + " Pixel.");
@@ -290,9 +301,6 @@ public class Konsole {
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY = !fahrstuhlsimulator.testumgebung.TestFenster.panel.X_RAY;
                 fahrstuhlsimulator.testumgebung.TestFenster.panel.repaint();
                 break;
-            case "random":
-                startRandom(Integer.parseInt(commandArray[1]));
-                break;
             case "close":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
                 schreibeAktion("door: close");
@@ -302,6 +310,7 @@ public class Konsole {
                 schreibeAktion("door: open");
                 break;
             case "goup":
+                (farhstuehle.get(Integer.parseInt(commandArray[1]))).close();
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).fahre();
                 break;
              case "fahredirekt":
@@ -317,6 +326,11 @@ public class Konsole {
                 break;
             case "call":
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(mitarbeiter.get(Integer.parseInt(commandArray[2])).getAktEtage());
+                break;
+            case "statistik":
+                //Objket von deiner Klasse erstellen
+                //Start Methode aufrufen und liste "mitarbeiter"
+                
                 break;
             default:
                 schreibeAktion("Error: Befehl nicht erkannt");

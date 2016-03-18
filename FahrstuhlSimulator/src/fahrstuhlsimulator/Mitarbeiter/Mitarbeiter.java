@@ -8,6 +8,9 @@ package fahrstuhlsimulator.Mitarbeiter;
 import fahrstuhlsimulator.FahrstuhlSimulator;
 import java.util.ArrayList;
 import fahrstuhlsimulator.Gebaeude.Etage;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
+import fahrstuhlsimulator.Misc.FahrstuhlOpenListener;
 import fahrstuhlsimulator.Misc.MitarbeiterMoveListener;
 import fahrstuhlsimulator.Misc.RandomMitarbeiterGenerator;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
@@ -16,12 +19,16 @@ import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
  *
  * @author becksusanna
  */
-public class Mitarbeiter{
+public class Mitarbeiter implements MitarbeiterMoveListener, FahrstuhlOpenListener{
     private String name;
     private int aktuelleEtage;
-    private MitarbeiterGraphic graphic;
+    public MitarbeiterGraphic graphic;
     private ArrayList<String> erlaubteEtagen;
     public int zieletage;
+    
+    private boolean wartetAufFahrstuhl = false;
+    private boolean ruftFahrstuhl = false;
+    private Fahrstuhl zubenutzenderFahrstuhl;
     
     protected Mitarbeiter(String name) {
         this.name=name;
@@ -30,6 +37,8 @@ public class Mitarbeiter{
         graphic = new MitarbeiterGraphic(RandomMitarbeiterGenerator.getArmeImgID(),RandomMitarbeiterGenerator.getBeineImgID(),RandomMitarbeiterGenerator.getKoerperImgID(),1-0,1,false);
         //this.erlaubteEtagen=erlaubteEtagen;
         this.aktuelleEtage=1;
+        FahrstuhlSimulator.graphicDrawer.addMitarbeiterMoveListener(this);
+        FahrstuhlSimulator.graphicDrawer.addFahrstuhlOpenListenerList(this);
     }
     
     public String getName() {
@@ -89,77 +98,79 @@ public class Mitarbeiter{
     public void teleport(int etage)
     {
         graphic.setEtage(etage);
+        this.setAktEtage(etage);
     }
     
     public void goTo(int etage)
     {
-        callFahrstuhl(etage);
+        zieletage = etage;
+        if(!(this.aktuelleEtage == etage))
+        {
+            ruftFahrstuhl = true;
+            callFahrstuhl(etage);
+        }
     }
     
     private void callFahrstuhl(int etage)
     {
-        FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
+        zubenutzenderFahrstuhl = FahrstuhlSimulator.konsole.fBrain.welcherFahrstuhl(FahrstuhlSimulator.konsole.getFahrstuhlListe(), etage);
+        FahrstuhlGraphic fahrstuhlG = zubenutzenderFahrstuhl.getFahrstuhlGrafik().get(this.aktuelleEtage);
+        
+        int dis = 0;
+        if(this.graphic.getX_Pos() > fahrstuhlG.getX_Pos())
+        {  
+            if(this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = graphic.getX_Pos() - fahrstuhlG.getX_Pos();
+        }else if(this.graphic.getX_Pos() < fahrstuhlG.getX_Pos())
+        {
+            if(!this.graphic.getFlipped())
+            {
+                this.graphic.umdrehen();
+            }
+            dis = fahrstuhlG.getX_Pos() - graphic.getX_Pos();
+        }
+        
+        this.graphic.moveDistanceWithAnimation(dis);
+        //FahrstuhlSimulator.konsole.getFahrstuhlListe().get(0).fahren(etage);
         
     }
-}
+
+    @Override
+    public void onPosition(MitarbeiterGraphic mG)
+    {
+        if(ruftFahrstuhl)
+        {
+            if(mG == this.graphic)
+            {
+                ruftFahrstuhl = false;
+                wartetAufFahrstuhl = true;
+                FahrstuhlSimulator.konsole.analyze("call "+FahrstuhlSimulator.konsole.getFahrstuhlID(zubenutzenderFahrstuhl) +" "+FahrstuhlSimulator.konsole.getMitarbeiterID(this));
+            }
+        }
+    }
+
+    @Override
+    public void opened(FahrstuhlGraphic fG) 
+    {
+        if(wartetAufFahrstuhl && fG.getEtage() == this.graphic.getEtage())
+        {
+            wartetAufFahrstuhl = false;
+            FahrstuhlSimulator.konsole.analyze("einsteigen "+FahrstuhlSimulator.konsole.getFahrstuhlID(zubenutzenderFahrstuhl) +" " +FahrstuhlSimulator.konsole.getMitarbeiterID(this) +" "+zieletage);
+            
+        }
+    }
+
+    @Override
+    public void closed(FahrstuhlGraphic fG) 
+    {
         
+    }
+
     /**
-     * if(commandArray[0].equalsIgnoreCase("Person")){
-            //1. Command
-            schreibeAktion("Person wird erzeugt");            
-        }
-        else if(commandArray[0].equalsIgnoreCase("open"))
-        {
-            if(!TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = true;
-            schreibeAktion("open door: " + commandArray[1]);
-            }else{
-                schreibeAktion("door: open");
-            }
-        }  
-        else if(commandArray[0].equalsIgnoreCase("close"))
-        {
-            if(TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open){ 
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).schliesseTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).open = false;
-            schreibeAktion("close door: " + commandArray[1]);}
-            else{
-                schreibeAktion("door: close");
-            }
-        }
-        else if(commandArray[0].equalsIgnoreCase("move"))
-        {
-            if(Integer.parseInt(commandArray[1]) < 0){
-            TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]) * (-1));
-            }else {
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(Integer.parseInt(commandArray[1]));
-            }   
-            schreibeAktion("move: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("etage"))
-        {
-            TestPanel.mitarbeiterGraphics.get(0).setEtage(Integer.parseInt(commandArray[1]));
-            TestFenster.panel.repaint();
-            //TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            schreibeAktion("etage: " + commandArray[1]);
-        } else if(commandArray[0].equalsIgnoreCase("goto"))
-        {
-            if(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() <= 368){
-                if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == false){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() - TestPanel.mitarbeiterGraphics.get(0).getX_Pos());
-            } else {
-                 if(TestPanel.mitarbeiterGraphics.get(0).getFlipped() == true){
-                TestPanel.mitarbeiterGraphics.get(0).umdrehen();
-                }
-                TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(TestPanel.mitarbeiterGraphics.get(0).getX_Pos() - TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).getX_Pos() );
-            }
-          /*  TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).oeffneTuer();
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer();
-            TestPanel.fahrstuhlGraphics.get(Integer.parseInt(commandArray[1])).oeffneTuer();
-            TestPanel.mitarbeiterGraphics.get(0).setPosition(368, Integer.parseInt(commandArray[1]));
-            TestPanel.mitarbeiterGraphics.get(0).moveDistanceWithAnimation(0);
-            TestPanel.fahrstuhlGraphics.get(TestPanel.mitarbeiterGraphics.get(0).getEtage()).schliesseTuer(); */
-           
+     * @return the vis
+     */
+    
+}

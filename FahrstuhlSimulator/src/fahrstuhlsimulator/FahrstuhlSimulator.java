@@ -1,5 +1,7 @@
 package fahrstuhlsimulator;
 
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.FahrstuhlBrain;
 import fahrstuhlsimulator.Konsole.Konsole;
 import fahrstuhlsimulator.Misc.GraphicDrawer;
 import fahrstuhlsimulator.Misc.ImageLoader;
@@ -28,7 +30,9 @@ public class FahrstuhlSimulator {
         new fahrstuhlsimulator.testumgebung.TestFenster();
 
         
-
+       
+       
+        
         
         
     }

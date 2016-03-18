@@ -6,6 +6,7 @@
 package fahrstuhlsimulator.Misc;
 
 import fahrstuhlsimulator.FahrstuhlSimulator;
+import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Fahrstuhl;
 import fahrstuhlsimulator.Gebaeude.Fahrstuhl.Graphic.FahrstuhlGraphic;
 import fahrstuhlsimulator.Mitarbeiter.Graphic.MitarbeiterGraphic;
 import fahrstuhlsimulator.testumgebung.TestFenster;
@@ -246,7 +247,33 @@ public class GraphicDrawer implements Runnable {
                         }
                         else if(taskList_taskSplit[0].equalsIgnoreCase("Fahrstuhl"))
                         {
-                            if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
+                            if(taskList_taskSplit[1].split(":")[0].equalsIgnoreCase("delay"))
+                            {
+                                String[] parameter = taskList_taskSplit[1].split(":")[1].split("[(),]");
+                                Fahrstuhl fahrstuhl = (Fahrstuhl) temp_taskList_object;
+                                long endSystemTime = 0;
+                                for(int i_parameter = 0; i_parameter < parameter.length; i_parameter++)
+                                {
+                                    //System.out.println(parameter[i_parameter]);
+                                    if(parameter[i_parameter].equalsIgnoreCase("delay"))
+                                    {
+                                        endSystemTime = Long.parseLong(parameter[i_parameter+1]);
+                                    }
+                                }
+                                if(System.currentTimeMillis() >= endSystemTime)
+                                {
+                                    fahrstuhl.fahrliste.remove(0);
+                                    fahrstuhl.open();
+                                    
+                                    deleteTask(i);
+                                    System.out.println("Neue Fahrliste: "+fahrstuhl.fahrliste);
+                                }
+                                else
+                                {
+                                    
+                                }
+                            }
+                            else if(taskList_taskSplit[1].equalsIgnoreCase("tuer"))
                             {
                                 if(taskList_taskSplit[2].equalsIgnoreCase("links"))
                                 {
@@ -370,7 +397,6 @@ public class GraphicDrawer implements Runnable {
     
     public void addFahrstuhlOpenListenerList(Object e)
     {
-        System.out.println("1");
         fahrstuhlOpenListenerList.add(e);
     }
     public void removeFahrstuhlOpenListenerList(Object e)
@@ -379,7 +405,6 @@ public class GraphicDrawer implements Runnable {
     }
     public void sendOpenedEvent(FahrstuhlGraphic fG)
     {
-        System.out.println(fahrstuhlOpenListenerList);
         for(Object fahrstuhlOpenListener:fahrstuhlOpenListenerList)
         {
             ((FahrstuhlOpenListener) fahrstuhlOpenListener).opened(fG);
