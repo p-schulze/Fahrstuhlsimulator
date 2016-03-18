@@ -70,7 +70,7 @@ public class Fahrstuhl {
         }
         else if (etage != e)
         {
-            fahrliste.add(e);
+            FahrstuhlSimulator.konsole.fBrain.sortiertEinfuegen(this, e);
         }
         else if(!open && etage == e)
         {
@@ -94,17 +94,25 @@ public class Fahrstuhl {
      * @param e Zieletage
      */
     public void fahren(int e){
-        if(!open){
-         etage = e;
-        for (int i= 0; i<inFahrstuhl.size(); i++){
-            inFahrstuhl.get(i).teleport(etage);
+        ArrayList<Integer> pruefe = new ArrayList<Integer>();
+        for (int i = 0; i<this.inFahrstuhl.size();i++) {
+            if(!pruefeE(this.inFahrstuhl.get(i),EWandel(e))) {
+                pruefe.add(1);
+            }
         }
-        this.open();
+        if (pruefe.isEmpty()) {
+            if(!open){
+                etage = e;
+                for (int i= 0; i<inFahrstuhl.size(); i++){
+                    inFahrstuhl.get(i).teleport(etage);
+                }
+                this.open();
+            }
+            else {
+                FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
+            }
         }
-        else
-        {
-            FahrstuhlSimulator.graphicDrawer.sendOpenedEvent(grafik.get(etage));
-        }
+        else {System.out.println("Eine der Personen im Fahrstuhl darf diese Etage nicht betreten.");}
     }
     
     /**
@@ -266,22 +274,24 @@ public class Fahrstuhl {
      */
     public void open(){
         if(!open){
+            System.out.println("Anfang: "+inFahrstuhl);
             open = true;
             grafik.get(etage).oeffneTuer();
             int iTemp = 0;
-            for (int i= 0; i<inFahrstuhl.size(); i = 0){
-                if(inFahrstuhl.get(i).zieletage == etage){
-                    this.aussteigen(inFahrstuhl.get(i));
+            for (int i= 0; i<inFahrstuhl.size(); i = 0){ // while(iTemp != inFahrstuhl.size())
+                if(inFahrstuhl.get(iTemp).zieletage == etage){
+                    this.aussteigen(inFahrstuhl.get(iTemp));
                 }
                 else
                 {
                     iTemp++;
                 }
-                if(iTemp == inFahrstuhl.size())
+                if(iTemp == inFahrstuhl.size())   // 1 2
                 {
                     break;
                 }
             }
+            System.out.println("Am Ende: "+inFahrstuhl);
         }
     }
 }
