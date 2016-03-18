@@ -328,9 +328,7 @@ public class Konsole {
                 (farhstuehle.get(Integer.parseInt(commandArray[1]))).addEtageToFahrliste(mitarbeiter.get(Integer.parseInt(commandArray[2])).getAktEtage());
                 break;
             case "statistik":
-                Statistik statistik = new Statistik();
-                statistik.run();
-                break;
+                
             case "start":
                 analyze("create");
                 analyze("create");
